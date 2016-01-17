@@ -1,0 +1,23 @@
+{
+  "name": "colegiojavier",
+  "version": "0.0.5",
+  "description": "Pagina web del Colegio Javier",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Borasta/ColegioJavier.git"
+  },
+  "keywords": [
+    "colegio",
+    "javier"
+  ],
+  "author": "Orlando Bohorquez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Borasta/ColegioJavier/issues"
+  },
+  "homepage": "https://github.com/Borasta/ColegioJavier#readme"
+}
