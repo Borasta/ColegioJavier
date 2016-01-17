@@ -7,7 +7,7 @@ app.listen(5000, function() {
 	console.log('Server iniciado');
 });
 
-app.get("*", function(req, res) {
-	res.write("Hola Mundo");
+app.get("/*", function(req, res) {
+	res.end("Hola Mundo")
 })
 
