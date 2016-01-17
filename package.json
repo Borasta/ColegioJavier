@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Borasta/ColegioJavier/issues"
   },
-  "homepage": "https://github.com/Borasta/ColegioJavier#readme"
+  "homepage": "https://github.com/Borasta/ColegioJavier#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
 }
