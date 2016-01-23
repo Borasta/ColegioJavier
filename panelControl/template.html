@@ -1,0 +1,124 @@
+<template id="temp_representantes">
+    <table id="representantes" >
+        <tr>
+            <th><span>REPRESENTASTES</span></th>
+            <th><span></span></th>
+        </tr>
+        <tr>
+            <td>Nombres</td>
+            <td><input id="nombres_r" placeholder="Nombre1 Nombre2 Nombre3" type="text" title="Nombres"></td>
+        </tr>
+        <tr>
+            <td>Apellidos</td>
+            <td><input id="apellidos_r" placeholder="Apellido1 Apellido2" type="text" title="Apellidos"></td>
+        </tr>
+        <tr>
+            <td>Cédula</td>
+            <td><input id="cedula_r" placeholder="#########" type="text" title="Cedula"></td>
+        </tr>
+        <tr>
+            <td>Dirección</td>
+            <td><input id="direccion" placeholder="Edo, Mun, Av, Calle, # Casa" type="text" title="Direccion"></td>
+        </tr>
+        <tr>
+            <td>Genero</td>
+            <td>
+                <input id="genero_r_m" type="radio" name="genero_r" value="M" checked title="Maculino">
+                <label for="genero_r_m"> Hombre</label> |
+                <input id="genero_r_f" type="radio" name="genero_r" value="F">
+                <label for="genero_r_f"> Mujer</label>
+            </td>
+        </tr>
+    </table>
+</template>
+
+<template id="temp_nombreDelTemplate">
+    <table id="nombreDelTemplate" >
+        <tr>
+            <th><span>Titulo</span></th>
+            <th><span></span></th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</template>
+
+<script>
+    window.addEventListener("load", function() {
+         function init() {
+             localStorage.setItem("user", "admin");
+             localStorage.setItem("pass", "masterkey");
+
+            var JSession = {
+                user: localStorage.getItem("user"),
+                pass: localStorage.getItem("pass")
+            };
+            validate( JSession, function(val) {
+               console.log(val);
+            });
+        }
+
+        function validate( JSession, valTrue, valFalse ) {
+            var ajax = new Ajax();
+
+            ajax.open("POST", "../server/Views/session.php");
+            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            ajax.send("JSession=" + encodeURI( JSON.stringify( JSession) ));
+
+            // Respuesta
+            ajax.addEventListener("load", function () {
+                var resp = JSON.parse( ajax.responseText );
+                if(resp.val)
+                    valTrue(resp);
+                else
+                    if(typeof valFalse === 'function')
+                        valFalse();
+            });
+        }
+
+        init();
+
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

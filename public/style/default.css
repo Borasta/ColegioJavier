@@ -1,0 +1,12 @@
+nav#nav {
+	padding: 5px;
+	width: 100%;
+}
+
+nav#nav a {
+	display: inline-block;
+	text-align: center;
+}
+div#estudiantes {
+	display: block;
+}

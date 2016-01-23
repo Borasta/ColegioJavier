@@ -1,0 +1,30 @@
+{
+  "name": "colegiojavier",
+  "description": "Pagina web del Colegio Javier",
+  "main": "server.js",
+  "authors": [
+    "Orlando Bohorquez"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.0",
+    "angular": "~1.4.8",
+    "Materialize": "materialize#~0.97.5",
+    "bootstrap": "~3.3.6"
+  }
+}

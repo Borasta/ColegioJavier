@@ -1,0 +1,11 @@
+.conectado .desconectado {
+	display: none;
+}
+
+body {
+	background-color: black;
+}
+
+.nombresPersona, .apellidosPersona {
+	color: #e3e3e3;
+}

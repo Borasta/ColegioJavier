@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<architect-project version="1.0" appversion="1.0.7">
+ <project-name>base de datos colegio javier</project-name>
+ <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
+ <project-data-sources>
+  <data-source id="DS0">
+   <property key="Connection Type" value="MySQL" />
+   <property key="Logical" value="(Target Database)" />
+   <property key="JDBC URL" value="jdbc:mysql://db4free.net:3306/javier" />
+   <property key="UID" value="jhoseww" />
+   <property key="PWD" value="5603410jwm" />
+   <property key="ca.sqlpower.architect.etl.kettle.database" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.port" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.hostname" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.repos.login" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
+  </data-source>
+ </project-data-sources>
+ <source-databases>
+ </source-databases>
+ <target-database id="ppdb" dbcs-ref="DS0">
+  <table id="TAB1" populated="true" UUID="c1dfe09d-01ab-462e-bff1-7b68755c1c35" name="representantes" objectType="TABLE" physicalName="representantes" >
+   <remarks></remarks>
+   <folder id="FOLTAB11" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL2" populated="true" UUID="fdd66369-7612-45d6-9bed-3f00ebcc35d9" autoIncrement="true" autoIncrementSequenceName="Estudiantes_id_e_seq" defaultValue="" name="id_r" nullable="0" physicalName="id_r" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL3" populated="true" UUID="6a451303-2cff-4e6a-a5b0-c12e2fb67ae5" autoIncrement="false" autoIncrementSequenceName="Representantes_nombre_seq" defaultValue="" name="nombres_r" nullable="0" physicalName="nombres_r" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL4" populated="true" UUID="530da315-b6d8-4fe8-bbb8-0db236c0d8af" autoIncrement="false" autoIncrementSequenceName="Representantes_primer_apellido_r_seq" defaultValue="" name="apellidos_r" nullable="0" physicalName="apellidos_r" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL5" populated="true" UUID="9c5ecd3a-38b0-458d-824d-3e17928f967c" autoIncrement="false" autoIncrementSequenceName="Representantes_cedula_seq" defaultValue="" name="cedula_r" nullable="0" physicalName="cedula_r" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL6" populated="true" UUID="523ee24a-b1b7-41f9-af46-2a06169c30b0" autoIncrement="false" autoIncrementSequenceName="representantes_genero_r_seq" defaultValue="" name="genero_r" nullable="0" physicalName="genero_r" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB13" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB12" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB14" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX7" populated="true" UUID="56e8141c-8eac-42a6-a32c-dfe4803c767d" clustered="false" name="representantes_pk" physicalName="representantes_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC8" populated="true" UUID="75c058dc-64f9-42b6-a9ed-8853bfcb4be8" ascendingOrDescending="UNSPECIFIED" column-ref="COL2" name="id_r" physicalName="id_r" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB9" populated="true" UUID="1018fbfc-1ca7-4187-8d89-d0d692875fdb" name="estudiantes" objectType="TABLE" physicalName="estudiantes" >
+   <remarks></remarks>
+   <folder id="FOLTAB91" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL10" populated="true" UUID="3738f1ac-6fe7-4b22-9efd-c7981c51bd7c" autoIncrement="true" autoIncrementSequenceName="estudiantes_id_e_seq" defaultValue="" name="id_e" nullable="0" physicalName="id_e" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL11" populated="true" UUID="b6328621-576a-4716-8f56-aeef7a76f79b" autoIncrement="false" autoIncrementSequenceName="Estudiantes_nombre_seq" defaultValue="" name="nombres_e" nullable="0" physicalName="nombres_e" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL12" populated="true" UUID="edac6fe8-8481-4e3f-bfcc-94a10abca88a" autoIncrement="false" autoIncrementSequenceName="Estudiantes_fecha_de_nacimiento_seq" defaultValue="" name="apellidos_e" nullable="0" physicalName="apellidos_e" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL13" populated="true" UUID="0bbb1130-a858-4183-87ba-668dabf83a65" autoIncrement="false" autoIncrementSequenceName="Estudiantes_cedula_seq" defaultValue="" name="cedula_e" nullable="1" physicalName="cedula_e" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL14" populated="true" UUID="68b67e23-6b35-4c98-a82d-39f79d7b07f3" autoIncrement="false" autoIncrementSequenceName="estudiantes_fecha_nacimiento_seq" defaultValue="" name="fecha_nacimiento" nullable="0" physicalName="fecha_nacimiento" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="91" userDefinedTypeUUID="ee349be3-6af2-46e1-b305-975f5354b009" >
+     <remarks></remarks>
+    </column>
+    <column id="COL15" populated="true" UUID="58ef19b9-7e12-4591-83b6-728057b2999b" autoIncrement="false" autoIncrementSequenceName="Representantes_genero_r_seq_1" defaultValue="" name="genero_e" nullable="0" physicalName="genero_e" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+     <remarks></remarks>
+    </column>
+    <column id="COL16" populated="true" UUID="fa02df75-0aa6-43f8-ac3a-8781cbd96706" autoIncrement="false" autoIncrementSequenceName="estudiantes_direccion_e_seq" defaultValue="" name="direccion_e" nullable="0" physicalName="direccion_e" precision="200" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL17" populated="true" UUID="f4918fc1-5656-4a3a-b0cf-bd721dae7c86" autoIncrement="false" autoIncrementSequenceName="Docentes_user_seq" defaultValue="" name="user_e" nullable="0" physicalName="user_e" precision="25" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL18" populated="true" UUID="c2397278-3caf-4601-8c06-344bfd8c3b69" autoIncrement="false" autoIncrementSequenceName="Usuarios_pass_seq" defaultValue="" name="pass_e" nullable="0" physicalName="pass_e" precision="15" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL19" populated="true" UUID="ee2ea6ed-c810-48f2-a567-36c6bcde6772" autoIncrement="false" autoIncrementSequenceName="Usuarios_flag_seq" defaultValue="" name="flag_e" nullable="0" physicalName="flag_e" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+     <remarks></remarks>
+    </column>
+    <column id="COL20" populated="true" UUID="6124b7cc-fadc-4775-8a11-82a1e9231534" autoIncrement="false" autoIncrementSequenceName="estudiantes_id_gra_seq" defaultValue="" name="id_gra" nullable="0" physicalName="id_gra" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB93" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB92" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB94" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX21" populated="true" UUID="40c47b9b-3651-48c7-9f92-97562f9f5fa2" clustered="false" name="estudiantes_pk" physicalName="estudiantes_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC22" populated="true" UUID="f9559467-63ed-4307-81b6-1f06539a82d9" ascendingOrDescending="UNSPECIFIED" column-ref="COL10" name="id_e" physicalName="id_e" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB23" populated="true" UUID="42d011fa-f3fe-40c2-8c46-acf47a573edd" name="familias" objectType="TABLE" physicalName="familias" >
+   <remarks></remarks>
+   <folder id="FOLTAB231" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL24" populated="true" UUID="033e9e2f-d406-4100-be50-db73bb64b3c8" autoIncrement="false" autoIncrementSequenceName="Estudiantes_id_e_seq_2" defaultValue="" name="id_r" nullable="0" physicalName="id_r" precision="0" primaryKeySeq="0" referenceCount="0" scale="0" source-column-ref="COL10" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL25" populated="true" UUID="bc170f07-3249-4ccf-a544-39072399b9f7" autoIncrement="false" autoIncrementSequenceName="familias_id_e_seq" defaultValue="" name="id_e" nullable="0" physicalName="id_e" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB233" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB232" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB234" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX26" populated="true" UUID="fbf8e695-fb86-43b6-9e7a-be8212b71229" clustered="false" name="familias_pk" physicalName="familias_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC27" populated="true" UUID="d22c41ac-b719-4cda-8015-eb44f8b1fab0" ascendingOrDescending="UNSPECIFIED" column-ref="COL24" name="id_r" physicalName="id_r" />
+     <index-column id="IDC28" populated="true" UUID="7ffbaf7f-fba3-493c-950e-6eb2e926d465" ascendingOrDescending="UNSPECIFIED" column-ref="COL25" name="id_e" physicalName="id_e" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB29" populated="true" UUID="ed01a550-81a5-4829-803c-afb22b05ad72" name="grupos" objectType="TABLE" physicalName="grupos" >
+   <remarks></remarks>
+   <folder id="FOLTAB291" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL30" populated="true" UUID="4af39dc0-bbe6-4a31-b15a-068ca5bb23c3" autoIncrement="true" autoIncrementSequenceName="grupos_id_gru_seq" defaultValue="" name="id_gru" nullable="0" physicalName="id_gru" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL31" populated="true" UUID="4b13c50e-023b-42c3-baeb-d6d97436c4bc" autoIncrement="false" autoIncrementSequenceName="grupos_nombre_g_seq" defaultValue="" name="nombre_gru" nullable="0" physicalName="nombre_gru" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL32" populated="true" UUID="ece90845-c1cb-4f94-9e7d-02ed3ffed35d" autoIncrement="false" autoIncrementSequenceName="grupos_descripcion_gru_seq" defaultValue="" name="descripcion_gru" nullable="0" physicalName="descripcion_gru" precision="200" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB293" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB292" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB294" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX33" populated="true" UUID="c9327cd0-fcca-4717-bd5b-1133bd20256c" clustered="false" name="grupos_pk" physicalName="grupos_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC34" populated="true" UUID="7cef6185-a9b8-44dd-b44b-2beee7da725e" ascendingOrDescending="UNSPECIFIED" column-ref="COL30" name="id_gru" physicalName="id_gru" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB35" populated="true" UUID="b0fc2627-0880-491c-9b61-a880554418bb" name="miembros" objectType="TABLE" physicalName="miembros" >
+   <remarks></remarks>
+   <folder id="FOLTAB351" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL36" populated="true" UUID="31a8359a-630b-41cf-a4ca-59e80e72ea55" autoIncrement="false" autoIncrementSequenceName="miembros_id_gru_seq" defaultValue="" name="id_gru" nullable="0" physicalName="id_gru" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL37" populated="true" UUID="d88412de-144f-48f7-8edb-984e0b193618" autoIncrement="false" autoIncrementSequenceName="miembros_id_e_seq" defaultValue="" name="id_e" nullable="0" physicalName="id_e" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB353" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB352" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB354" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX38" populated="true" UUID="5f234966-19a4-40b2-ab4a-6b27ad8726b9" clustered="false" name="miembros_pk" physicalName="miembros_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC39" populated="true" UUID="c280d03d-93e4-491c-886b-44acb17d06bf" ascendingOrDescending="UNSPECIFIED" column-ref="COL36" name="id_gru" physicalName="id_gru" />
+     <index-column id="IDC40" populated="true" UUID="e863c0f5-68b4-4df3-8223-02c4c86406a2" ascendingOrDescending="UNSPECIFIED" column-ref="COL37" name="id_e" physicalName="id_e" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB41" populated="true" UUID="3fd3583a-7f75-49ad-84b5-4ae30a99d9d6" name="materias" objectType="TABLE" physicalName="materias" >
+   <remarks></remarks>
+   <folder id="FOLTAB411" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL42" populated="true" UUID="b19d23ce-eb87-4b2e-a514-77c81b2584dd" autoIncrement="true" autoIncrementSequenceName="materias_id_m_seq" defaultValue="" name="id_m" nullable="0" physicalName="id_m" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL43" populated="true" UUID="1eacfcff-fed2-4db2-bfcc-793f2f53deac" autoIncrement="false" autoIncrementSequenceName="materias_nombre_m_seq" defaultValue="" name="nombre_m" nullable="0" physicalName="nombre_m" precision="40" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB413" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB412" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB414" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX44" populated="true" UUID="9f56936d-dbe1-487e-a181-e72362f3e7e8" clustered="false" name="materias_pk" physicalName="materias_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC45" populated="true" UUID="40488fa3-b6f4-4afb-9d80-113555642c4e" ascendingOrDescending="UNSPECIFIED" column-ref="COL42" name="id_m" physicalName="id_m" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB46" populated="true" UUID="dbf3f14a-2530-4642-877e-f31d6d98d84f" name="docentes" objectType="TABLE" physicalName="docentes" >
+   <remarks></remarks>
+   <folder id="FOLTAB461" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL47" populated="true" UUID="678998a7-b2a9-4d9a-8c8f-923ab0d34b3d" autoIncrement="true" autoIncrementSequenceName="Usuarios_Docentes_id_u_seq" defaultValue="" name="id_d" nullable="0" physicalName="id_d" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL48" populated="true" UUID="dbd7101c-deb6-423b-8548-41fedc2410e6" autoIncrement="false" autoIncrementSequenceName="Docentes_nombre_profesor_seq" defaultValue="" name="nombres_d" nullable="0" physicalName="nombres_d" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL49" populated="true" UUID="38f35c1e-f909-45a3-8099-4a146df111e1" autoIncrement="false" autoIncrementSequenceName="Docentes_apellido_profesor_seq" defaultValue="" name="apellidos_d" nullable="0" physicalName="apellidos_d" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL50" populated="true" UUID="98673b89-6a4a-4be1-a7ee-f41d0baf96bf" autoIncrement="false" autoIncrementSequenceName="Docentes_cedula_profesor_seq" defaultValue="" name="cedula_d" nullable="0" physicalName="cedula_d" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL51" populated="true" UUID="f76470b8-3c22-4c7f-85d7-f3623048b350" autoIncrement="false" autoIncrementSequenceName="docentes_genero_d_seq" defaultValue="" name="genero_d" nullable="0" physicalName="genero_d" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+     <remarks></remarks>
+    </column>
+    <column id="COL52" populated="true" UUID="36591547-f7e5-45df-8215-80131ec4523b" autoIncrement="false" autoIncrementSequenceName="Docentes_user_seq_1" defaultValue="" name="user_d" nullable="0" physicalName="user_d" precision="25" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL53" populated="true" UUID="3f569306-eca8-4a8b-8a44-8b52d89586b0" autoIncrement="false" autoIncrementSequenceName="Usuarios_pass_seq_1" defaultValue="" name="pass_d" nullable="0" physicalName="pass_d" precision="15" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL54" populated="true" UUID="a9964a3c-02e9-4ce2-a22a-2ec5a547d037" autoIncrement="false" autoIncrementSequenceName="Usuarios_flag_seq_1" defaultValue="" name="flag_d" nullable="0" physicalName="flag_d" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB463" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB462" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB464" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX55" populated="true" UUID="4e527768-1e1a-4f88-aec9-e497f0ae3689" clustered="false" name="docentes_pk" physicalName="docentes_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC56" populated="true" UUID="4391a22c-ce98-49c1-90f3-8da8b9a46135" ascendingOrDescending="UNSPECIFIED" column-ref="COL47" name="id_d" physicalName="id_d" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB57" populated="true" UUID="5a9cb17a-4ea9-4931-8075-45bd9a714bef" name="cursos" objectType="TABLE" physicalName="cursos" >
+   <remarks></remarks>
+   <folder id="FOLTAB571" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL58" populated="true" UUID="6c1c358d-12c1-41a3-bbe1-a0e8be65619d" autoIncrement="true" autoIncrementSequenceName="cursos_id_c_seq" defaultValue="" name="id_c" nullable="0" physicalName="id_c" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL59" populated="true" UUID="9a6b56e8-be73-448d-8a3a-5a84b0286e3d" autoIncrement="false" autoIncrementSequenceName="Docente_Materia_id_m_seq" defaultValue="" name="id_dm" nullable="0" physicalName="id_dm" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL60" populated="true" UUID="06f6c646-3385-478e-bb9b-cc11d666ab66" autoIncrement="false" autoIncrementSequenceName="cursos_id_e_seq" defaultValue="" name="id_e" nullable="0" physicalName="id_e" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB573" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB572" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB574" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX61" populated="true" UUID="dde00c29-183b-48bc-84c2-bdbc936075b4" clustered="false" name="cursos_pk" physicalName="cursos_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC62" populated="true" UUID="0f5d8a10-7708-4553-aa6f-ecef8ae5135d" ascendingOrDescending="UNSPECIFIED" column-ref="COL58" name="id_c" physicalName="id_c" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB63" populated="true" UUID="df95f24c-156c-4e15-9917-388150e68981" name="docente_materia" objectType="TABLE" physicalName="docente_materia" >
+   <remarks></remarks>
+   <folder id="FOLTAB631" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL64" populated="true" UUID="721a8829-3db9-4bce-8984-8e6ae2b8f7f9" autoIncrement="true" autoIncrementSequenceName="Docente_Materia_id_m_seq_1" defaultValue="" name="id_dm" nullable="0" physicalName="id_dm" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL65" populated="true" UUID="4d57fefa-c77b-4876-8583-cead30c025c6" autoIncrement="false" autoIncrementSequenceName="Usuarios_Docentes_id_u_seq_1_1" defaultValue="" name="id_d" nullable="0" physicalName="id_d" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL66" populated="true" UUID="f720552c-bfb1-4426-ad51-1ad33d72477c" autoIncrement="false" autoIncrementSequenceName="docente_materia_id_m_seq" defaultValue="" name="id_m" nullable="0" physicalName="id_m" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB633" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB632" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB634" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX67" populated="true" UUID="65a30260-b612-455e-b7c0-5f59dbccf696" clustered="false" name="docente_materia_pk" physicalName="docente_materia_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC68" populated="true" UUID="80c04dbd-3b77-4b77-a009-93d0ffeeea74" ascendingOrDescending="UNSPECIFIED" column-ref="COL64" name="id_dm" physicalName="id_dm" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB69" populated="true" UUID="63f07907-7f15-4aa2-b84c-5f82c4cf70a8" name="grados" objectType="TABLE" physicalName="grados" >
+   <remarks></remarks>
+   <folder id="FOLTAB691" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL70" populated="true" UUID="0c03b9fc-4342-4732-8e94-d6c6b4c792cf" autoIncrement="true" autoIncrementSequenceName="grados_id_gra_seq" defaultValue="" name="id_gra" nullable="0" physicalName="id_gra" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL71" populated="true" UUID="2379c1f5-649c-42e2-958f-0df69348c477" autoIncrement="false" autoIncrementSequenceName="grados_grado_seq" defaultValue="" name="grado" nullable="0" physicalName="grado" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+     <remarks></remarks>
+    </column>
+    <column id="COL72" populated="true" UUID="aa162dc1-d882-42ae-a19a-8f760668f275" autoIncrement="false" autoIncrementSequenceName="grados_id_s_seq" defaultValue="" name="id_s" nullable="0" physicalName="id_s" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB693" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB692" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB694" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX73" populated="true" UUID="d6688f43-e16b-4d3b-829c-79835fb88c8d" clustered="false" name="grados_pk" physicalName="grados_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC74" populated="true" UUID="8678aecd-cdeb-4232-b128-91855386436c" ascendingOrDescending="UNSPECIFIED" column-ref="COL70" name="id_gra" physicalName="id_gra" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB75" populated="true" UUID="8da6af36-4ece-4c05-b448-57637d18b4f5" name="horarios" objectType="TABLE" physicalName="horarios" >
+   <remarks></remarks>
+   <folder id="FOLTAB751" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL76" populated="true" UUID="f88893e6-9773-48bd-9492-feb1a23c1840" autoIncrement="true" autoIncrementSequenceName="horarios_id_h_seq" defaultValue="" name="id_h" nullable="0" physicalName="id_h" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL77" populated="true" UUID="4834b95f-6b19-493a-94ab-b5f6136b6d56" autoIncrement="false" autoIncrementSequenceName="Docente_Materia_id_m_seq_1_1" defaultValue="" name="id_dm" nullable="0" physicalName="id_dm" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL78" populated="true" UUID="09325562-8bb5-4310-9ed2-48514c4f8f05" autoIncrement="false" autoIncrementSequenceName="horarios_id_dia_seq" defaultValue="" name="id_dia" nullable="0" physicalName="id_dia" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL79" populated="true" UUID="99263507-d7e3-43c1-9b39-75fd4458e08c" autoIncrement="false" autoIncrementSequenceName="horarios_hora_inicio_seq" defaultValue="" name="hora_inicio" nullable="0" physicalName="hora_inicio" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="92" userDefinedTypeUUID="10d6960f-169d-47c2-860a-37341342b1d5" >
+     <remarks></remarks>
+    </column>
+    <column id="COL80" populated="true" UUID="d361a23e-6987-493c-a862-256362104a12" autoIncrement="false" autoIncrementSequenceName="Horario_hora_inicio_seq_1" defaultValue="" name="hora_final" nullable="0" physicalName="hora_final" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="92" userDefinedTypeUUID="10d6960f-169d-47c2-860a-37341342b1d5" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB753" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB752" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB754" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX81" populated="true" UUID="5a928b22-0ff8-4bdd-8681-c33d7e9a0793" clustered="false" name="horarios_pk" physicalName="horarios_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC82" populated="true" UUID="31621b80-79a1-4a3f-86be-390f42d9f424" ascendingOrDescending="UNSPECIFIED" column-ref="COL76" name="id_h" physicalName="id_h" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB83" populated="true" UUID="be09f2dc-ffd7-4813-bf6d-8cf949eb8592" name="secciones" objectType="TABLE" physicalName="secciones" >
+   <remarks></remarks>
+   <folder id="FOLTAB831" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL84" populated="true" UUID="d56a0bb4-42f2-4e25-933b-3ed744723e4e" autoIncrement="true" autoIncrementSequenceName="secciones_id_s_seq" defaultValue="" name="id_s" nullable="0" physicalName="id_s" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL85" populated="true" UUID="b803ec1d-9a7a-4cfb-b32e-23d15ad79adc" autoIncrement="false" autoIncrementSequenceName="secciones_seccion_seq" defaultValue="" name="seccion" nullable="0" physicalName="seccion" precision="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB833" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB832" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB834" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX86" populated="true" UUID="0e058b48-6781-4e49-b57f-06bd6590c853" clustered="false" name="secciones_pk" physicalName="secciones_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC87" populated="true" UUID="af614d8c-6c3f-4462-a3f7-26ef1a83b183" ascendingOrDescending="UNSPECIFIED" column-ref="COL84" name="id_s" physicalName="id_s" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB88" populated="true" UUID="7cf4b58b-c8fb-4fb9-81a0-fe61b61d188d" name="notas" objectType="TABLE" physicalName="notas" >
+   <remarks></remarks>
+   <folder id="FOLTAB881" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL89" populated="true" UUID="d130d05e-49b0-41b3-8737-5d60b3ef8f18" autoIncrement="false" autoIncrementSequenceName="Curso_New Column_seq" defaultValue="" name="id_c" nullable="0" physicalName="id_c" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL90" populated="true" UUID="fcfd488b-2a5d-4f08-ab83-3543b78ab8d2" autoIncrement="false" autoIncrementSequenceName="notas_id_anio_seq" defaultValue="" name="id_anio" nullable="0" physicalName="id_anio" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL91" populated="true" UUID="b8a2335f-102b-475a-a257-60cfc2a468cf" autoIncrement="false" autoIncrementSequenceName="Curso_nota_seq" defaultValue="0.00" name="lapso1" nullable="0" physicalName="lapso1" precision="4" referenceCount="1" scale="2" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
+     <remarks></remarks>
+    </column>
+    <column id="COL92" populated="true" UUID="44efa3e6-a361-42e5-be38-463427be6fd9" autoIncrement="false" autoIncrementSequenceName="Curso_nota_seq_1" defaultValue="0.00" name="lapso2" nullable="0" physicalName="lapso2" precision="4" referenceCount="1" scale="2" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
+     <remarks></remarks>
+    </column>
+    <column id="COL93" populated="true" UUID="ff0b707a-9596-4b98-98d1-4d05f68a343f" autoIncrement="false" autoIncrementSequenceName="Curso_nota_seq_2" defaultValue="0.00" name="lapso3" nullable="0" physicalName="lapso3" precision="4" referenceCount="1" scale="2" sourceDataTypeName="UserDefinedSQLType" type="3" userDefinedTypeUUID="cc1304ea-628a-4fc5-a84a-06ba14759152" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB883" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB882" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB884" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX94" populated="true" UUID="4b24f2c9-cac0-4d92-a936-1e0ce02d5ea3" clustered="false" name="notas_pk" physicalName="notas_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC95" populated="true" UUID="2e50da38-d807-4690-9973-e9e68bf4a118" ascendingOrDescending="UNSPECIFIED" column-ref="COL89" name="id_c" physicalName="id_c" />
+     <index-column id="IDC96" populated="true" UUID="0caf3429-6890-4a79-a31f-20c2c10fc7f1" ascendingOrDescending="UNSPECIFIED" column-ref="COL90" name="id_anio" physicalName="id_anio" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB97" populated="true" UUID="dd471008-c8c9-40fb-9913-3ae7a6a808df" name="dias" objectType="TABLE" physicalName="dias" >
+   <remarks></remarks>
+   <folder id="FOLTAB971" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL98" populated="true" UUID="3480ea4b-a051-4972-b5b4-36fd378b5352" autoIncrement="true" autoIncrementSequenceName="dias_id_dia_seq" defaultValue="" name="id_dia" nullable="0" physicalName="id_dia" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL99" populated="true" UUID="1cc338f7-3c88-475f-95ee-d0b996a9b31c" autoIncrement="false" autoIncrementSequenceName="dias_dia_seq" defaultValue="" name="dia" nullable="0" physicalName="dia" precision="9" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB973" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB972" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB974" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX100" populated="true" UUID="f402a70b-4aa1-4113-bc2d-a123df084d79" clustered="false" name="dias_pk" physicalName="dias_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC101" populated="true" UUID="86a58b34-b49b-43f1-b00c-003cbe3873be" ascendingOrDescending="UNSPECIFIED" column-ref="COL98" name="id_dia" physicalName="id_dia" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB102" populated="true" UUID="aacd3d9a-4662-4811-8591-fc5a89133273" name="anio" objectType="TABLE" physicalName="anio" >
+   <remarks></remarks>
+   <folder id="FOLTAB1021" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL103" populated="true" UUID="10667ab5-b62e-4a0f-9ded-bca0c91b8f48" autoIncrement="true" autoIncrementSequenceName="anio_id_anio_seq" defaultValue="" name="id_anio" nullable="0" physicalName="id_anio" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL104" populated="true" UUID="01f65416-9e69-40a6-9510-995bbefcd05c" autoIncrement="false" autoIncrementSequenceName="anio_anio_seq" defaultValue="" name="anio" nullable="0" physicalName="anio" precision="9" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB1023" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB1022" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB1024" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX105" populated="true" UUID="3f31eb67-37a3-42d1-a682-e722eb6bb767" clustered="false" name="anio_pk" physicalName="anio_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC106" populated="true" UUID="1e299ca8-358f-49b4-a719-70787366df9c" ascendingOrDescending="UNSPECIFIED" column-ref="COL103" name="id_anio" physicalName="id_anio" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB107" populated="true" UUID="068811ec-6dc7-4b6b-8063-bef0039204b6" name="lideres" objectType="TABLE" physicalName="lideres" >
+   <remarks></remarks>
+   <folder id="FOLTAB1071" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL108" populated="true" UUID="4d3c7d72-d9ea-4a10-88da-2e300745c56e" autoIncrement="false" autoIncrementSequenceName="lideres_id_gru_seq" defaultValue="" name="id_gru" nullable="0" physicalName="id_gru" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL109" populated="true" UUID="39ab5a7f-0591-4077-9599-0e8a73c61c9e" autoIncrement="false" autoIncrementSequenceName="Usuarios_Docentes_id_u_seq_1" defaultValue="" name="id_d" nullable="0" physicalName="id_d" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB1073" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB1072" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB1074" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX110" populated="true" UUID="2ec0c0f0-34f7-4774-8978-4c2f39e163d5" clustered="false" name="lideres_pk" physicalName="lideres_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC111" populated="true" UUID="e72aa8a1-172f-4891-add0-7e97873d014b" ascendingOrDescending="UNSPECIFIED" column-ref="COL108" name="id_gru" physicalName="id_gru" />
+     <index-column id="IDC112" populated="true" UUID="2b61b0d3-fb83-405e-8455-a6e3316d25b3" ascendingOrDescending="UNSPECIFIED" column-ref="COL109" name="id_d" physicalName="id_d" />
+    </index>
+   </folder>
+  </table>
+  <relationships>
+   <relationship id="REL113" populated="true" UUID="ee5772f4-de92-479f-9dec-45079f638c7f" deferrability="7" deleteRule="3" fk-table-ref="TAB23" fkCardinality="7" identifying="true" name="Representantes_Familias_fk" physicalName="representantes_familias_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP114" populated="true" UUID="2f47a314-b205-4a95-a5ea-234e60a820a0" fk-column-ref="COL24" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
+   </relationship>
+   <relationship id="REL115" populated="true" UUID="ede6aca2-a353-4210-9c21-1d663fae0078" deferrability="7" deleteRule="3" fk-table-ref="TAB23" fkCardinality="7" identifying="true" name="Estudiantes_Familias_fk" physicalName="estudiantes_familias_fk" pk-table-ref="TAB9" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP116" populated="true" UUID="5f4132fa-7fc4-4684-a2ed-078d5bfd84c8" fk-column-ref="COL25" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL10" />
+   </relationship>
+   <relationship id="REL117" populated="true" UUID="5380c274-00dc-4ff4-ae64-3325c7df5e50" deferrability="7" deleteRule="3" fk-table-ref="TAB35" fkCardinality="7" identifying="true" name="Estudiantes_Miembros_fk" physicalName="estudiantes_miembros_fk" pk-table-ref="TAB9" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP118" populated="true" UUID="cf53d3d7-59ad-4225-a18c-ac9113ab6dae" fk-column-ref="COL37" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL10" />
+   </relationship>
+   <relationship id="REL119" populated="true" UUID="d5456855-3477-42c7-865f-b791bbe7eb58" deferrability="7" deleteRule="3" fk-table-ref="TAB57" fkCardinality="7" identifying="false" name="Estudiantes_Curso_fk" physicalName="estudiantes_curso_fk" pk-table-ref="TAB9" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP120" populated="true" UUID="92841d04-f02a-44ff-b648-cffb722ffa69" fk-column-ref="COL60" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL10" />
+   </relationship>
+   <relationship id="REL121" populated="true" UUID="b2d027b8-beee-4441-a4fa-a05467195edf" deferrability="7" deleteRule="3" fk-table-ref="TAB35" fkCardinality="7" identifying="true" name="Grupos_Miembros_fk" physicalName="grupos_miembros_fk" pk-table-ref="TAB29" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP122" populated="true" UUID="79437e73-2736-4ddb-b9f6-15a93d40ec80" fk-column-ref="COL36" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL30" />
+   </relationship>
+   <relationship id="REL123" populated="true" UUID="ebda12ee-5a0f-4390-8b75-346c070f492d" deferrability="7" deleteRule="3" fk-table-ref="TAB107" fkCardinality="7" identifying="true" name="Grupos_Lideres_fk" physicalName="grupos_lideres_fk" pk-table-ref="TAB29" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP124" populated="true" UUID="2585a3dd-6c6f-4691-9995-54d5034193fd" fk-column-ref="COL108" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL30" />
+   </relationship>
+   <relationship id="REL125" populated="true" UUID="e1e5ff17-ff3f-4acc-ab1f-5d4024d5d80a" deferrability="7" deleteRule="3" fk-table-ref="TAB63" fkCardinality="7" identifying="false" name="Materia_Docente_Materia_fk" physicalName="materia_docente_materia_fk" pk-table-ref="TAB41" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP126" populated="true" UUID="2433935c-62b2-4d0a-86e2-ddc3fae19a00" fk-column-ref="COL66" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL42" />
+   </relationship>
+   <relationship id="REL127" populated="true" UUID="54667a99-3139-417b-9fa7-6bc2afbfd64f" deferrability="7" deleteRule="3" fk-table-ref="TAB63" fkCardinality="7" identifying="false" name="Docentes_Docente_Materia_fk" physicalName="docentes_docente_materia_fk" pk-table-ref="TAB46" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP128" populated="true" UUID="e7aaac20-ec09-49b1-9a9f-be53f384c17b" fk-column-ref="COL65" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL47" />
+   </relationship>
+   <relationship id="REL129" populated="true" UUID="f23d9757-ae46-4af2-9953-d5189a4c6b8b" deferrability="7" deleteRule="3" fk-table-ref="TAB107" fkCardinality="7" identifying="true" name="Docentes_Lideres_fk" physicalName="docentes_lideres_fk" pk-table-ref="TAB46" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP130" populated="true" UUID="a99ccab2-3bad-4728-b9ae-12b1e5b74a09" fk-column-ref="COL109" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL47" />
+   </relationship>
+   <relationship id="REL131" populated="true" UUID="95e76433-b9bd-4587-b66a-39a5b0b171bb" deferrability="7" deleteRule="3" fk-table-ref="TAB88" fkCardinality="7" identifying="true" name="Curso_Curso_Lapso_fk" physicalName="curso_curso_lapso_fk" pk-table-ref="TAB57" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP132" populated="true" UUID="610dca00-bea1-4b4c-b506-dc894896ba14" fk-column-ref="COL89" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL58" />
+   </relationship>
+   <relationship id="REL133" populated="true" UUID="0215143c-e3d9-4a40-9a7f-3bd1485718b6" deferrability="7" deleteRule="3" fk-table-ref="TAB57" fkCardinality="7" identifying="false" name="Docente_Materia_Curso_fk" physicalName="docente_materia_curso_fk" pk-table-ref="TAB63" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP134" populated="true" UUID="e94a0d5a-67eb-4f9b-80d1-882d529fad72" fk-column-ref="COL59" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL64" />
+   </relationship>
+   <relationship id="REL135" populated="true" UUID="c0e9c98d-2fa4-4bc3-8489-ec68a04003cb" deferrability="7" deleteRule="3" fk-table-ref="TAB75" fkCardinality="7" identifying="false" name="Docente_Materia_Dias_fk" physicalName="docente_materia_dias_fk" pk-table-ref="TAB63" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP136" populated="true" UUID="d3cc1592-7082-433f-abdc-8ac2377b4cf6" fk-column-ref="COL77" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL64" />
+   </relationship>
+   <relationship id="REL137" populated="true" UUID="f14bae5f-195d-46f7-89b0-e8100ed908b6" deferrability="7" deleteRule="3" fk-table-ref="TAB9" fkCardinality="7" identifying="false" name="Grados_Estudiantes_fk" physicalName="grados_estudiantes_fk" pk-table-ref="TAB69" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP138" populated="true" UUID="097181e1-aefe-4d3b-bd04-aa33f6468b85" fk-column-ref="COL20" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL70" />
+   </relationship>
+   <relationship id="REL139" populated="true" UUID="4a0b6874-8bb8-4514-b9c5-a370e861c765" deferrability="7" deleteRule="3" fk-table-ref="TAB69" fkCardinality="7" identifying="false" name="Secciones_Grados_fk" physicalName="secciones_grados_fk" pk-table-ref="TAB83" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP140" populated="true" UUID="ed3bf6d0-eb1f-42c9-93fb-4178063a735b" fk-column-ref="COL72" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL84" />
+   </relationship>
+   <relationship id="REL141" populated="true" UUID="69e8b567-cfc1-437b-9983-b41fc7e8fda9" deferrability="7" deleteRule="3" fk-table-ref="TAB75" fkCardinality="7" identifying="false" name="Dias_Horarios_fk" physicalName="dias_horarios_fk" pk-table-ref="TAB97" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP142" populated="true" UUID="25c62ad3-0665-4039-a4e4-dfd7bd20f02f" fk-column-ref="COL78" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL98" />
+   </relationship>
+   <relationship id="REL143" populated="true" UUID="629d2127-46a0-46bf-8562-77f0eb76f131" deferrability="7" deleteRule="3" fk-table-ref="TAB88" fkCardinality="7" identifying="true" name="Anio_Curso_Lapso_fk" physicalName="anio_curso_lapso_fk" pk-table-ref="TAB102" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP144" populated="true" UUID="bbed2dd7-19ed-43ee-9b7d-cc10b7e8c2f3" fk-column-ref="COL90" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL103" />
+   </relationship>
+  </relationships>
+ </target-database>
+ <ddl-generator type="ca.sqlpower.architect.ddl.MySqlDDLGenerator" allow-connection="false"> </ddl-generator>
+ <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
+ <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
+ <play-pen zoom="0.8408964152537145" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+  <table-pane table-ref="TAB1" x="316" y="70" bgColor="0xf6bcbc" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB9" x="754" y="38" bgColor="0xbfd6ff" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB29" x="964" y="376" bgColor="0xf6bcbc" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB35" x="982" y="153" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB41" x="360" y="253" bgColor="0xf6bcbc" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB46" x="367" y="522" bgColor="0xf6bcbc" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB57" x="566" y="245" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB63" x="362" y="372" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB69" x="754" y="323" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB75" x="185" y="374" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB83" x="762" y="470" bgColor="0xf6bcbc" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB88" x="573" y="359" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB97" x="193" y="537" bgColor="0xf6bcbc" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB102" x="576" y="511" bgColor="0xf6bcbc" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB107" x="972" y="575" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB23" x="542" y="92" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-link relationship-ref="REL127" pkConnection="0.4166666666666667" fkConnection="0.5172413793103449" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL125" pkConnection="0.46511627906976744" fkConnection="0.5" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-link relationship-ref="REL133" pkConnection="0.49295774647887325" fkConnection="0.647887323943662" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL121" pkConnection="0.5669291338582677" fkConnection="0.4426229508196721" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL117" pkConnection="0.7814207650273224" fkConnection="0.49122807017543857" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL135" pkConnection="0.5058823529411764" fkConnection="0.41414141414141414" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="18"/>
+  <table-link relationship-ref="REL119" pkConnection="0.8032786885245902" fkConnection="0.5238095238095238" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="130"/>
+  <table-link relationship-ref="REL137" pkConnection="0.5" fkConnection="0.45323741007194246" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL139" pkConnection="0.49523809523809526" fkConnection="0.47619047619047616" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL131" pkConnection="0.5263157894736842" fkConnection="0.42063492063492064" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-link relationship-ref="REL141" pkConnection="0.4649122807017544" fkConnection="0.5350877192982456" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL143" pkConnection="0.5" fkConnection="0.5" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="72"/>
+  <table-link relationship-ref="REL123" pkConnection="0.5275590551181102" fkConnection="0.48360655737704916" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="132"/>
+  <table-link relationship-ref="REL129" pkConnection="0.574468085106383" fkConnection="0.49122807017543857" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL115" pkConnection="0.44808743169398907" fkConnection="0.49122807017543857" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="18"/>
+  <table-link relationship-ref="REL113" pkConnection="0.5050505050505051" fkConnection="0.49122807017543857" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+ </play-pen>
+ <critic-manager>
+  <critic-grouping platformType="Generic" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.PrimaryKeyCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.RelationshipMappingTypeCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.EmptyRelationshipCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.AlphaNumericNameCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.AlphaNumericSequenceNameCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SetDefaultOnColumnWithNoDefaultCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SetNullOnNonNullableColumnCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.DuplicateNameCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="DB2" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.DB2UnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="H2" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.H2UnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="HSQLDB" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.HSQLDBUnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="MySQL" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.MySQLCommentCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.MySQLReservedWordsCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.MySQLUnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="Oracle" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.OraclePhysicalNameCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.OracleReservedWordsCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.OracleUnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="PostgreSQL" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.PostgreSQLReservedWordsCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="SQL Server" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SQLServerUnsupportedFeaturesCritic" severity="ERROR"/>
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SQLServerReservedWordsCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="SQL Server 2000" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SQLServer2000UnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+  <critic-grouping platformType="SQL Server 2005" enabled="true">
+   <critic-settings class="ca.sqlpower.architect.ddl.critic.impl.SQLServer2005UnsupportedFeaturesCritic" severity="ERROR"/>
+  </critic-grouping>
+ </critic-manager>
+ <profiles topNCount="10">
+  </profiles>
+  <olap>
+  </olap>
+  <olap-gui>
+  </olap-gui>
+</architect-project>

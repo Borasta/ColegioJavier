@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Registro Estudiante</title>
+	<meta charset="UTF-8">
+	<script src="script/ajax.js"></script>
+	<script src="../objects.js"></script>
+	<script src="script/registro.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="">Colegio Javier</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="../index.php">Inicio</a></li>
+				<li><a href="">¿Quienes Somos?</a></li>
+				<li><a href="../contacto.html">Contactanos</a></li>
+				<li><a href="../noticia.html">Noticias</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="">Estudiantes<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="">Educacion Inicial</a></li>
+						<li><a href="">Primaria</a></li>
+						<li><a href="">Diversificado</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="conectado active dropdown" style="display: none;">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="">
+						<span class="nombresPersona"></span>
+						<span class="apellidosPersona"></span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="">Administracion <span class="glyphicon glyphicon-book"></span></a></li>
+						<li><a href="" id="config">Configuracion <span class="glyphicon glyphicon-cog"></span></a></li>
+						<li class="divider"></li>
+						<li><a href="" id="desconectar">Desconectar <span class="glyphicon glyphicon-off"></span></a></li>
+					</ul>
+
+				</li>
+				<li class="desconectado" style="display: none;">
+					<a class="dropdown-toggle" data-toggle="modal" data-target="#myModal" href="">
+						<span class="glyphicon glyphicon-log-in dropdown"></span> Login
+					</a>
+
+					<!-- Modal -->
+					<div id="myModal" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content modal-sm">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Login</h4>
+								</div>
+								<div class="modal-body">
+									<p>Some text in the modal.</p>
+									<div class="row">
+										<div class="input-prepend col-xs-11">
+											<span class="add-on"><i class="icon-user"></i> Usuario:</span>
+											<input id="usuario" type="text" class="form-control"/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-prepend col-xs-11">
+											<span class="add-on"><i></i> Contraseña:</span>
+											<input id="contrasenia" type="password" class="form-control"/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-prepend col-xs-11">
+											<select class="form-control" id="tipo">
+												<option value="estudiante">Estudiante</option>
+												<option value="docente">Docente</option>
+											</select>
+										</div>
+									</div>
+									<br/>
+									<div class="row">
+										<span class="col-xs-6">Olvido su contraseña?</span>
+										<button class="btn btn-info btn-sm col-xs-5" id="conectar">Conectar</button>
+									</div>
+									<br/>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+	<form id="form" >
+		<table id="fase2">
+			<tr>
+				<th><span>ESTUDIANTES</span></th>
+				<th><span></span></th>
+			</tr>
+			<tr>
+				<td>Nombres</td>
+				<td><input id="nombres_e" placeholder="Nombre1 Nombre2 Nombre3" type="text"></td>
+			</tr>
+			<tr>
+				<td>Apellidos</td>
+				<td><input id="apellidos_e" placeholder="Apellido1 Apellido2" type="text"></td>
+			</tr>
+			<tr>
+				<td>Fecha de nacimiento</td>
+				<td><input id="fecha_nacimiento_e" type="date" title="Fecha de nacimiento"></td>
+			</tr>
+			<tr>
+				<td>Cédula</td>
+				<td><input type="text" id="cedula_e" placeholder="#########"></td>
+			</tr>
+			<tr>
+				<td>Genero</td>
+				<td>
+					<input id="genero_e_m" type="radio" name="genero_e" value="M" checked title="Masculino"> Varon |
+					<input id="genero_e_f" type="radio" name="genero_e" value="F" title="Femenino"> Hembra
+				</td>
+			</tr>
+		</table>
+
+		<table id="fase3">
+			<tr>
+				<th><span>CUENTA</span></th>
+				<th><span></span></th>
+			</tr>
+			<tr>
+				<td>Usuario</td>
+				<td><input id="user" placeholder="usuario" type="text" title="Usuario"></td>
+			</tr>
+			<tr>
+				<td>Contraseña</td>
+				<td><input id="contrasenia" placeholder="###AAA" type="password" title="Contraseña"></td>
+			</tr>
+			<tr>
+				<td>Repitela</td>
+				<td><input id="contrasenia2" placeholder="###AAA" type="password" title="Repita la contraseña"></td>
+			</tr>
+		</table>
+	</form>
+	<button id="boton">Siguiente</button>
+	<p></p>
+</body>
+</html>

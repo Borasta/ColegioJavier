@@ -1,13 +1,59 @@
-var express = require("express");
-var app = express();
+"use strict";
 
-app.use( express.static(__dirname) );
+var _express = require("express");
 
-app.listen(process.env.PORT || 5000, function() {
-	console.log('Server iniciado');
+var _express2 = _interopRequireDefault(_express);
+
+var _bodyParser = require("body-parser");
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _bluebird = require("bluebird");
+
+var _bluebird2 = _interopRequireDefault(_bluebird);
+
+var _promiseMysql = require("promise-mysql");
+
+var _promiseMysql2 = _interopRequireDefault(_promiseMysql);
+
+var _routes = require("./app/routes");
+
+var _routes2 = _interopRequireDefault(_routes);
+
+var _request = require("./app/request");
+
+var _request2 = _interopRequireDefault(_request);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mysql = undefined;
+
+var app = (0, _express2.default)();
+
+app.set("port", process.env.PORT || 5000);
+
+app.set("mysql", {
+	"host": 'db4free.net',
+	"user": 'jhoseww',
+	"password": '5603410jwm',
+	"database": 'javier'
 });
 
-// app.get("/*", function(req, res) {
-// 	res.sendFile()
-// })
+app.use(_bodyParser2.default.json());
+app.use(_bodyParser2.default.urlencoded({ "extended": false }));
 
+app.use(_express2.default.static(__dirname + "/public"));
+app.use(_express2.default.static(__dirname + "/bower_components"));
+
+app.listen(app.get("port"), function () {
+	console.log("Servidor iniciado en http://localhost:" + app.get("port"));
+	_promiseMysql2.default.createConnection(app.get("mysql")).then(function (success) {
+		mysql = success;
+		console.log("Conexion con la base de datos correcta");
+		(0, _request2.default)(app, mysql);
+	}).catch(function (error) {
+		console.log(error);
+	});
+});
+
+(0, _routes2.default)(app);

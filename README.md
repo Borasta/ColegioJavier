@@ -1,4 +1,2 @@
-# ColegioJavier
-Pagina web del Colegio Javier
-
-Texto de prueba
+# WebSite
+Site for administrative processes for school Javier.
