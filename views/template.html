@@ -28,9 +28,14 @@
     <script>
         $( document ).ready(
             function() {
-                $(".dropdown-est").dropdown();
-                $('.modal-trigger').leanModal();
+                $(".dropdown-button").dropdown();
+                $(".modal-trigger").leanModal();
                 $(".button-collapse").sideNav();
+                $('.parallax').parallax();
+                $('.slider').slider({height: 100});
+                $('.close').click(function() {
+                    $("#modal1").closeModal();  
+                })
             }
         )
     </script>
@@ -54,10 +59,10 @@
                 <ul class="right">
                     <li class="hide-on-med-and-down"><a href="#">Noticias</a></li>
                     <li class="hide-on-med-and-down">
-                        <a class="dropdown-est" href="#!" data-activates="estdrop">Estudiantes
+                        <a class="dropdown-button" href="#!" data-activates="estdrop1">Estudiantes
                             <i class="material-icons right">arrow_drop_down</i>
                         </a>
-                        <ul id="estdrop" class="dropdown-content">
+                        <ul id="estdrop1" class="dropdown-content">
                             <li class="blue lighten-5"><a href="#">Educacion Inicial</a></li>
                             <li class="blue lighten-5"><a href="#">Primaria</a></li>
                             <li class="blue lighten-5"><a href="#">Diversificado</a></li>
@@ -70,37 +75,6 @@
                         </a>
                     </li>
                 </ul>
-
-                            <!-- </div> -->
-                            <!-- <li>
-                                <span class="col-xs-1"></span>
-                                <span class="col-xs-12"><label for="usuario">Usuario</label></span>
-                            </li>
-                            <li>
-                                <span class="col-xs-1"></span>
-                                <span class="col-xs-12">
-                                    <div class="input-prepend">
-                                        <span class="add-on"><i class="icon-user"></i></span>
-                                        <input id="usuario" type="text" class="form-control"/>
-                                    </div>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="col-xs-1"></span>
-                                <span class="col-xs-12"><label for="contrasenia">Contraseña</label></span>
-                            </li>
-                            <li>
-                                <span class="col-xs-1"></span>
-                                <span class="col-xs-12">
-                                    <div class="input-prepend">
-                                        <span class="add-on"><i></i></span>
-                                        <input id="contrasenia" type="password" class="form-control"/>
-                                    </div>
-                                </span>
-                            </li> -->
-                        </ul>
-                    </li>
-                </ul>
                 <!-- Side bar para telefonos -->
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="side-nav" id="mobile-demo">
@@ -109,10 +83,10 @@
                     <li class=""><a href="#">Contactanos</a></li>
                     <li class=""><a href="#">Noticias</a></li>
                     <li class="">
-                        <a class="dropdown-est" href="#!" data-activates="estdrop">Estudiantes
+                        <a class="dropdown-button" href="#!" data-activates="estdrop2">Estudiantes
                             <i class="material-icons right">arrow_drop_down</i>
                         </a>
-                        <ul id="estdrop" class="dropdown-content">
+                        <ul id="estdrop2" class="dropdown-content">
                             <li class="blue lighten-5"><a href="#">Educacion Inicial</a></li>
                             <li class="blue lighten-5"><a href="#">Primaria</a></li>
                             <li class="blue lighten-5"><a href="#">Diversificado</a></li>
@@ -125,20 +99,23 @@
     </div>
 
     <div id="modal1" class="modal">
-        <div class="modal-content green lighten-5">
+        <div class="modal-content blue darken-3">
+            <div class="row">
+                <button class="col s2 push-s10 m1 push-m11 btn small close">X</button>
+            </div>
             <form class="">
                 <div class="input-field row">
                     <div class="col s12 m10 push-m1">
-                        <input placeholder="Nombre de usuario" id="user" type="text" class="validate center">
+                        <input placeholder="Nombre de usuario" id="user" type="text" class="validate center white-text">
                         <label for="user">
                             Usuario
                             <i class="material-icons left">person</i>
                         </label>
                     </div>
                 </div>
-                <div class="input-field row center">
+                <div class="input-field row">
                     <div class="col s12 m10 push-m1">
-                        <input placeholder="Contraseña" id="pass" type="password" class="validate center">
+                        <input placeholder="Contraseña" id="pass" type="password" class="validate center white-text">
                         <label for="pass">
                             Contraseña
                             <i class="material-icons left">lock_outline</i>
@@ -147,7 +124,7 @@
                 </div>
             </form>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer blue darken-5">
             <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Iniciar</a>
         </div>
     </div>
