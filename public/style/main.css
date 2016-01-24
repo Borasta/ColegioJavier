@@ -1,11 +1,23 @@
-.conectado .desconectado {
-	display: none;
+div.parallax-container > div.section {
+	margin-top: 23em;
 }
 
-body {
-	background-color: black;
+.parallax-container {
+	margin-top: -250px;
+  	height: 750px;
 }
-
-.nombresPersona, .apellidosPersona {
-	color: #e3e3e3;
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	color: #eceff1;	/* blue-grey lighten-5 */s
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color: #eceff1;	/* blue-grey lighten-5 */s
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color: #eceff1;	/* blue-grey lighten-5 */
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: #eceff1;	/* blue-grey lighten-5 */s
+}
+:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+	color: #eceff1;	/* blue-grey lighten-5 */s
 }

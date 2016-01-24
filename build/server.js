@@ -8,8 +8,9 @@ import request from "./app/request";
 
 let mysql;
 
-			
 let app = express();
+
+let router = express.Router();
 
 app.set("port", process.env.PORT || 5000);
 
@@ -33,10 +34,10 @@ app.listen(app.get("port"), () => {
 		then(success => {
 			mysql = success;
 			console.log(`Conexion con la base de datos correcta`);
-			request(app, mysql);
+			app.use( request( router, mysql ) );
 		}).catch(error => {
-			console.log(error)
+			console.log(`${error}`)
 	});
 });
 
-routes(app);
+app.use( routes(router) );

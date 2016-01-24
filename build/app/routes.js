@@ -3,8 +3,8 @@ let path = require("path");
 
 let views = path.join(__dirname, "../views");
 
-module.exports = app => {
-	app.get(`/`, (req, res) => {
+module.exports = router => {
+	router.get(`/`, (req, res) => {
 		render({
 			res: res,
 			tmp: `${views}/template.html`,
@@ -14,7 +14,7 @@ module.exports = app => {
 		res.end("");
 	});
 
-	app.get(`/quienes-somos`, (req, res) => {
+	router.get(`/quienes-somos`, (req, res) => {
 		render({
 			res: res,
 			tmp: `${views}/template.html`,
@@ -24,7 +24,7 @@ module.exports = app => {
 		res.end("");
 	});
 
-	app.get(`/contactanos`, (req, res) => {
+	router.get(`/contactanos`, (req, res) => {
 		render({
 			res: res,
 			tmp: `${views}/template.html`,
@@ -34,7 +34,7 @@ module.exports = app => {
 		res.end("");
 	});
 
-	app.get(`/noticias`, (req, res) => {
+	router.get(`/noticias`, (req, res) => {
 		render({
 			res: res,
 			tmp: `${views}/template.html`,
@@ -44,7 +44,7 @@ module.exports = app => {
 		res.end("");
 	});
 
-	app.get(`/estudiantes/educacion-inicial`, (req, res) => {
+	router.get(`/estudiantes/educacion-inicial`, (req, res) => {
 		render({
 			res: res,
 			tmp: `${views}/template.html`,
@@ -54,7 +54,7 @@ module.exports = app => {
 		res.end("");
 	});
 
-	app.get(`/estudiantes/primaria`, (req, res) => {
+	router.get(`/estudiantes/primaria`, (req, res) => {
 		render({
 			res: res,
 			tmp: `${views}/template.html`,
@@ -64,7 +64,7 @@ module.exports = app => {
 		res.end("");
 	});
 
-	app.get(`/estudiantes/diversificado`, (req, res) => {
+	router.get(`/estudiantes/diversificado`, (req, res) => {
 		render({
 			res: res,
 			tmp: `${views}/template.html`,
@@ -73,4 +73,6 @@ module.exports = app => {
 		});
 		res.end("");
 	});
+
+	return router;
 }

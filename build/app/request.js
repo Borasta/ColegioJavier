@@ -1,12 +1,19 @@
-module.exports = (app, mysql) => {
+import services from "./services";
+import jwt from "jwt-simple";
+
+module.exports = (router, mysql) => {
 	let auth = false;
 	let query = ``;
 
-	app.get("/auth/verify", (req, res) => {
+	router.get("/auth/verify", (req, res) => {
 		res.send(auth);
 	});
 
-	app.post("/auth/login/estudiante", (req, res) => {
+	router.route("/auth/login/estudiante")
+	.get( () => {
+
+	}).post( (req, res) => {
+		console.log(req.headers.authorization);
 		let userData = req.body;
 		query = `
             SELECT id_e,
@@ -23,13 +30,27 @@ module.exports = (app, mysql) => {
         `;
         mysql.query(query)
         .then( row => {
-			res.send(row);
+
+        	if( row.length >= 1 ) {
+        		let token = services.createToken( row[0].id_e, {
+        			"time": 1,
+        			"type": "days"
+        		});
+        		res.status(200).send(token);
+        	}
         }).catch(error => {
         	res.send(error);
         });
+    });
+
+	router.route("/auth/login/profesor")
+	.get( () => {
+
+	}).post( () => {
+
 	});
 
-	app.get("/estudiantes", (req, res) => {
+	router.get("/estudiantes", (req, res) => {
 		query = `
             SELECT *
             FROM estudiantes;
@@ -42,12 +63,14 @@ module.exports = (app, mysql) => {
         });
 	});
 
-	app.post("/auth/signup/estudiante", (req, res) => {
+	router.post("/auth/signup/estudiante", (req, res) => {
 		
 	});
 
-	app.get("/auth/logout", (req, res) => {
+	router.get("/auth/logout", (req, res) => {
 		auth = false;
 		res.send(auth);
 	});
+
+	return router;
 }

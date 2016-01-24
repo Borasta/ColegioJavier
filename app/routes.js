@@ -5,8 +5,8 @@ var path = require("path");
 
 var views = path.join(__dirname, "../views");
 
-module.exports = function (app) {
-	app.get("/", function (req, res) {
+module.exports = function (router) {
+	router.get("/", function (req, res) {
 		render({
 			res: res,
 			tmp: views + "/template.html",
@@ -16,7 +16,7 @@ module.exports = function (app) {
 		res.end("");
 	});
 
-	app.get("/quienes-somos", function (req, res) {
+	router.get("/quienes-somos", function (req, res) {
 		render({
 			res: res,
 			tmp: views + "/template.html",
@@ -26,7 +26,7 @@ module.exports = function (app) {
 		res.end("");
 	});
 
-	app.get("/contactanos", function (req, res) {
+	router.get("/contactanos", function (req, res) {
 		render({
 			res: res,
 			tmp: views + "/template.html",
@@ -36,7 +36,7 @@ module.exports = function (app) {
 		res.end("");
 	});
 
-	app.get("/noticias", function (req, res) {
+	router.get("/noticias", function (req, res) {
 		render({
 			res: res,
 			tmp: views + "/template.html",
@@ -46,7 +46,7 @@ module.exports = function (app) {
 		res.end("");
 	});
 
-	app.get("/estudiantes/educacion-inicial", function (req, res) {
+	router.get("/estudiantes/educacion-inicial", function (req, res) {
 		render({
 			res: res,
 			tmp: views + "/template.html",
@@ -56,7 +56,7 @@ module.exports = function (app) {
 		res.end("");
 	});
 
-	app.get("/estudiantes/primaria", function (req, res) {
+	router.get("/estudiantes/primaria", function (req, res) {
 		render({
 			res: res,
 			tmp: views + "/template.html",
@@ -66,7 +66,7 @@ module.exports = function (app) {
 		res.end("");
 	});
 
-	app.get("/estudiantes/diversificado", function (req, res) {
+	router.get("/estudiantes/diversificado", function (req, res) {
 		render({
 			res: res,
 			tmp: views + "/template.html",
@@ -75,4 +75,6 @@ module.exports = function (app) {
 		});
 		res.end("");
 	});
+
+	return router;
 };

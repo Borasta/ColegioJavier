@@ -25,25 +25,13 @@
     <!-- Angular -->
     <script src="/angular/angular.min.js"></script>
 
-    <script>
-        $( document ).ready(
-            function() {
-                $(".dropdown-button").dropdown();
-                $(".modal-trigger").leanModal();
-                $(".button-collapse").sideNav();
-                $('.parallax').parallax();
-                $('.slider').slider({height: 100});
-                $('.close').click(function() {
-                    $("#modal1").closeModal();  
-                })
-            }
-        )
-    </script>
+    <link rel="stylesheet" href="/style/main.css">
+    <script src="/script/init.js"></script>
 
     <script src="/script/main.js"></script>
 
 </head>
-<body>
+<body ng-controller="Login">
     <div class="navbar-fixed">
         <nav class="navbar navbar-inverse blue">
             <div class="container-fluid">
@@ -69,14 +57,21 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a class="modal-trigger" href="#modal1">
+                        <a class="modal-trigger" ng-hide="autentificado" href="#modal1">
                             <span class="hide-on-med-and-down">Entrar</span>
                             <i class="material-icons left">person</i>
                         </a>
+                        <a href="#" data-activates="slide-out" ng-show="autentificado" class="button-collapse right show-on-large">
+                            <i class="material-icons">person</i>
+                        </a>
+                        <ul id="slide-out" class="side-nav">
+                            <li><a href="#!">Opcion 1</a></li>
+                            <li><a href="#!">Opcion 2</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <!-- Side bar para telefonos -->
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse mobile"><i class="material-icons">menu</i></a>
                 <ul class="side-nav" id="mobile-demo">
                     <li class="active"><a href="#">Inicio</a></li>
                     <li class=""><a href="#">¿Quienes Somos?</a></li>
@@ -106,7 +101,7 @@
             <form class="">
                 <div class="input-field row">
                     <div class="col s12 m10 push-m1">
-                        <input placeholder="Nombre de usuario" id="user" type="text" class="validate center white-text">
+                        <input placeholder="Nombre de usuario" id="user" type="text" ng-model="data.user" class="validate center white-text">
                         <label for="user">
                             Usuario
                             <i class="material-icons left">person</i>
@@ -115,22 +110,59 @@
                 </div>
                 <div class="input-field row">
                     <div class="col s12 m10 push-m1">
-                        <input placeholder="Contraseña" id="pass" type="password" class="validate center white-text">
+                        <input placeholder="Contraseña" id="pass" type="password" ng-model="data.pass" class="validate center white-text">
                         <label for="pass">
                             Contraseña
                             <i class="material-icons left">lock_outline</i>
                         </label>
                     </div>
                 </div>
+                <div class="input-field row white-text">
+                    <div class="col s8 push-s2">
+                        <div class="row">
+                            <p class="col s6">
+                                <input name="tipo" type="radio" ng-model="data.type" id="estudiante" value="estudiante"/>
+                                <label for="estudiante">Estudiante</label>
+                            </p>
+                            <p class="col s6">
+                                <input name="tipo" type="radio"ng-model="data.type" id="profesor" value="profesor"/>
+                                <label for="profesor">Profesor</label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="modal-footer blue darken-5">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Iniciar</a>
+            <button ng-click="login()" class="modal-action modal-close waves-effect waves-green btn-flat">Iniciar</button>
         </div>
     </div>
     {{content}}
-    <footer>
-            
+    
+    <footer class="page-footer yellow darken-4">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2014 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
     </footer>
 </body>
 </html>

@@ -30,6 +30,8 @@ var mysql = undefined;
 
 var app = (0, _express2.default)();
 
+var router = _express2.default.Router();
+
 app.set("port", process.env.PORT || 5000);
 
 app.set("mysql", {
@@ -50,10 +52,10 @@ app.listen(app.get("port"), function () {
 	_promiseMysql2.default.createConnection(app.get("mysql")).then(function (success) {
 		mysql = success;
 		console.log("Conexion con la base de datos correcta");
-		(0, _request2.default)(app, mysql);
+		app.use((0, _request2.default)(router, mysql));
 	}).catch(function (error) {
-		console.log(error);
+		console.log("" + error);
 	});
 });
 
-(0, _routes2.default)(app);
+app.use((0, _routes2.default)(router));
