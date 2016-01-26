@@ -12,3 +12,6 @@ module.exports.createToken = ( data, duration) => {
 	};
 	return jwt.encode(payload, TOKEN_SECRET);
 }
+
+module.exports.decoded
+

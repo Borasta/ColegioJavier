@@ -24,3 +24,5 @@ module.exports.createToken = function (data, duration) {
 	};
 	return _jwtSimple2.default.encode(payload, TOKEN_SECRET);
 };
+
+module.exports.decoded;

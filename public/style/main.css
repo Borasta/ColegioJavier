@@ -21,3 +21,7 @@ div.parallax-container > div.section {
 :placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
 	color: #eceff1;	/* blue-grey lighten-5 */s
 }
+
+p.table {
+	margin-top: -2px;
+}

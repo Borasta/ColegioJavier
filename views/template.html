@@ -29,9 +29,8 @@
     <script src="/script/init.js"></script>
 
     <script src="/script/main.js"></script>
-
 </head>
-<body ng-controller="Login">
+<body ng-controller="LoginController">
     <div class="navbar-fixed">
         <nav class="navbar navbar-inverse blue">
             <div class="container-fluid">
@@ -57,16 +56,20 @@
                         </ul>
                     </li>
                     <li class="">
+                        <!-- DESAUTENTIFICADO -->
                         <a class="modal-trigger" ng-hide="autentificado" href="#modal1">
                             <span class="hide-on-med-and-down">Entrar</span>
                             <i class="material-icons left">person</i>
                         </a>
+                        <!-- AUTENTIFICADO -->
                         <a href="#" data-activates="slide-out" ng-show="autentificado" class="button-collapse right show-on-large">
-                            <i class="material-icons">person</i>
+                            <span>{{nombre}}</span>
+                            <i class="material-icons left hide-on-med-and-down light-green-text text-accent-1">person</i>
                         </a>
                         <ul id="slide-out" class="side-nav">
-                            <li><a href="#!">Opcion 1</a></li>
-                            <li><a href="#!">Opcion 2</a></li>
+                            <li><a href="#" ng-click="private('/perfil')">Mi perfil</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#!" ng-click="logout()">Salir</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -121,11 +124,11 @@
                     <div class="col s8 push-s2">
                         <div class="row">
                             <p class="col s6">
-                                <input name="tipo" type="radio" ng-model="data.type" id="estudiante" value="estudiante"/>
+                                <input name="tipo" type="radio" ng-model="data.type" id="estudiante" value="e"/>
                                 <label for="estudiante">Estudiante</label>
                             </p>
                             <p class="col s6">
-                                <input name="tipo" type="radio"ng-model="data.type" id="profesor" value="profesor"/>
+                                <input name="tipo" type="radio"ng-model="data.type" id="profesor" value="p"/>
                                 <label for="profesor">Profesor</label>
                             </p>
                         </div>
@@ -138,7 +141,6 @@
         </div>
     </div>
     {{content}}
-    
     <footer class="page-footer yellow darken-4">
         <div class="container">
             <div class="row">

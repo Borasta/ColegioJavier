@@ -1,13 +1,24 @@
 "use strict";
 
-var render = require("./render");
-var path = require("path");
+var _render = require("./render");
 
-var views = path.join(__dirname, "../views");
+var _render2 = _interopRequireDefault(_render);
+
+var _path = require("path");
+
+var _path2 = _interopRequireDefault(_path);
+
+var _middleware = require("./middleware");
+
+var _middleware2 = _interopRequireDefault(_middleware);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var views = _path2.default.join(__dirname, "../views");
 
 module.exports = function (router) {
 	router.get("/", function (req, res) {
-		render({
+		(0, _render2.default)({
 			res: res,
 			tmp: views + "/template.html",
 			ctn: views + "/main.html",
@@ -17,7 +28,7 @@ module.exports = function (router) {
 	});
 
 	router.get("/quienes-somos", function (req, res) {
-		render({
+		(0, _render2.default)({
 			res: res,
 			tmp: views + "/template.html",
 			ctn: views + "/quienes-somos.html",
@@ -27,7 +38,7 @@ module.exports = function (router) {
 	});
 
 	router.get("/contactanos", function (req, res) {
-		render({
+		(0, _render2.default)({
 			res: res,
 			tmp: views + "/template.html",
 			ctn: views + "/contactanos.html",
@@ -37,7 +48,7 @@ module.exports = function (router) {
 	});
 
 	router.get("/noticias", function (req, res) {
-		render({
+		(0, _render2.default)({
 			res: res,
 			tmp: views + "/template.html",
 			ctn: views + "/noticias.html",
@@ -47,7 +58,7 @@ module.exports = function (router) {
 	});
 
 	router.get("/estudiantes/educacion-inicial", function (req, res) {
-		render({
+		(0, _render2.default)({
 			res: res,
 			tmp: views + "/template.html",
 			ctn: views + "/educacion-inicial.html",
@@ -57,7 +68,7 @@ module.exports = function (router) {
 	});
 
 	router.get("/estudiantes/primaria", function (req, res) {
-		render({
+		(0, _render2.default)({
 			res: res,
 			tmp: views + "/template.html",
 			ctn: views + "/primaria.html",
@@ -67,12 +78,31 @@ module.exports = function (router) {
 	});
 
 	router.get("/estudiantes/diversificado", function (req, res) {
-		render({
+		(0, _render2.default)({
 			res: res,
 			tmp: views + "/template.html",
 			ctn: views + "/diversificado.html",
 			values: {}
 		});
+		res.end("");
+	});
+
+	// Rutas privadas;
+
+	router.get("/perfil/:token", _middleware2.default.authenticated, function (req, res) {
+		if (req.data.type === "e") (0, _render2.default)({
+			res: res,
+			tmp: views + "/template.html",
+			ctn: views + "/panel_estudiante.html",
+			values: {}
+		});else if (req.data.type === "p") (0, _render2.default)({
+			res: res,
+			tmp: views + "/template.html",
+			ctn: views + "/panel_profesor.html",
+			values: {}
+		});else {
+			res.status(401).send({ message: "Error, ingrese nuevamente" });
+		}
 		res.end("");
 	});
 

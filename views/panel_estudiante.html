@@ -1,0 +1,321 @@
+
+    <div class="container" ng-controller="EstudianteController">
+        <br/>
+        <br/>
+        <ul class="collapsible popout" data-collapsible="expandable">
+            <li>
+                <div class="collapsible-header" ng-click="verData(misDatos)">
+                    <i class="material-icons">filter_drama</i>Mis datos
+                    <div class="secondary-content"><i class="material-icons">send</i></div>
+                </div>
+                <div class="collapsible-body">
+                    <br/>
+                    <div class="center-align" ng-hide="misDatos">
+                        <div class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <ul class="collapsible popout" data-collapsible="expandable">
+                            <li class="collection-itemr" ng-show="misDatos.estudiante">
+                                <div class="collapsible-header">
+                                    <i class="material-icons">filter_drama</i>Estudiante
+                                    <div class="secondary-content"><i class="material-icons">send</i></div>
+                                </div>
+                                <div class="collapsible-body">
+                                    <ul class="collection">
+                                        <li class="collection-item">Nombres: {{misDatos.estudiante.nombres}}</li>
+                                        <li class="collection-item">Apellidos: {{misDatos.estudiante.apellidos}}</li>
+                                        <li class="collection-item">Edad: {{misDatos.estudiante.edad}}</li>
+                                        <li class="collection-item">Cedula: {{misDatos.estudiante.cedula}}</li>
+                                        <li class="collection-item">Genero: {{misDatos.estudiante.genero}}</li>
+                                        <li class="collection-item">Direccion: {{misDatos.estudiante.direccion}}</li>
+                                        <li class="collection-item">Usuario: {{misDatos.estudiante.usuario}}</li>
+                                        <li class="collection-item">Grado: {{misDatos.estudiante.grado}}</li>
+                                        <li class="collection-item">Seccion: {{misDatos.estudiante.seccion}}</li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <br/>
+                            <li class="collection-itemr" ng-show="misDatos.representantes">
+                                <div class="collapsible-header">
+                                    <i class="material-icons">filter_drama</i>Representantes
+                                    <div class="secondary-content"><i class="material-icons">send</i></div>
+                                </div>
+                                <div class="collapsible-body">
+                                    <ul class="collection">
+                                        <li class="collection-item" ng-repeat="representante in misDatos.representantes">
+                                            <b>Representante</b>
+                                            <ul class="collection">
+                                                <li class="collection-item">Nombres: {{representante.nombres}}</li>
+                                                <li class="collection-item">Apellidos: {{representante.apellidos}}</li>
+                                                <li class="collection-item">Cedula: {{representante.cedula}}</li>
+                                                <li class="collection-item">Genero: {{representante.genero}}</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <ul class="collection" ng-show="misDatos">
+                        <li class="collection-item"><b>Estudiante</b>
+                            <ul class="list-group">
+                                <li class="collection-item">Nombres: </li>
+                                <li class="collection-item">Apellidos: </li>
+                                <li class="collection-item">Edad: </li>
+                                <li class="collection-item">Cedula: </li>
+                                <li class="collection-item">Genero: </li>
+                                <li class="collection-item">Direccion: </li>
+                                <li class="collection-item">Usuario: </li>
+                                <li class="collection-item">Grado: </li>
+                                <li class="collection-item">Seccion: </li>
+                            </ul>
+                        </li>
+                        <li class="collection-item"><b>Representante</b>
+                            <ul class="collection">
+                                <li class="collection-item">Nombres: </li>
+                                <li class="collection-item">Apellidos: </li>
+                                <li class="collection-item">Cedula: </li>
+                                <li class="collection-item">Genero: </li>
+                            </ul>
+                        </li>
+                    </ul> -->
+                </div>
+            </li>
+            <br/>
+            <li>
+                <div class="collapsible-header" ng-click="verNotas(notas)">
+                    <i class="material-icons">place</i>Notas
+                    <div class="secondary-content"><i class="material-icons">send</i></div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="center-align" ng-hide="notas">
+                        <div class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="bordered highlight centered container responsive-table" ng-show="notas">
+                        <thead>
+                            <tr>
+                                <th data-field="materia">Materias</th>
+                                <th data-field="nombres">Profesor</th>
+                                <th data-field="lapso1">Lapso #1</th>
+                                <th data-field="lapso2">Lapso #2</th>
+                                <th data-field="lapso3">Lapso #3</th>
+                                <th data-field="promedio">Promedio</th>
+                                <th data-field="anio">Año escolar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="nota in notas">
+                                <td>{{nota.materia}}</td>
+                                <td>{{nota.nombre}}</td>
+                                <td>{{nota.lapso1}}</td>
+                                <td>{{nota.lapso2}}</td>
+                                <td>{{nota.lapso3}}</td>
+                                <td>{{nota.promedio}}</td>
+                                <td>{{nota.anio}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <br/>
+            <li>
+                <div class="collapsible-header" ng-click="verHorario(semanas)">
+                    <i class="material-icons">whatshot</i>Horario
+                    <div class="secondary-content"><i class="material-icons">send</i></div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="center-align" ng-hide="semanas">
+                        <div class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="bordered highlight centered container responsive-table" ng-show="semanas">
+                        <thead>
+                            <tr>
+                                <th data-field="lunes">Lunes</th>
+                                <th data-field="martes">Martes</th>
+                                <th data-field="miercoles">Miercoles</th>
+                                <th data-field="jueves">Jueves</th>
+                                <th data-field="viernes">Viernes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="semana in semanas track by $index">
+                                <td>{{semana}}</td>
+                                <!-- <td>{{semana[0] ? semana[0].nombre_m: "&nbsp;"}}</td>
+                                <td>{{semana[1] ? semana[1].nombre_m: "&nbsp;"}}</td>
+                                <td>{{semana[2] ? semana[2].nombre_m: "&nbsp;"}}</td>
+                                <td>{{semana[3] ? semana[3].nombre_m: "&nbsp;"}}</td>
+                                <td>{{semana[4] ? semana[4].nombre_m: "&nbsp;"}}</td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <br/>
+            <li>
+                <div class="collapsible-header" ng-click="verGrupos(grupos)">
+                    <i class="material-icons">whatshot</i>Grupos
+                    <div class="secondary-content"><i class="material-icons">send</i></div>
+                </div>
+                <div class="collapsible-body">
+                    <div class="center-align" ng-hide="grupos">
+                        <div class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="grupos">
+                        Lorem ipsum dolor sit amet.
+                    </p>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+    <div id="wrapper">
+        </div>
+        <div id="page-content-wrapper">
+            <div id="menuPerfil" class="row menu" style="display: none">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <ul id="perfil" class="list-group">
+                            <li class="list-group-item list-group-item-success estudiante"><b>Estudiante</b>
+                                <ul class="list-group">
+                                    <li class="list-group-item nombres">Nombres: </li>
+                                    <li class="list-group-item apellidos">Apellidos: </li>
+                                    <li class="list-group-item edad">Edad: </li>
+                                    <li class="list-group-item cedula">Cedula: </li>
+                                    <li class="list-group-item genero">Genero: </li>
+                                    <li class="list-group-item direccion">Direccion: </li>
+                                    <li class="list-group-item usuario">Usuario: </li>
+                                    <li class="list-group-item grado">Grado: </li>
+                                    <li class="list-group-item seccion">Seccion: </li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item list-group-item-info representante"><b>Representante</b>
+                                <ul class="list-group">
+                                    <li class="list-group-item nombres">Nombres: </li>
+                                    <li class="list-group-item apellidos">Apellidos: </li>
+                                    <li class="list-group-item cedula cedula">Cedula: </li>
+                                    <li class="list-group-item genero genero">Genero: </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="menuHorario" class="row menu" style="display: none">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="horario" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Lunes</th>
+                                    <th>Martes</th>
+                                    <th>Miercoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="semana in semanas">
+                                    <td>{{semana[1].nombre_m}}</td>
+                                    <td>{{semana[2].nombre_m}}</td>
+                                    <td>{{semana[3].nombre_m}}</td>
+                                    <td>{{semana[4].nombre_m}}</td>
+                                    <td>{{semana[5].nombre_m}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="menuNotas" class="row menu" style="display: none">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="notas">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Materia</th>
+                                <th colspan="2">Profesor</th>
+                                <th>Lapso 1</th>
+                                <th>Lapso 2</th>
+                                <th>Lapso 3</th>
+                                <th>Promedio</th>
+                                <th>Año Escolar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="menuGrupos" class="row menu" style="display: none">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="grupos">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Grupo a los que pertecenes</th>
+                                    <th>Descripcion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

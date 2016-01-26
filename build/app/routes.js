@@ -1,5 +1,6 @@
-let render = require("./render");
-let path = require("path");
+import render from "./render";
+import path from "path";
+import middleware from "./middleware";
 
 let views = path.join(__dirname, "../views");
 
@@ -71,6 +72,29 @@ module.exports = router => {
 			ctn: `${views}/diversificado.html`,
 			values: {}
 		});
+		res.end("");
+	});
+
+	// Rutas privadas;
+
+	router.get(`/perfil/:token`, middleware.authenticated, (req, res) => {
+		if( req.data.type === "e" )
+			render({
+				res: res,
+				tmp: `${views}/template.html`,
+				ctn: `${views}/panel_estudiante.html`,
+				values: {}
+			});
+		else if( req.data.type === "p" )
+			render({
+				res: res,
+				tmp: `${views}/template.html`,
+				ctn: `${views}/panel_profesor.html`,
+				values: {}
+			});
+		else {
+			res.status(401).send({message: "Error, ingrese nuevamente"})
+		}
 		res.end("");
 	});
 
