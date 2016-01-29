@@ -174,13 +174,41 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="semana in semanas track by $index">
-                                <td>{{semana}}</td>
-                                <!-- <td>{{semana[0] ? semana[0].nombre_m: "&nbsp;"}}</td>
-                                <td>{{semana[1] ? semana[1].nombre_m: "&nbsp;"}}</td>
-                                <td>{{semana[2] ? semana[2].nombre_m: "&nbsp;"}}</td>
-                                <td>{{semana[3] ? semana[3].nombre_m: "&nbsp;"}}</td>
-                                <td>{{semana[4] ? semana[4].nombre_m: "&nbsp;"}}</td> -->
+                            <tr ng-repeat="indice in length track by $index">
+                                <td ng-show="semanas[0][$index]">
+                                    {{semanas[0][$index].nombre_m}}
+                                </td>
+                                <td ng-hide="semanas[0][$index]">
+                                    <i class="material-icons">clear_all</i>
+                                </td>
+
+                                <td ng-show="semanas[1][$index]">
+                                    {{semanas[1][$index].nombre_m}}
+                                </td>
+                                <td ng-hide="semanas[1][$index]">
+                                    <i class="material-icons">clear_all</i>
+                                </td>
+
+                                <td ng-show="semanas[2][$index]">
+                                    {{semanas[2][$index].nombre_m}}
+                                </td>
+                                <td ng-hide="semanas[2][$index]">
+                                    <i class="material-icons">clear_all</i>
+                                </td>
+
+                                <td ng-show="semanas[3][$index]">
+                                    {{semanas[3][$index].nombre_m}}
+                                </td>
+                                <td ng-hide="semanas[3][$index]">
+                                    <i class="material-icons">clear_all</i>
+                                </td>
+
+                                <td ng-show="semanas[4][$index]">
+                                    {{semanas[4][$index].nombre_m}}
+                                </td>
+                                <td ng-hide="semanas[4][$index]">
+                                    <i class="material-icons">clear_all</i>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

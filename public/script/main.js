@@ -131,51 +131,71 @@ app.controller('EstudianteController', function ($scope, $http, $window) {
 		if (!self) {
 			console.log($http.defaults.headers.post.Authorization);
 			$http.post("/perfil/estudiante/horario").success(function (data) {
-				for (var i = 0; i < data.length; i++) {
-					switch (data[i].dia) {
-						case "Lunes":
-							data[i].numero = 0;
-							break;
-						case "Martes":
-							data[i].numero = 1;
-							break;
-						case "Miercoles":
-							data[i].numero = 2;
-							break;
-						case "Jueves":
-							data[i].numero = 3;
-							break;
-						case "Viernes":
-							data[i].numero = 4;
-							break;
-					}
-				}
-				var horario = [[], [], [], [], []];
-				var anterior = -1;
-				var vacio = ["&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;"];
-				var semanas = [vacio];
-				var length = 0;
-				var transpuesta = [[,,,,], [,,,,], [,,,,], [,,,,], [,,,,]];
+
+				var semanas = [[], [], [], [], []];
 
 				console.log(data);
 
-				for (var i = 0; i < data.length; i++) {
-					horario[data[i].numero].push(data[i]);
-					if (horario[data[i].numero].length > length) length = horario[data[i].numero].length;
-				}
+				$scope.i = 0;
 
-				console.log(length);
-
-				console.log("matriz");
 				for (var i = 0; i < data.length; i++) {
-					transpuesta.push([]);
-					for (var j = 0; j < length; j++) {
-						transpuesta[j].push(horario[j][i]);
+					switch (data[i].dia) {
+						case "Lunes":
+							semanas[0].push(data[i]);
+							break;
+						case "Martes":
+							semanas[1].push(data[i]);
+							break;
+						case "Miercoles":
+							semanas[2].push(data[i]);
+							break;
+						case "Jueves":
+							semanas[3].push(data[i]);
+							break;
+						case "Viernes":
+							semanas[4].push(data[i]);
+							break;
 					}
 				}
 
-				console.log(transpuesta);
-				console.log(horario);
+				var length = 0;
+				for (var i = 0; i < semanas.length; i++) {
+					var len = semanas[i].length;
+					if (len > length) length = len;
+				};
+
+				$scope.length = new Array(length);
+
+				$scope.semanas = semanas;
+
+				console.log($scope.semanas);
+
+				// let horario = [
+				// 	[],
+				// 	[],
+				// 	[],
+				// 	[],
+				// 	[],
+				// ]
+				// let anterior = -1;
+				// let vacio = ["&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;"];
+				// let semanas = [vacio];
+				// let length = 0;
+				// let transpuesta = [
+				// 	[,,,,],		// Lunes
+				// 	[,,,,],		// Martes
+				// 	[,,,,],		// Miercoles
+				// 	[,,,,],		// Jueves
+				// 	[,,,,],		// Viernes
+				// ];
+
+				// console.log(data);
+
+				// for( let i = 0; i < data.length; i++ ) {
+				// 	horario[data[i].numero].push(data[i]);
+				// 	if(horario[data[i].numero].length > length)
+				// 		length = horario[data[i].numero].length;
+				// }
 			}).error(function (e) {
 				console.log("Error");
 				console.log(e);
