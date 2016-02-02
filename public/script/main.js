@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module("MyApp", []);
+var app = angular.module("MyApp", ["ngLoad"]);
 
 app.controller("LoginController", function ($scope, $http, $window) {
 	$scope.autentificado = false;
@@ -39,7 +39,7 @@ app.controller("LoginController", function ($scope, $http, $window) {
 			$scope.nombre = data.nombres.split(" ")[0] + " " + data.apellidos[0];
 			sessionStorage.token = data.token;
 			$scope.autentificado = true;
-			console.log("Success " + data);
+			console.log(data);
 		}).error(function (e) {
 			console.log("Error");
 			console.log(e);
@@ -64,11 +64,10 @@ app.controller("LoginController", function ($scope, $http, $window) {
 });
 
 app.controller('EstudianteController', function ($scope, $http, $window) {
-	// /perfil/estudiante/notas
 
 	$scope.verData = function (self) {
+		console.log("VER DATA");
 		if (!self) {
-			console.log($http.defaults.headers.post.Authorization);
 			$http.post("/perfil/estudiante/data").success(function (data) {
 				console.log(data.estudiante.edad);
 				data.estudiante.edad = data.estudiante.edad.split(" ")[0];
@@ -102,7 +101,6 @@ app.controller('EstudianteController', function ($scope, $http, $window) {
 
 	$scope.verNotas = function (self) {
 		if (!self) {
-			console.log($http.defaults.headers.post.Authorization);
 			$http.post("/perfil/estudiante/notas").success(function (data) {
 				$scope.notas = [];
 				for (var i = 0; i < data.length; i++) {
@@ -129,14 +127,14 @@ app.controller('EstudianteController', function ($scope, $http, $window) {
 
 	$scope.verHorario = function (self) {
 		if (!self) {
-			console.log($http.defaults.headers.post.Authorization);
 			$http.post("/perfil/estudiante/horario").success(function (data) {
 
-				var semanas = [[], [], [], [], []];
-
-				console.log(data);
-
-				$scope.i = 0;
+				var semanas = [[], // Lunes
+				[], // Martes
+				[], // Mircoles
+				[], // Jueves
+				[] // Viernes
+				];
 
 				for (var i = 0; i < data.length; i++) {
 					switch (data[i].dia) {
@@ -167,35 +165,6 @@ app.controller('EstudianteController', function ($scope, $http, $window) {
 				$scope.length = new Array(length);
 
 				$scope.semanas = semanas;
-
-				console.log($scope.semanas);
-
-				// let horario = [
-				// 	[],
-				// 	[],
-				// 	[],
-				// 	[],
-				// 	[],
-				// ]
-				// let anterior = -1;
-				// let vacio = ["&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;"];
-				// let semanas = [vacio];
-				// let length = 0;
-				// let transpuesta = [
-				// 	[,,,,],		// Lunes
-				// 	[,,,,],		// Martes
-				// 	[,,,,],		// Miercoles
-				// 	[,,,,],		// Jueves
-				// 	[,,,,],		// Viernes
-				// ];
-
-				// console.log(data);
-
-				// for( let i = 0; i < data.length; i++ ) {
-				// 	horario[data[i].numero].push(data[i]);
-				// 	if(horario[data[i].numero].length > length)
-				// 		length = horario[data[i].numero].length;
-				// }
 			}).error(function (e) {
 				console.log("Error");
 				console.log(e);
@@ -206,8 +175,7 @@ app.controller('EstudianteController', function ($scope, $http, $window) {
 
 	$scope.verGrupos = function (self) {
 		if (!self) {
-			console.log($http.defaults.headers.post.Authorization);
-			$http.post("/perfil/estudiante/notas").success(function (data) {
+			$http.post("/perfil/estudiante/grupos").success(function (data) {
 				$scope.grupos = data;
 				console.log(data);
 			}).error(function (e) {
@@ -217,4 +185,45 @@ app.controller('EstudianteController', function ($scope, $http, $window) {
 			});
 		}
 	};
+});
+
+app.controller('DocenteController', function ($scope, $http, $window) {
+
+	$scope.verData = function (self) {
+		if (!self) {
+			$http.post("/perfil/docente/data").success(function (data) {
+				switch (data.genero) {
+					case "m":
+						data.genero = "Hombre";
+						break;
+					case "f":
+						data.genero = "Mujer";
+				}
+
+				$scope.misDatos = data;
+				console.log(data);
+			}).error(function (e) {
+				console.log("Error");
+				console.log(e);
+				$scope.logout();
+			});
+		}
+	};
+
+	$scope.verHorario = function () {};
+
+	$scope.verAlumnos = function (self) {
+		if (!self) {
+			$http.post("/perfil/docente/alumnos").success(function (alumnos) {
+				$scope.alumnos = alumnos;
+				console.log(alumnos);
+			}).error(function (e) {
+				console.log("Error");
+				console.log(e);
+				$scope.logout();
+			});
+		}
+	};
+
+	$scope.addNotas = function () {};
 });

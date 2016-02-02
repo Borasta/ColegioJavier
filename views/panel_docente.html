@@ -1,0 +1,192 @@
+<div class="container" ng-controller="DocenteController">
+
+    <br/>
+    <br/>
+
+    <ul class="collapsible popout" data-collapsible="expandable">
+        <li>
+            <div class="collapsible-header" ng-click="verData(misDatos)">
+                <i class="material-icons">filter_drama</i>Mis datos
+                <div class="secondary-content"><i class="material-icons">send</i></div>
+            </div>
+            <div class="collapsible-body">
+                <div class="center-align" ng-hide="misDatos">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="collection">
+                    <li class="collection-item">Nombres: {{misDatos.nombres}}</li>
+                    <li class="collection-item">Apellidos: {{misDatos.apellidos}}</li>
+                    <li class="collection-item">Cedula: {{misDatos.cedula}}</li>
+                    <li class="collection-item">Genero: {{misDatos.genero}}</li>
+                    <li class="collection-item">Usuario: {{misDatos.usuario}}</li>
+                </ul>
+            </div>
+        </li>
+
+        <br/>
+
+        <li>
+            <div class="collapsible-header" ng-click="verNotas(notas)">
+                <i class="material-icons">place</i>Notas
+                <div class="secondary-content"><i class="material-icons">send</i></div>
+            </div>
+            <div class="collapsible-body">
+                <div class="center-align" ng-hide="notas">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="bordered highlight centered container responsive-table" ng-show="notas">
+                    <thead>
+                        <tr>
+                            <th data-field="materia">Materias</th>
+                            <th data-field="nombres">Profesor</th>
+                            <th data-field="lapso1">Lapso #1</th>
+                            <th data-field="lapso2">Lapso #2</th>
+                            <th data-field="lapso3">Lapso #3</th>
+                            <th data-field="promedio">Promedio</th>
+                            <th data-field="anio">Año escolar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="nota in notas">
+                            <td>{{nota.materia}}</td>
+                            <td>{{nota.nombre}}</td>
+                            <td>{{nota.lapso1}}</td>
+                            <td>{{nota.lapso2}}</td>
+                            <td>{{nota.lapso3}}</td>
+                            <td>{{nota.promedio}}</td>
+                            <td>{{nota.anio}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <br/>
+        
+        <li>
+            <div class="collapsible-header" ng-click="verHorario(semanas)">
+                <i class="material-icons">whatshot</i>Horario
+                <div class="secondary-content"><i class="material-icons">send</i></div>
+            </div>
+            <div class="collapsible-body">
+                <div class="center-align" ng-hide="semanas">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="bordered highlight centered container responsive-table" ng-show="semanas">
+                    <thead>
+                        <tr>
+                            <th data-field="lunes">Lunes</th>
+                            <th data-field="martes">Martes</th>
+                            <th data-field="miercoles">Miercoles</th>
+                            <th data-field="jueves">Jueves</th>
+                            <th data-field="viernes">Viernes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="indice in length track by $index">
+                            <td ng-show="semanas[0][$index]">
+                                {{semanas[0][$index].nombre_m}}
+                            </td>
+                            <td ng-hide="semanas[0][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[1][$index]">
+                                {{semanas[1][$index].nombre_m}}
+                            </td>
+                            <td ng-hide="semanas[1][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[2][$index]">
+                                {{semanas[2][$index].nombre_m}}
+                            </td>
+                            <td ng-hide="semanas[2][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[3][$index]">
+                                {{semanas[3][$index].nombre_m}}
+                            </td>
+                            <td ng-hide="semanas[3][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[4][$index]">
+                                {{semanas[4][$index].nombre_m}}
+                            </td>
+                            <td ng-hide="semanas[4][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <br/>
+        
+        <li>
+            <div class="collapsible-header" ng-click="verGrupos(grupos)">
+                <i class="material-icons">whatshot</i>Grupos
+                <div class="secondary-content"><i class="material-icons">send</i></div>
+            </div>
+            <div class="collapsible-body">
+                <div class="center-align" ng-hide="grupos">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p ng-show="grupos">
+                    Lorem ipsum dolor sit amet.
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>

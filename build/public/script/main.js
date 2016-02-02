@@ -1,4 +1,4 @@
-let app = angular.module("MyApp", []);
+let app = angular.module("MyApp", ["ngLoad"]);
 
 app.controller("LoginController", ($scope, $http, $window) => {
 	$scope.autentificado = false;
@@ -40,7 +40,7 @@ app.controller("LoginController", ($scope, $http, $window) => {
 				$scope.nombre = `${data.nombres.split(" ")[0]} ${data.apellidos[0]}`;
 				sessionStorage.token = data.token;
 				$scope.autentificado = true;
-				console.log(`Success ${data}`);
+				console.log(data);
 			}).error( e => {
 				console.log(`Error`);
 				console.log(e);
@@ -67,11 +67,10 @@ app.controller("LoginController", ($scope, $http, $window) => {
 });
 
 app.controller('EstudianteController', ($scope, $http, $window) => {
-	// /perfil/estudiante/notas
 
-	$scope.verData = (self) => {
+	$scope.verData = self => {
+		console.log("VER DATA")
 		if( !self ) {
-			console.log($http.defaults.headers.post.Authorization);
 			$http.post(`/perfil/estudiante/data`)
 				.success( data => {
 					console.log(data.estudiante.edad);
@@ -104,9 +103,8 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 		}
 	}
 
-	$scope.verNotas = (self) => {
+	$scope.verNotas = self => {
 		if( !self ) {
-			console.log($http.defaults.headers.post.Authorization);
 			$http.post(`/perfil/estudiante/notas`)
 				.success( data => {
 					$scope.notas = [];
@@ -135,15 +133,16 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 
 	$scope.verHorario = self => {
 		if( !self ) {
-			console.log($http.defaults.headers.post.Authorization);
 			$http.post(`/perfil/estudiante/horario`)
 				.success( data => {
 
-					let semanas = [[], [], [], [], []];
-
-					console.log(data);
-
-					$scope.i = 0;
+					let semanas = [
+						[],	// Lunes 
+						[], // Martes
+						[], // Mircoles
+						[], // Jueves
+						[]	// Viernes
+					];
 
 					for( let i = 0; i < data.length; i++ ) {
 						switch( data[i].dia ) {
@@ -175,38 +174,6 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 					$scope.length = new Array(length);
 
 					$scope.semanas = semanas;
-
-					console.log($scope.semanas)
-
-
-
-					// let horario = [
-					// 	[],
-					// 	[],
-					// 	[],
-					// 	[],
-					// 	[],
-					// ]
-					// let anterior = -1;
-					// let vacio = ["&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;", "&nbsp;"];
-					// let semanas = [vacio];
-					// let length = 0;
-					// let transpuesta = [
-					// 	[,,,,],		// Lunes
-					// 	[,,,,],		// Martes
-					// 	[,,,,],		// Miercoles
-					// 	[,,,,],		// Jueves
-					// 	[,,,,],		// Viernes
-					// ];
-
-					// console.log(data);
-
-					// for( let i = 0; i < data.length; i++ ) {
-					// 	horario[data[i].numero].push(data[i]);
-					// 	if(horario[data[i].numero].length > length)
-					// 		length = horario[data[i].numero].length;
-					// }
-
 				}).error( e => {
 					console.log(`Error`);
 					console.log(e);
@@ -215,10 +182,9 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 		}
 	}
 
-	$scope.verGrupos = (self) => {
+	$scope.verGrupos = self => {
 		if( !self ) {
-			console.log($http.defaults.headers.post.Authorization);
-			$http.post(`/perfil/estudiante/notas`)
+			$http.post(`/perfil/estudiante/grupos`)
 				.success( data => {
 					$scope.grupos = data;
 					console.log(data);
@@ -229,5 +195,55 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 				});
 		}
 	}
+
+});
+
+app.controller('DocenteController', ($scope, $http, $window) => {
+
+	$scope.verData = self => {
+		if( !self ) {
+			$http.post(`/perfil/docente/data`)
+				.success( data => {
+					switch( data.genero ) {
+						case "m":
+							data.genero = "Hombre";
+							break;
+						case "f":
+							data.genero = "Mujer";
+					}
+
+					$scope.misDatos = data;
+					console.log(data);
+				}).error( e => {
+					console.log(`Error`);
+					console.log(e);
+					$scope.logout();
+				});
+		}
+	}
+
+	$scope.verHorario = () => {
+		
+	}
+
+	$scope.verAlumnos = self => {
+		if( !self ) {
+			$http.post(`/perfil/docente/alumnos`)
+				.success( alumnos => {
+					$scope.alumnos = alumnos;
+					console.log(alumnos);
+				}).error( e => {
+					console.log(`Error`);
+					console.log(e);
+					$scope.logout();
+				});
+		}
+	}
+
+	$scope.addNotas = () => {
+		
+	}
+
+
 
 });

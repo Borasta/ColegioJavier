@@ -19,17 +19,18 @@ module.exports = function (router, mysql) {
 
 	router.get("/auth/login/:token", _middleware2.default.authenticated, function (req, res) {
 		var tokenDecoded = req.data;
+		console.log(tokenDecoded);
 		if (tokenDecoded.type === "e") {
-			query = "\n\t            SELECT id_e,\n\t            \tnombres_e,\n\t\t            apellidos_e\n\t            FROM estudiantes\n\t            WHERE id_e = " + tokenDecoded.id + ";\n\t        ";
-		} else if (tokenDecoded.type === "p") {
-			query = "\n\t            SELECT id_p,\n\t            \tnombres_p,\n\t\t            apellidos_p\n\t            FROM profesores\n\t            WHERE id_p = " + tokenDecoded.id + ";\n\t        ";
+			query = "\n\t            SELECT id_e as id,\n\t            \tnombres_e as nombres,\n\t\t            apellidos_e as apellidos\n\t            FROM estudiantes\n\t            WHERE id_e = " + tokenDecoded.id + ";\n\t        ";
+		} else if (tokenDecoded.type === "d") {
+			query = "\n\t            SELECT id_d as id,\n\t            \tnombres_d as nombres,\n\t\t            apellidos_d as apellidos\n\t            FROM docentes\n\t            WHERE id_d = " + tokenDecoded.id + ";\n\t        ";
 		}
 		mysql.query(query).then(function (row) {
 			if (row.length >= 1) {
 				var data = {
 					"token": req.params.token,
-					"nombres": row[0].nombres_e,
-					"apellidos": row[0].apellidos_e
+					"nombres": row[0].nombres,
+					"apellidos": row[0].apellidos
 				};
 				res.status(200).send(data);
 			}
@@ -40,12 +41,12 @@ module.exports = function (router, mysql) {
 
 	router.post("/auth/login", function (req, res) {
 		var userData = req.body;
-		switch (req.body.type) {
+		switch (userData.type) {
 			case "e":
 				query = "\n\t\t            SELECT id_e as id,\n\t\t            \tnombres_e as nombres,\n\t\t\t            apellidos_e as apellidos,\n\t\t\t            flag_e as flag\n\t\t            FROM estudiantes\n\t\t            WHERE user_e = '" + userData.user + "' AND pass_e = '" + userData.pass + "';\n\t\t        ";
 				break;
-			case "p":
-				query = "\n\t\t            SELECT id_p as id,\n\t\t            \tnombres_p as nombres,\n\t\t\t            apellidos_p as apellidos,\n\t\t\t            flag_p as flag\n\t\t            FROM profesores\n\t\t            WHERE user_p = '" + userData.user + "' AND pass_p = '" + userData.pass + "';\n\t\t        ";
+			case "d":
+				query = "\n\t\t            SELECT id_d as id,\n\t\t            \tnombres_d as nombres,\n\t\t\t            apellidos_d as apellidos,\n\t\t\t            flag_d as flag\n\t\t            FROM docentes\n\t\t            WHERE user_d = '" + userData.user + "' AND pass_d = '" + userData.pass + "';\n\t\t        ";
 				break;
 			default:
 				res.status(404).send({ message: "Error, ingrese de nuevo" });
@@ -55,11 +56,12 @@ module.exports = function (router, mysql) {
 			if (row.length >= 1) {
 				var token = _services2.default.createToken({
 					"id": row[0].id,
-					"type": "e"
+					"type": userData.type
 				}, {
 					"time": 1,
 					"type": "days"
 				});
+				console.log(token);
 				var data = {
 					"token": token,
 					"nombres": row[0].nombres,
@@ -69,15 +71,6 @@ module.exports = function (router, mysql) {
 			}
 		}).catch(function (error) {
 			res.status(404).send(error);
-		});
-	});
-
-	router.get("/estudiantes", function (req, res) {
-		query = "\n            SELECT *\n            FROM estudiantes;\n        ";
-		mysql.query(query).then(function (row) {
-			res.send(row);
-		}).catch(function (error) {
-			console.log(error);
 		});
 	});
 
@@ -125,6 +118,43 @@ module.exports = function (router, mysql) {
 			if (materias.length >= 1) {
 				console.log(materias);
 				res.status(200).send(materias);
+			}
+		}).catch(function (error) {
+			res.status(404).send(error);
+		});
+	});
+
+	router.post("/perfil/estudiante/grupos", _middleware2.default.authenticated, function (req, res) {
+		var tokenDecoded = req.data;
+		query = "\n\t\t\tSELECT \n\t\t\t\tgrupos.nombre_gru as nombre, \n\t\t\t\tgrupos.descripcion_gru as descripcion\n\t\t\tFROM estudiantes INNER JOIN miembros\n\t\t\t\tON estudiantes.id_e = miembros.id_e INNER JOIN grupos\n\t\t\t\tON miembros.id_gru = grupos.id_gru\n\t\t\tWHERE estudiantes.id_e = " + tokenDecoded.id + ";\n\t\t";
+		mysql.query(query).then(function (grupos) {
+			if (grupos.length >= 1) {
+				console.log(grupos);
+				res.status(200).send(grupos);
+			}
+		}).catch(function (error) {
+			res.status(404).send(error);
+		});
+	});
+
+	router.post("/perfil/docente/data", _middleware2.default.authenticated, function (req, res) {
+		var tokenDecoded = req.data;
+		query = "\n            SELECT docentes.nombres_d as nombres,\n\t            docentes.apellidos_d as apellidos,\n\t            docentes.cedula_d as cedula,\n\t            docentes.genero_d as genero,\n\t            docentes.user_d as usuario\n            FROM docentes\n            WHERE docentes.id_d = " + tokenDecoded.id + ";\n        ";
+		mysql.query(query).then(function (docente) {
+			if (docente.length >= 1) {
+				res.status(200).send(docente[0]);
+			}
+		}).catch(function (error) {
+			res.status(404).send(error);
+		});
+	});
+
+	router.post("/perfil/docente/alumnos", _middleware2.default.authenticated, function (req, res) {
+		var tokenDecoded = req.data;
+		query = "\n            SELECT estudiantes.nombres_e,\n\t\t\t\testudiantes.apellidos_e,\n            \testudiantes.cedula_e,\n            \tnotas.lapso1,\n            \tnotas.lapso2,\n            \tnotas.lapso3,\n\t\t\t\tmaterias.nombre_m,\n\t\t\t\tgrados.grado,\n\t\t\t\tsecciones.seccion\n\t            FROM docentes INNER JOIN docente_materia\n\t            \tON docentes.id_d = docente_materia.id_d INNER JOIN cursos\n\t            \tON docente_materia.id_dm = cursos.id_dm INNER JOIN materias\n\t            \tON docente_materia.id_m = materias.id_m INNER JOIN estudiantes\n\t            \tON cursos.id_e = estudiantes.id_e INNER JOIN notas\n\t            \tON cursos.id_c = notas.id_c INNER JOIN grados\n\t            \tON estudiantes.id_gra = grados.id_gra INNER JOIN secciones\n\t            \tON grados.id_s = secciones.id_s\n            WHERE docentes.id_d = " + tokenDecoded.id + " AND (SELECT count(*) FROM anio) = notas.id_anio\n            ORDER BY grados.grado, secciones.seccion, estudiantes.cedula;\n        ";
+		mysql.query(query).then(function (docente) {
+			if (docente.length >= 1) {
+				res.status(200).send(docente[0]);
 			}
 		}).catch(function (error) {
 			res.status(404).send(error);

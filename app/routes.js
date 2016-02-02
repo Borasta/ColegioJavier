@@ -95,13 +95,13 @@ module.exports = function (router) {
 			tmp: views + "/template.html",
 			ctn: views + "/panel_estudiante.html",
 			values: {}
-		});else if (req.data.type === "p") (0, _render2.default)({
+		});else if (req.data.type === "d") (0, _render2.default)({
 			res: res,
 			tmp: views + "/template.html",
-			ctn: views + "/panel_profesor.html",
+			ctn: views + "/panel_docente.html",
 			values: {}
 		});else {
-			res.status(401).send({ message: "Error, ingrese nuevamente" });
+			res.status(401).send({ "message": "Error, ingrese nuevamente" });
 		}
 		res.end("");
 	});

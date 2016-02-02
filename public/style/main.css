@@ -25,3 +25,17 @@ div.parallax-container > div.section {
 p.table {
 	margin-top: -2px;
 }
+
+.no-scroll {
+	overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}

@@ -85,15 +85,15 @@ module.exports = router => {
 				ctn: `${views}/panel_estudiante.html`,
 				values: {}
 			});
-		else if( req.data.type === "p" )
+		else if( req.data.type === "d" )
 			render({
 				res: res,
 				tmp: `${views}/template.html`,
-				ctn: `${views}/panel_profesor.html`,
+				ctn: `${views}/panel_docente.html`,
 				values: {}
 			});
 		else {
-			res.status(401).send({message: "Error, ingrese nuevamente"})
+			res.status(401).send({"message": "Error, ingrese nuevamente"})
 		}
 		res.end("");
 	});

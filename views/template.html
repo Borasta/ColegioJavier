@@ -128,8 +128,8 @@
                                 <label for="estudiante">Estudiante</label>
                             </p>
                             <p class="col s6">
-                                <input name="tipo" type="radio"ng-model="data.type" id="profesor" value="p"/>
-                                <label for="profesor">Profesor</label>
+                                <input name="tipo" type="radio"ng-model="data.type" id="docente" value="d"/>
+                                <label for="docente">Docente</label>
                             </p>
                         </div>
                     </div>
@@ -140,7 +140,9 @@
             <button ng-click="login()" class="modal-action modal-close waves-effect waves-green btn-flat">Iniciar</button>
         </div>
     </div>
-    {{content}}
+    <main>
+        {{content}}
+    </main>
     <footer class="page-footer yellow darken-4">
         <div class="container">
             <div class="row">
