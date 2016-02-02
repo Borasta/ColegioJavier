@@ -1,4 +1,4 @@
-let app = angular.module("MyApp", ["ngLoad"]);
+let app = angular.module("MyApp", []);
 
 app.controller("LoginController", ($scope, $http, $window) => {
 	$scope.autentificado = false;
