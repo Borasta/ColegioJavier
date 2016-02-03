@@ -15,14 +15,12 @@ let app = express(); //guarda los objetos
 
 let router = express.Router(); //guarda las rutas
 
-//
-
 app.set("port", process.env.PORT || 5000); //agregar el puerto 
 
 app.set("mysql", {
 	"host": 'db4free.net',
     "user": 'jhoseww',
-    "password": '5603410jwm',
+    "password": 'javier',
     "database": 'javier'  // Datos de mi usuario
 });
 
@@ -47,5 +45,5 @@ app.listen(app.get("port"), () => { //Conexion con la base de datos
 app.use( routes(router) ); //Acceder a las rutas
 
 
-//back end (es la parte que procesa los datos que recive del usuario) --> Servidor
-// From end (es la parte del dise;o software donde interactua con el usuario) -->Login 
+// Backend (es la parte que procesa los datos que recive del usuario) --> Servidor
+// Frontend (es la parte del dise;o software donde interactua con el usuario) -->Login 

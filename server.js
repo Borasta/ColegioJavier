@@ -34,14 +34,12 @@ var app = (0, _express2.default)(); //guarda los objetos
 
 var router = _express2.default.Router(); //guarda las rutas
 
-//
-
 app.set("port", process.env.PORT || 5000); //agregar el puerto
 
 app.set("mysql", {
 	"host": 'db4free.net',
 	"user": 'jhoseww',
-	"password": '5603410jwm',
+	"password": 'javier',
 	"database": 'javier' // Datos de mi usuario
 });
 
@@ -65,5 +63,5 @@ app.listen(app.get("port"), function () {
 
 app.use((0, _routes2.default)(router)); //Acceder a las rutas
 
-//back end (es la parte que procesa los datos que recive del usuario) --> Servidor
-// From end (es la parte del dise;o software donde interactua con el usuario) -->Login
+// Backend (es la parte que procesa los datos que recive del usuario) --> Servidor
+// Frontend (es la parte del dise;o software donde interactua con el usuario) -->Login
