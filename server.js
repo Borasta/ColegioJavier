@@ -64,4 +64,4 @@ app.listen(app.get("port"), function () {
 app.use((0, _routes2.default)(router)); //Acceder a las rutas
 
 // Backend (es la parte que procesa los datos que recive del usuario) --> Servidor
-// Frontend (es la parte del dise;o software donde interactua con el usuario) --> Login
+// Frontend (es la parte del dise;o software donde interactua con el usuario) -->Login
