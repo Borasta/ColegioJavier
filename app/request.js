@@ -90,7 +90,7 @@ module.exports = function (router, mysql) {
 	router.post("/perfil/estudiante/data", _middleware2.default.authenticated, function (req, res) {
 		var tokenDecoded = req.data;
 		var data = {};
-		query = "\n            SELECT estudiantes.nombres_e as nombres,\n            estudiantes.apellidos_e as apellidos,\n            estudiantes.fecha_nacimiento as edad,\n            estudiantes.cedula_e as cedula,\n            estudiantes.genero_e as genero,\n            estudiantes.direccion_e as direccion,\n            estudiantes.user_e as usuario,\n            grados.grado as grado,\n            secciones.seccion as seccion\n            FROM estudiantes                          INNER JOIN grados\n                ON estudiantes.id_gra = grados.id_gra INNER JOIN secciones\n                ON grados.id_s = secciones.id_s\n            WHERE estudiantes.id_e = " + tokenDecoded.id + ";\n        ";
+		query = "\n            SELECT estudiantes.nombres_e as nombres,\n            estudiantes.apellidos_e as apellidos,\n            estudiantes.fecha_nacimiento as edad,\n            estudiantes.cedula_e as cedula,\n            estudiantes.genero_e as genero,\n            estudiantes.direccion_e as direccion,\n            estudiantes.user_e as usuario,\n            grados.grado as grado,\n            grados.seccion as seccion\n            FROM estudiantes                          INNER JOIN grados\n                ON estudiantes.id_gra = grados.id_gra\n            WHERE estudiantes.id_e = " + tokenDecoded.id + ";\n        ";
 		mysql.query(query).then(function (estudiante) {
 			if (estudiante.length >= 1) {
 				data.estudiante = estudiante[0];
@@ -149,12 +149,36 @@ module.exports = function (router, mysql) {
 		});
 	});
 
+	router.post("/perfil/docente/salones", _middleware2.default.authenticated, function (req, res) {
+		var tokenDecoded = req.data;
+		query = "\n            SELECT DISTINCT \n            \tgrados.id_gra,\n            \tgrados.grado,\n\t\t\t\tgrados.seccion\n\t            FROM docentes INNER JOIN docente_materia\n\t            \tON docentes.id_d = docente_materia.id_d INNER JOIN cursos\n\t            \tON docente_materia.id_dm = cursos.id_dm INNER JOIN estudiantes\n\t            \tON cursos.id_e = estudiantes.id_e INNER JOIN grados\n\t            \tON estudiantes.id_gra = grados.id_gra INNER JOIN notas\n\t            \tON cursos.id_c = notas.id_c\n            WHERE docentes.id_d = " + tokenDecoded.id + " AND (SELECT count(*) FROM anio) = notas.id_anio\n            ORDER BY grados.grado, grados.seccion;\n        ";
+		mysql.query(query).then(function (salones) {
+			if (salones.length >= 1) {
+				res.status(200).send(salones);
+			}
+		}).catch(function (error) {
+			res.status(404).send(error);
+		});
+	});
+
 	router.post("/perfil/docente/alumnos", _middleware2.default.authenticated, function (req, res) {
 		var tokenDecoded = req.data;
-		query = "\n            SELECT estudiantes.nombres_e,\n\t\t\t\testudiantes.apellidos_e,\n            \testudiantes.cedula_e,\n            \tnotas.lapso1,\n            \tnotas.lapso2,\n            \tnotas.lapso3,\n\t\t\t\tmaterias.nombre_m,\n\t\t\t\tgrados.grado,\n\t\t\t\tsecciones.seccion\n\t            FROM docentes INNER JOIN docente_materia\n\t            \tON docentes.id_d = docente_materia.id_d INNER JOIN cursos\n\t            \tON docente_materia.id_dm = cursos.id_dm INNER JOIN materias\n\t            \tON docente_materia.id_m = materias.id_m INNER JOIN estudiantes\n\t            \tON cursos.id_e = estudiantes.id_e INNER JOIN notas\n\t            \tON cursos.id_c = notas.id_c INNER JOIN grados\n\t            \tON estudiantes.id_gra = grados.id_gra INNER JOIN secciones\n\t            \tON grados.id_s = secciones.id_s\n            WHERE docentes.id_d = " + tokenDecoded.id + " AND (SELECT count(*) FROM anio) = notas.id_anio\n            ORDER BY grados.grado, secciones.seccion, estudiantes.cedula;\n        ";
-		mysql.query(query).then(function (docente) {
-			if (docente.length >= 1) {
-				res.status(200).send(docente[0]);
+		query = "\n            SELECT estudiantes.nombres_e,\n\t\t\t\testudiantes.apellidos_e,\n            \testudiantes.cedula_e,\n            \tnotas.lapso1,\n            \tnotas.lapso2,\n            \tnotas.lapso3\n\t            FROM docentes INNER JOIN docente_materia\n\t            \tON docentes.id_d = docente_materia.id_d INNER JOIN cursos\n\t            \tON docente_materia.id_dm = cursos.id_dm INNER JOIN estudiantes\n\t            \tON cursos.id_e = estudiantes.id_e INNER JOIN notas\n\t            \tON cursos.id_c = notas.id_calumnos\n            WHERE docentes.id_d = " + tokenDecoded.id + " AND grados.id_gra = " + req.body.id + " AND (SELECT count(*) FROM anio) = notas.id_anio\n            ORDER BY grados.grado, grados.seccion, estudiantes.cedula_e;\n        ";
+		mysql.query(query).then(function (alumnos) {
+			if (alumnos.length >= 1) {
+				res.status(200).send(alumnos);
+			}
+		}).catch(function (error) {
+			res.status(404).send(error);
+		});
+	});
+
+	router.post("/perfil/docente/horario", _middleware2.default.authenticated, function (req, res) {
+		var tokenDecoded = req.data;
+		query = "\n            SELECT materias.nombre_m, dias.dia, horarios.hora_inicio, horarios.hora_final\n\t\t\t\tFROM docentes INNER JOIN docente_materia\n\t\t\t\t\tON docentes.id_d = docente_materia.id_d\n\t\t\t\t  INNER JOIN materias\n\t\t\t\t\tON docente_materia.id_m = materias.id_m\n\t\t\t\t  INNER JOIN horarios\n\t\t\t\t\tON docente_materia.id_dm = horarios.id_dm\n\t\t\t\t  INNER JOIN dias\n\t\t\t\t\tON horarios.id_dia = dias.id_dia\n\t\t\t\tWHERE docentes.id_d = " + tokenDecoded.id + "\n\t\t\t\tORDER BY dias.id_dia, horarios.id_h;\n        ";
+		mysql.query(query).then(function (horario) {
+			if (horario.length >= 1) {
+				res.status(200).send(horario);
 			}
 		}).catch(function (error) {
 			res.status(404).send(error);

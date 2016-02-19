@@ -5,7 +5,6 @@ app.controller("LoginController", ($scope, $http, $window) => {
 	$scope.nombre = "";
 
 	if( sessionStorage.token !== "null") {
-		console.log(sessionStorage.token);
 		$http.get(`/auth/login/${sessionStorage.token}`).success( data => {
 				$http.defaults.headers.post.Authorization = `Session ${data.token}`;
 				$scope.nombre = `${data.nombres.split(" ")[0]} ${data.apellidos[0]}`;
@@ -222,21 +221,88 @@ app.controller('DocenteController', ($scope, $http, $window) => {
 		}
 	}
 
+	setTimeout($scope.verData, 2000);
+
 	$scope.verHorario = () => {
 		
 	}
 
-	$scope.verAlumnos = self => {
+	$scope.verSalones = self => {
 		if( !self ) {
-			$http.post(`/perfil/docente/alumnos`)
-				.success( alumnos => {
-					$scope.alumnos = alumnos;
-					console.log(alumnos);
+			$http.post(`/perfil/docente/salones`)
+				.success( salones => {
+					$scope.salones = salones;
+					console.log(salones);
 				}).error( e => {
 					console.log(`Error`);
 					console.log(e);
 					$scope.logout();
 				});
+		}
+	}
+
+	$scope.verAlumnos = self => {
+		if( !self ) {
+			$http.post(`/perfil/docente/alumnos`)
+				.success( salones => {
+					$scope.salones = salones;
+					console.log(salones);
+				}).error( e => {
+					console.log(`Error`);
+					console.log(e);
+					$scope.logout();
+				});
+		}
+	}
+
+	$scope.verHorario = self => {
+		if( !self ) {
+			$http.post(`/perfil/docente/horario`)
+			.success( data => {
+
+				let semanas = [
+					[],	// Lunes 
+					[], // Martes
+					[], // Mircoles
+					[], // Jueves
+					[]	// Viernes
+				];
+
+				for( let i = 0; i < data.length; i++ ) {
+					switch( data[i].dia ) {
+						case "Lunes":
+							semanas[0].push(data[i]);
+							break;
+						case "Martes":
+							semanas[1].push(data[i]);
+							break;
+						case "Miercoles":
+							semanas[2].push(data[i]);
+							break;
+						case "Jueves":
+							semanas[3].push(data[i]);
+							break;
+						case "Viernes":
+							semanas[4].push(data[i]);
+							break;
+					}
+				}
+
+				let length = 0;
+				for (let i = 0; i < semanas.length; i++) {
+					let len = semanas[i].length;
+					if( len > length )
+						length = len;
+				};
+
+				$scope.length = new Array(length);
+
+				$scope.semanas = semanas;
+			}).error( e => {
+				console.log(`Error`);
+				console.log(e);
+				$scope.logout();
+			});
 		}
 	}
 
