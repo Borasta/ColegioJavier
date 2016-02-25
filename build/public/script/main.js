@@ -310,6 +310,4 @@ app.controller('DocenteController', ($scope, $http, $window) => {
 		
 	}
 
-
-
 });

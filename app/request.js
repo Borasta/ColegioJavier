@@ -56,7 +56,8 @@ module.exports = function (router, mysql) {
 			if (row.length >= 1) {
 				var token = _services2.default.createToken({
 					"id": row[0].id,
-					"type": userData.type
+					"type": userData.type,
+					"flag": row[0].flag
 				}, {
 					"time": 1,
 					"type": "days"
@@ -180,6 +181,29 @@ module.exports = function (router, mysql) {
 			if (horario.length >= 1) {
 				res.status(200).send(horario);
 			}
+		}).catch(function (error) {
+			res.status(404).send(error);
+		});
+	});
+
+	router.post("/representantes/crear", _middleware2.default.authenticated, function (req, res) {
+		var tokenDecoded = req.data;
+		query = "\n            INSERT INTO representantes VALUES ( \n\t            null, \n\t            '" + req.body.nombres + "', \n\t            '" + req.body.apellidos + "', \n\t            " + req.body.cedula + ", \n\t            '" + req.body.genero + "' \n            );\n        ";
+		console.log(query);
+		mysql.query(query).then(function (s) {
+			res.status(200).send(s);
+		}).catch(function (error) {
+			res.status(404).send(error);
+		});
+	});
+
+	router.post("/representantes/leer", _middleware2.default.authenticated, function (req, res) {
+		var tokenDecoded = req.data;
+		query = "\n            SELECT \n            \tid_r as id, \n            \tnombres_r as nombres, \n            \tapellidos_r as apellidos, \n            \tcedula_r as cedula, \n            \tgenero_r as genero \n            FROM representantes WHERE upper(" + req.body.type + "_r) LIKE upper('%" + req.body.data + "%') \n            ORDER BY nombres_r;\n        ";
+		console.log(query);
+		mysql.query(query).then(function (representantes) {
+			console.log(representantes);
+			res.status(200).send(representantes);
 		}).catch(function (error) {
 			res.status(404).send(error);
 		});

@@ -74,7 +74,8 @@ module.exports = (router, mysql) => {
         		let token = services.createToken( 
         			{
         				"id": row[0].id,
-        				"type": userData.type
+        				"type": userData.type,
+        				"flag": row[0].flag,
         			}, 
         			{
 	        			"time": 1,
@@ -323,6 +324,48 @@ module.exports = (router, mysql) => {
         	if( horario.length >= 1 ) {
 		        res.status(200).send(horario);
 		    }
+        }).catch(error => {
+        	res.status(404).send(error);
+        });
+	});
+
+	router.post("/representantes/crear", middleware.authenticated, (req, res) => {
+		let tokenDecoded = req.data;
+		query = `
+            INSERT INTO representantes VALUES ( 
+	            null, 
+	            '${req.body.nombres}', 
+	            '${req.body.apellidos}', 
+	            ${req.body.cedula}, 
+	            '${req.body.genero}' 
+            );
+        `;
+        console.log(query);
+		mysql.query(query)
+        .then( s => {
+			res.status(200).send(s);
+        }).catch(error => {
+        	res.status(404).send(error);
+        });
+	});
+
+	router.post("/representantes/leer", middleware.authenticated, (req, res) => {
+		let tokenDecoded = req.data;
+		query = `
+            SELECT 
+            	id_r as id, 
+            	nombres_r as nombres, 
+            	apellidos_r as apellidos, 
+            	cedula_r as cedula, 
+            	genero_r as genero 
+            FROM representantes WHERE upper(${req.body.type}_r) LIKE upper('%${req.body.data}%') 
+            ORDER BY nombres_r;
+        `;
+        console.log(query);
+		mysql.query(query)
+        .then( representantes => {
+        	console.log(representantes)
+			res.status(200).send(representantes);
         }).catch(error => {
         	res.status(404).send(error);
         });

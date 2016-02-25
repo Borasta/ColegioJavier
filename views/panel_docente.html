@@ -1,205 +1,209 @@
-<div class="container" ng-controller="DocenteController">
+<div class="container">
 
-    <div class="row">
-        <div class="col s12">
-            <ul class="tabs no-scroll">
-                <li class="tab"><a href="#misDatos">Mis datos</a></li>
-                <li class="tab"><a href="#notas" ng-click="verSalones(salones)">Notas</a></li>
-                <li class="tab"><a href="#horario" ng-click="verHorario(semanas)">Horario</a></li>
-                <li class="tab"><a href="#grupos" ng-click="verGrupos(grupos)">Grupos</a></li>
-            </ul>
-        </div>
-
-        <div id="misDatos" class="col s12">
-            <div class="center-align" ng-hide="misDatos">
-                <div class="preloader-wrapper small active">
-                    <div class="spinner-layer spinner-green-only">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="gap-patch">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="circle-clipper right">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <ul class="collection" ng-show="misDatos">
-                <li class="collection-item">Nombres: {{misDatos.nombres}}</li>
-                <li class="collection-item">Apellidos: {{misDatos.apellidos}}</li>
-                <li class="collection-item">Cedula: {{misDatos.cedula}}</li>
-                <li class="collection-item">Genero: {{misDatos.genero}}</li>
-                <li class="collection-item">Usuario: {{misDatos.usuario}}</li>
-            </ul>
-        </div>
-
-        <div id="notas" class="col s12">
-            <div class="center-align" ng-hide="salones">
-                <div class="preloader-wrapper small active">
-                    <div class="spinner-layer spinner-green-only">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="gap-patch">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="circle-clipper right">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div ng-show="salones">
-                <ul class="collapsible popout" data-collapsible="accordion">
-                    <li ng-repeat="salon in salones">
-                    <!-- verAlumnos(salon)  -->
-                        <div class="collapsible-header" ng-click="">
-                            <i class="material-icons">filter_drama</i>
-                            {{salon.grado}} {{salon.seccion.toUpperCase()}}
-                        </div>
-                        <div class="collapsible-body">
-                            <!-- <table>
-                                <thead>
-                                    <tr>
-                                        <th>Check</th>
-                                        <th>Cedula</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Lapso 1</th>
-                                        <th>Lapso 2</th>
-                                        <th>Lapso 3</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="alumno in salon.alumnos">
-                                        <td>
-                                            <input id="_{{alumno.cedula}}" type="checkbox" />
-                                            <label for="_{{alumno.cedula}}"></label>
-                                        </td>
-                                        <td>{{alumno.nombres}}</td>
-                                        <td>{{alumno.apellidos}}</td>
-                                        <td><input type="text" placeholder="Lapso 1" value="{{alumno.lapso1}}"></td>
-                                        <td><input type="text" placeholder="Lapso 2" value="{{alumno.lapso2}}"></td>
-                                        <td><input type="text" placeholder="Lapso 3" value="{{alumno.lapso3}}"></td>
-                                    </tr>
-                                </tbody>
-                            </table> -->
-                        </div>
-                    </li>
+    <div ng-controller="DocenteController">
+        <h2 class="center-align">Docente</h2>
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs no-scroll">
+                    <li class="tab"><a href="#misDatos">Mis datos</a></li>
+                    <li class="tab"><a href="#notas" ng-click="verSalones(salones)">Notas</a></li>
+                    <li class="tab"><a href="#horario" ng-click="verHorario(semanas)">Horario</a></li>
+                    <li class="tab"><a href="#grupos" ng-click="verGrupos(grupos)">Grupos</a></li>
                 </ul>
             </div>
 
-        </div>
-
-        <div id="horario" class="col s12">
-            <div class="center-align" ng-hide="semanas">
-                <div class="preloader-wrapper small active">
-                    <div class="spinner-layer spinner-green-only">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="gap-patch">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="circle-clipper right">
-                            <div class="circle"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <table class="bordered highlight centered container responsive-table" ng-show="semanas">
-                <thead>
-                    <tr>
-                        <th data-field="lunes">Lunes</th>
-                        <th data-field="martes">Martes</th>
-                        <th data-field="miercoles">Miercoles</th>
-                        <th data-field="jueves">Jueves</th>
-                        <th data-field="viernes">Viernes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="indice in length track by $index">
-                        <td ng-show="semanas[0][$index]">
-                            <div class="row">{{semanas[0][$index].hora_inicio}} - {{semanas[0][$index].hora_final}}</div>
-                            <div class="row">{{semanas[0][$index].nombre_m}}</div>
-                        </td>
-                        <td ng-hide="semanas[0][$index]">
-                            <i class="material-icons">clear_all</i>
-                        </td>
-
-                        <td ng-show="semanas[1][$index]">
-                            <div class="row">{{semanas[1][$index].hora_inicio}} - {{semanas[1][$index].hora_final}}</div>
-                            <div class="row">{{semanas[1][$index].nombre_m}}</div>
-                        </td>
-                        <td ng-hide="semanas[1][$index]">
-                            <i class="material-icons">clear_all</i>
-                        </td>
-
-                        <td ng-show="semanas[2][$index]">
-                            <div class="row">{{semanas[2][$index].hora_inicio}} - {{semanas[2][$index].hora_final}}</div>
-                            <div class="row">{{semanas[2][$index].nombre_m}}</div>
-                        </td>
-                        <td ng-hide="semanas[2][$index]">
-                            <i class="material-icons">clear_all</i>
-                        </td>
-
-                        <td ng-show="semanas[3][$index]">
-                            <div class="row">{{semanas[3][$index].hora_inicio}} - {{semanas[3][$index].hora_final}}</div>
-                            <div class="row">{{semanas[3][$index].nombre_m}}</div>
-                        </td>
-                        <td ng-hide="semanas[3][$index]">
-                            <i class="material-icons">clear_all</i>
-                        </td>
-
-                        <td ng-show="semanas[4][$index]">
-                            <div class="row">{{semanas[4][$index].hora_inicio}} - {{semanas[4][$index].hora_final}}</div>
-                            <div class="row">{{semanas[4][$index].nombre_m}}</div>
-                        </td>
-                        <td ng-hide="semanas[4][$index]">
-                            <i class="material-icons">clear_all</i>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div id="grupos" class="col s12">
-            <div class="center-align" ng-hide="grupos">
-                <div class="preloader-wrapper small active">
-                    <div class="spinner-layer spinner-green-only">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="gap-patch">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="circle-clipper right">
-                            <div class="circle"></div>
+            <div id="misDatos" class="col s12">
+                <div class="center-align" ng-hide="misDatos">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <ul class="collection" ng-show="misDatos">
+                    <li class="collection-item">Nombres: {{misDatos.nombres}}</li>
+                    <li class="collection-item">Apellidos: {{misDatos.apellidos}}</li>
+                    <li class="collection-item">Cedula: {{misDatos.cedula}}</li>
+                    <li class="collection-item">Genero: {{misDatos.genero}}</li>
+                    <li class="collection-item">Usuario: {{misDatos.usuario}}</li>
+                </ul>
             </div>
-            <table class="bordered highlight centered container responsive-table" ng-show="grupos">
-                <thead>
-                    <tr>
-                        <th data-field="lunes">Grupo</th>
-                        <th data-field="martes">Descripcion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="grupo in grupos">
-                        <td>
-                            {{grupo.nombre}}
-                        </td>
-                        <td>
-                            {{grupo.descripcion}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <div id="notas" class="col s12">
+                <div class="center-align" ng-hide="salones">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-show="salones">
+                    <ul class="collapsible popout" data-collapsible="accordion">
+                        <li ng-repeat="salon in salones">
+                        <!-- verAlumnos(salon)  -->
+                            <div class="collapsible-header" ng-click="">
+                                <i class="material-icons">filter_drama</i>
+                                {{salon.grado}} {{salon.seccion.toUpperCase()}}
+                            </div>
+                            <div class="collapsible-body">
+                                <!-- <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Check</th>
+                                            <th>Cedula</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Lapso 1</th>
+                                            <th>Lapso 2</th>
+                                            <th>Lapso 3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="alumno in salon.alumnos">
+                                            <td>
+                                                <input id="_{{alumno.cedula}}" type="checkbox" />
+                                                <label for="_{{alumno.cedula}}"></label>
+                                            </td>
+                                            <td>{{alumno.nombres}}</td>
+                                            <td>{{alumno.apellidos}}</td>
+                                            <td><input type="text" placeholder="Lapso 1" value="{{alumno.lapso1}}"></td>
+                                            <td><input type="text" placeholder="Lapso 2" value="{{alumno.lapso2}}"></td>
+                                            <td><input type="text" placeholder="Lapso 3" value="{{alumno.lapso3}}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table> -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div id="horario" class="col s12">
+                <div class="center-align" ng-hide="semanas">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="bordered highlight centered container responsive-table" ng-show="semanas">
+                    <thead>
+                        <tr>
+                            <th data-field="lunes">Lunes</th>
+                            <th data-field="martes">Martes</th>
+                            <th data-field="miercoles">Miercoles</th>
+                            <th data-field="jueves">Jueves</th>
+                            <th data-field="viernes">Viernes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="indice in length track by $index">
+                            <td ng-show="semanas[0][$index]">
+                                <div class="row">{{semanas[0][$index].hora_inicio}} - {{semanas[0][$index].hora_final}}</div>
+                                <div class="row">{{semanas[0][$index].nombre_m}}</div>
+                            </td>
+                            <td ng-hide="semanas[0][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[1][$index]">
+                                <div class="row">{{semanas[1][$index].hora_inicio}} - {{semanas[1][$index].hora_final}}</div>
+                                <div class="row">{{semanas[1][$index].nombre_m}}</div>
+                            </td>
+                            <td ng-hide="semanas[1][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[2][$index]">
+                                <div class="row">{{semanas[2][$index].hora_inicio}} - {{semanas[2][$index].hora_final}}</div>
+                                <div class="row">{{semanas[2][$index].nombre_m}}</div>
+                            </td>
+                            <td ng-hide="semanas[2][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[3][$index]">
+                                <div class="row">{{semanas[3][$index].hora_inicio}} - {{semanas[3][$index].hora_final}}</div>
+                                <div class="row">{{semanas[3][$index].nombre_m}}</div>
+                            </td>
+                            <td ng-hide="semanas[3][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[4][$index]">
+                                <div class="row">{{semanas[4][$index].hora_inicio}} - {{semanas[4][$index].hora_final}}</div>
+                                <div class="row">{{semanas[4][$index].nombre_m}}</div>
+                            </td>
+                            <td ng-hide="semanas[4][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="grupos" class="col s12">
+                <div class="center-align" ng-hide="grupos">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="bordered highlight centered container responsive-table" ng-show="grupos">
+                    <thead>
+                        <tr>
+                            <th data-field="lunes">Grupo</th>
+                            <th data-field="martes">Descripcion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="grupo in grupos">
+                            <td>
+                                {{grupo.nombre}}
+                            </td>
+                            <td>
+                                {{grupo.descripcion}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+    
 </div>

@@ -1,0 +1,597 @@
+<div class="container">
+
+    <div class="hide-on-large-only">
+        <p class="center-align">Para ver todas las opciones por favor ingrese desde un dispositivo con pantalla mas grande</p>
+    </div>
+
+    <div class="hide-on-med-and-down">
+        <h2 class="center-align">Admin</h2>
+    </div>
+
+    <div class="hide-on-med-and-down">
+        <script src="/script/moderador.js"></script>
+        <h2 class="center-align">Moderador</h2>
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs no-scroll">
+                    <li class="tab"><a href="#docentes">Docentes</a></li>
+                    <li class="tab"><a href="#alumnos">Alumnos</a></li>
+                    <li class="tab"><a href="#representantes">Representantes</a></li>
+                    <li class="tab"><a href="#materias">Materias</a></li>
+                    <li class="tab"><a href="#horarios">Horarios</a></li>
+                    <li class="tab"><a href="#cursos">Cursos</a></li>
+                </ul>
+            </div>
+
+            <div id="docentes" class="col s12" ng-controller="Docentes">
+                <div class="row">
+                    <div class="col s3">
+                        <input class="with-gap" name="docente" ng-model="radio.docente" value="c" type="radio" id="docenteCrear"/>
+                        <label for="docenteCrear"><i class="small material-icons">playlist_add</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="docente" ng-model="radio.docente" value="l" type="radio" id="docenteLeer"/>
+                        <label for="docenteLeer"><i class="small material-icons">find_in_page</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="docente" ng-model="radio.docente" value="m" type="radio" id="docenteModificar"/>
+                        <label for="docenteModificar"><i class="small material-icons">build</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="docente" ng-model="radio.docente" value="b" type="radio" id="docenteBorrar"/>
+                        <label for="docenteBorrar"><i class="small material-icons">delete</i></label>
+                    </div>
+                </div>
+                
+                <div ng-show="radio.docente == 'c'">
+                    Hola yo creo
+                </div>
+                <div ng-show="radio.docente == 'l'">
+                    Hola yo leo
+                </div>
+                <div ng-show="radio.docente == 'm'">
+                    Hola yo actualizo
+                </div>
+                <div ng-show="radio.docente == 'b'">
+                    Hola yo elimino
+                </div>    
+            </div>
+
+            <div id="alumnos" class="col s12" ng-controller="Alumnos">
+                <div class="row">
+                    <div class="col s3">
+                        <input class="with-gap" name="alumnos" ng-model="radio.alumnos" value="c" type="radio" id="alumnosCrear"/>
+                        <label for="alumnosCrear"><i class="small material-icons">playlist_add</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="alumnos" ng-model="radio.alumnos" value="l" type="radio" id="alumnosLeer"/>
+                        <label for="alumnosLeer"><i class="small material-icons">find_in_page</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="alumnos" ng-model="radio.alumnos" value="m" type="radio" id="alumnosModificar"/>
+                        <label for="alumnosModificar"><i class="small material-icons">build</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="alumnos" ng-model="radio.alumnos" value="b" type="radio" id="alumnosBorrar"/>
+                        <label for="alumnosBorrar"><i class="small material-icons">delete</i></label>
+                    </div>
+                </div>
+                
+                <div ng-show="radio.alumnos == 'c'">
+                    Hola yo creo
+                </div>
+                <div ng-show="radio.alumnos == 'l'">
+                    Hola yo leo
+                </div>
+                <div ng-show="radio.alumnos == 'm'">
+                    Hola yo actualizo
+                </div>
+                <div ng-show="radio.alumnos == 'b'">
+                    Hola yo elimino
+                </div>
+            </div>
+
+            <div id="representantes" class="col s12" ng-controller="Representantes">
+                <div id="resultL" class="modal">
+                    <div class="modal-content blue darken-3">
+                        <div class="center-align" ng-hide="resultL">
+                            <div class="preloader-wrapper small active">
+                                <div class="spinner-layer spinner-green-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table ng-show="resultL" class="white stripped z-depth-2">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Cedula</th>
+                                    <th>Genero</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="re in resultL">
+                                    <td>{{re.id}}</td>
+                                    <td>{{re.nombres}}</td>
+                                    <td>{{re.apellidos}}</td>
+                                    <td>{{re.cedula}}</td>
+                                    <td>{{re.genero == 'm' ? 'Hombre' : 'Mujer'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s3">
+                        <input class="with-gap" name="representantes" ng-model="radio.representantes" value="c" type="radio" id="representantesCrear"/>
+                        <label for="representantesCrear"><i class="small material-icons">playlist_add</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="representantes" ng-model="radio.representantes" value="l" type="radio" id="representantesLeer"/>
+                        <label for="representantesLeer"><i class="small material-icons">find_in_page</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="representantes" ng-model="radio.representantes" value="m" type="radio" id="representantesModificar"/>
+                        <label for="representantesModificar"><i class="small material-icons">build</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="representantes" ng-model="radio.representantes" value="b" type="radio" id="representantesBorrar"/>
+                        <label for="representantesBorrar"><i class="small material-icons">delete</i></label>
+                    </div>
+                </div>
+                
+                <div class="row" ng-show="radio.representantes == 'c'">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="nombres_r" ng-model="createR.nombres" type="text" class="validate">
+                                <label for="nombres_r">Nombres</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="apellidos_r" type="tel" ng-model="createR.apellidos" class="validate">
+                                <label for="apellidos_r">Apellidos</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">assignment_ind</i>
+                                <input id="cedula_r" type="text" ng-model="createR.cedula" class="validate">
+                                <label for="cedula_r">Cedula</label>
+                            </div>
+                            <br>
+                            <div class="col s3">
+                                <input class="with-gap" name="genero_r" ng-model="createR.genero" value="m" type="radio" id="generoM"/>
+                                <label for="generoM">Hombre</label>
+                            </div>
+
+                            <div class="col s3">
+                                <input class="with-gap" name="genero_r" ng-model="createR.genero" value="f" type="radio" id="generoF"/>
+                                <label for="generoF">Mujer</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a ng-click="crear()" class="waves-effect waves-light btn-large col s12">CREAR</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="row" ng-show="radio.representantes == 'l'">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s4">
+                                <select ng-model="readR.type">
+                                    <option value="" disabled selected>Buscar por : ?</option>
+                                    <option value="nombres">Nombre</option>
+                                    <option value="apellidos">Apellido</option>
+                                    <option value="cedula">Cedula</option>
+                                </select>
+                                <label>Tipo</label>
+                            </div>
+                            <div class="input-field col s5">
+                                <input type="text" ng-model="readR.data" id="findL"/>
+                                <label for="findL">Buscador</label>
+                            </div>
+                            <br>
+                            <div class="col s3">
+                                <a class="waves-effect waves-light btn-large modal-trigger" href="#resultL" ng-click="leer()">Buscar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row" ng-show="radio.representantes == 'm'">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s4">
+                                <select ng-model="type">
+                                    <option value="" disabled selected>Buscar por : ?</option>
+                                    <option value="n">Nombre</option>
+                                    <option value="a">Apellido</option>
+                                    <option value="c">Cedula</option>
+                                </select>
+                                <label>Tipo</label>
+                            </div>
+                            <div class="input-field col s8">
+                                <input type="text" ng-model="findM" id="findM"/>
+                                <label for="findM">Buscador</label>
+                            </div>
+                        </div>
+                        <form ng-show="person" class="col s12">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input id="nombres_r" type="text" class="validate">
+                                    <label for="nombres_r">Nombres</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="apellidos_r" type="tel" class="validate">
+                                    <label for="apellidos_r">Apellidos</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">assignment_ind</i>
+                                    <input id="cedula_r" type="text" class="validate">
+                                    <label for="cedula_r">Cedula</label>
+                                </div>
+                                <br>
+                                <div class="col s3">
+                                    <input class="with-gap" name="genero_r" ng-model="radio.genero_r" value="m" type="radio" id="generoM"/>
+                                    <label for="generoM">Hombre</label>
+                                </div>
+
+                                <div class="col s3">
+                                    <input class="with-gap" name="genero_r" ng-model="radio.genero_r" value="f" type="radio" id="generoF"/>
+                                    <label for="generoF">Mujer</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <a class="waves-effect waves-light btn-large col s12">Actualizar</a>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+                <div class="row" ng-show="radio.representantes == 'b'">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s4">
+                                <select ng-model="type">
+                                    <option value="" disabled selected>Buscar por : ?</option>
+                                    <option value="n">Nombre</option>
+                                    <option value="a">Apellido</option>
+                                    <option value="c">Cedula</option>
+                                </select>
+                                <label>Tipo</label>
+                            </div>
+                            <div class="input-field col s5">
+                                <input type="text" ng-model="find" id="find"/>
+                                <label for="find">Buscador</label>
+                            </div>
+                            <br>
+                            <div class="col s3">
+                                <a class="waves-effect waves-light btn-large">Eliminar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="materias" class="col s12" ng-controller="Materias">
+                <div class="row">
+                    <div class="col s3">
+                        <input class="with-gap" name="materias" ng-model="radio.materias" value="c" type="radio" id="materiasCrear"/>
+                        <label for="materiasCrear"><i class="small material-icons">playlist_add</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="materias" ng-model="radio.materias" value="l" type="radio" id="materiasLeer"/>
+                        <label for="materiasLeer"><i class="small material-icons">find_in_page</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="materias" ng-model="radio.materias" value="m" type="radio" id="materiasModificar"/>
+                        <label for="materiasModificar"><i class="small material-icons">build</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="materias" ng-model="radio.materias" value="b" type="radio" id="materiasBorrar"/>
+                        <label for="materiasBorrar"><i class="small material-icons">delete</i></label>
+                    </div>
+                </div>
+                
+                <div class="row" ng-show="radio.materias == 'c'">
+                    Hola yo creo
+                </div>
+                <div class="row" ng-show="radio.materias == 'l'">
+                    Hola yo leo
+                </div>
+                <div class="row" ng-show="radio.materias == 'm'">
+                    Hola yo actualizo
+                </div>
+                <div class="row" ng-show="radio.materias == 'b'">
+                    Hola yo elimino
+                </div>                    
+            </div>
+
+            <div id="horarios" class="col s12" ng-controller="Horarios">
+                <div class="row">
+                    <div class="col s3">
+                        <input class="with-gap" name="horarios" ng-model="radio.horarios" value="c" type="radio" id="horariosCrear"/>
+                        <label for="horariosCrear"><i class="small material-icons">playlist_add</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="horarios" ng-model="radio.horarios" value="l" type="radio" id="horariosLeer"/>
+                        <label for="horariosLeer"><i class="small material-icons">find_in_page</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="horarios" ng-model="radio.horarios" value="m" type="radio" id="horariosModificar"/>
+                        <label for="horariosModificar"><i class="small material-icons">build</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="horarios" ng-model="radio.horarios" value="b" type="radio" id="horariosBorrar"/>
+                        <label for="horariosBorrar"><i class="small material-icons">delete</i></label>
+                    </div>
+                </div>
+                
+                <div class="row" ng-show="radio.horarios == 'c'">
+                    Hola yo creo
+                </div>
+                <div class="row" ng-show="radio.horarios == 'l'">
+                    Hola yo leo
+                </div>
+                <div class="row" ng-show="radio.horarios == 'm'">
+                    Hola yo actualizo
+                </div>
+                <div class="row" ng-show="radio.horarios == 'b'">
+                    Hola yo elimino
+                </div>                
+            </div>
+
+            <div id="cursos" class="col s12" ng-controller="Cursos">
+                <div class="row">
+                    <div class="col s3">
+                        <input class="with-gap" name="cursos" ng-model="radio.cursos" value="c" type="radio" id="cursosCrear"/>
+                        <label for="cursosCrear"><i class="small material-icons">playlist_add</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="cursos" ng-model="radio.cursos" value="l" type="radio" id="cursosLeer"/>
+                        <label for="cursosLeer"><i class="small material-icons">find_in_page</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="cursos" ng-model="radio.cursos" value="m" type="radio" id="cursosModificar"/>
+                        <label for="cursosModificar"><i class="small material-icons">build</i></label>
+                    </div>
+                    <div class="col s3">
+                        <input class="with-gap" name="cursos" ng-model="radio.cursos" value="b" type="radio" id="cursosBorrar"/>
+                        <label for="cursosBorrar"><i class="small material-icons">delete</i></label>
+                    </div>
+                </div>
+                
+                <div class="row" ng-show="radio.cursos == 'c'">
+                    Hola yo creo
+                </div>
+                <div class="row" ng-show="radio.cursos == 'l'">
+                    Hola yo leo
+                </div>
+                <div class="row" ng-show="radio.cursos == 'm'">
+                    Hola yo actualizo
+                </div>
+                <div class="row" ng-show="radio.cursos == 'b'">
+                    Hola yo elimino
+                </div>                
+            </div>
+    </div>
+
+    <div ng-controller="DocenteController">
+        <h2 class="center-align">Docente</h2>
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs no-scroll">
+                    <li class="tab"><a href="#misDatos">Mis datos</a></li>
+                    <li class="tab"><a href="#notas" ng-click="verSalones(salones)">Notas</a></li>
+                    <li class="tab"><a href="#horario" ng-click="verHorario(semanas)">Horario</a></li>
+                    <li class="tab"><a href="#grupos" ng-click="verGrupos(grupos)">Grupos</a></li>
+                </ul>
+            </div>
+
+            <div id="misDatos" class="col s12">
+                <div class="center-align" ng-hide="misDatos">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="collection" ng-show="misDatos">
+                    <li class="collection-item">Nombres: {{misDatos.nombres}}</li>
+                    <li class="collection-item">Apellidos: {{misDatos.apellidos}}</li>
+                    <li class="collection-item">Cedula: {{misDatos.cedula}}</li>
+                    <li class="collection-item">Genero: {{misDatos.genero}}</li>
+                    <li class="collection-item">Usuario: {{misDatos.usuario}}</li>
+                </ul>
+            </div>
+
+            <div id="notas" class="col s12">
+                <div class="center-align" ng-hide="salones">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-show="salones">
+                    <ul class="collapsible popout" data-collapsible="accordion">
+                        <li ng-repeat="salon in salones">
+                        <!-- verAlumnos(salon)  -->
+                            <div class="collapsible-header" ng-click="">
+                                <i class="material-icons">filter_drama</i>
+                                {{salon.grado}} {{salon.seccion.toUpperCase()}}
+                            </div>
+                            <div class="collapsible-body">
+                                <!-- <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Check</th>
+                                            <th>Cedula</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Lapso 1</th>
+                                            <th>Lapso 2</th>
+                                            <th>Lapso 3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="alumno in salon.alumnos">
+                                            <td>
+                                                <input id="_{{alumno.cedula}}" type="checkbox" />
+                                                <label for="_{{alumno.cedula}}"></label>
+                                            </td>
+                                            <td>{{alumno.nombres}}</td>
+                                            <td>{{alumno.apellidos}}</td>
+                                            <td><input type="text" placeholder="Lapso 1" value="{{alumno.lapso1}}"></td>
+                                            <td><input type="text" placeholder="Lapso 2" value="{{alumno.lapso2}}"></td>
+                                            <td><input type="text" placeholder="Lapso 3" value="{{alumno.lapso3}}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table> -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div id="horario" class="col s12">
+                <div class="center-align" ng-hide="semanas">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="bordered highlight centered container responsive-table" ng-show="semanas">
+                    <thead>
+                        <tr>
+                            <th data-field="lunes">Lunes</th>
+                            <th data-field="martes">Martes</th>
+                            <th data-field="miercoles">Miercoles</th>
+                            <th data-field="jueves">Jueves</th>
+                            <th data-field="viernes">Viernes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="indice in length track by $index">
+                            <td ng-show="semanas[0][$index]">
+                                <div class="row">{{semanas[0][$index].hora_inicio}} - {{semanas[0][$index].hora_final}}</div>
+                                <div class="row">{{semanas[0][$index].nombre_m}}</div>
+                            </td>
+                            <td ng-hide="semanas[0][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[1][$index]">
+                                <div class="row">{{semanas[1][$index].hora_inicio}} - {{semanas[1][$index].hora_final}}</div>
+                                <div class="row">{{semanas[1][$index].nombre_m}}</div>
+                            </td>
+                            <td ng-hide="semanas[1][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[2][$index]">
+                                <div class="row">{{semanas[2][$index].hora_inicio}} - {{semanas[2][$index].hora_final}}</div>
+                                <div class="row">{{semanas[2][$index].nombre_m}}</div>
+                            </td>
+                            <td ng-hide="semanas[2][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[3][$index]">
+                                <div class="row">{{semanas[3][$index].hora_inicio}} - {{semanas[3][$index].hora_final}}</div>
+                                <div class="row">{{semanas[3][$index].nombre_m}}</div>
+                            </td>
+                            <td ng-hide="semanas[3][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+
+                            <td ng-show="semanas[4][$index]">
+                                <div class="row">{{semanas[4][$index].hora_inicio}} - {{semanas[4][$index].hora_final}}</div>
+                                <div class="row">{{semanas[4][$index].nombre_m}}</div>
+                            </td>
+                            <td ng-hide="semanas[4][$index]">
+                                <i class="material-icons">clear_all</i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="grupos" class="col s12">
+                <div class="center-align" ng-hide="grupos">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="bordered highlight centered container responsive-table" ng-show="grupos">
+                    <thead>
+                        <tr>
+                            <th data-field="lunes">Grupo</th>
+                            <th data-field="martes">Descripcion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="grupo in grupos">
+                            <td>
+                                {{grupo.nombre}}
+                            </td>
+                            <td>
+                                {{grupo.descripcion}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>

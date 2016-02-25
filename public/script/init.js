@@ -9,7 +9,8 @@ $( document ).ready(
         $('.parallax').parallax();
         $('select').material_select();
         $('.close').click(function() {
-            $("#modal1").closeModal();  
+            $(".modal").closeModal();
         })
+
     }
 )
