@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import methodOverride from "method-override";
 import Promise from "bluebird";
 import Mysql from "promise-mysql";
 
@@ -27,8 +28,9 @@ app.set("mysql", {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ "extended": false }));
 
-app.use( express.static(`${__dirname}/bower_components`) ); //se usa express en la carpeta (Bower Components)
-app.use( express.static(`${__dirname}/public`) ); //se usa express en la carpeta (public)
+app.use( express.static(`${__dirname}/bower_components`) ); // se usa express en la carpeta (Bower Components)
+app.use( express.static(`${__dirname}/public`) ); // se usa express en la carpeta (public)
+app.use( methodOverride() ); // Se usa para poder utilizar los metodos put y delete
 
 app.listen(app.get("port"), () => { //Conexion con la base de datos
 	console.log(`Servidor iniciado en http://localhost:${app.get("port")}`); 

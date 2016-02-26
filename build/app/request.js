@@ -230,7 +230,7 @@ module.exports = (router, mysql) => {
         });
 	});
 
-	router.post("/perfil/docente/data", middleware.authenticated, (req, res) => {
+	router.get("/perfil/docente/data", middleware.authenticated, (req, res) => {
 		let tokenDecoded = req.data;
 		query = `
             SELECT docentes.nombres_d as nombres,
@@ -329,7 +329,27 @@ module.exports = (router, mysql) => {
         });
 	});
 
-	router.post("/representantes/crear", middleware.authenticated, (req, res) => {
+	router.route("/representantes")
+	.get(middleware.authenticated, (req, res) => {
+		let tokenDecoded = req.data;
+		query = `
+            SELECT 
+            	id_r as id, 
+            	nombres_r as nombres, 
+            	apellidos_r as apellidos, 
+            	cedula_r as cedula, 
+            	genero_r as genero 
+            FROM representantes WHERE upper(${req.query.type}_r) LIKE upper('%${req.query.data}%') 
+            ORDER BY nombres_r;
+        `;
+		mysql.query(query)
+        .then( representantes => {
+        	console.log(representantes)
+			res.status(200).send(representantes);
+        }).catch(error => {
+        	res.status(404).send(error);
+        });
+	}).post(middleware.authenticated, (req, res) => {
 		let tokenDecoded = req.data;
 		query = `
             INSERT INTO representantes VALUES ( 
@@ -340,32 +360,38 @@ module.exports = (router, mysql) => {
 	            '${req.body.genero}' 
             );
         `;
-        console.log(query);
 		mysql.query(query)
         .then( s => {
 			res.status(200).send(s);
         }).catch(error => {
         	res.status(404).send(error);
         });
-	});
-
-	router.post("/representantes/leer", middleware.authenticated, (req, res) => {
+	}).put( (req, res) => {
 		let tokenDecoded = req.data;
 		query = `
-            SELECT 
-            	id_r as id, 
-            	nombres_r as nombres, 
-            	apellidos_r as apellidos, 
-            	cedula_r as cedula, 
-            	genero_r as genero 
-            FROM representantes WHERE upper(${req.body.type}_r) LIKE upper('%${req.body.data}%') 
-            ORDER BY nombres_r;
+            UPDATE representantes SET
+	            nombres_r = '${req.query.nombres}', 
+	            apellidos_r = '${req.query.apellidos}', 
+	            cedula_r = ${req.query.cedula}, 
+	            genero_r = '${req.query.genero}' 
+            WHERE id_r = ${req.query.id}
+            ;
         `;
-        console.log(query);
 		mysql.query(query)
-        .then( representantes => {
-        	console.log(representantes)
-			res.status(200).send(representantes);
+        .then( s => {
+			res.status(200).send(s);
+        }).catch(error => {
+        	res.status(404).send(error);
+        });
+	}).delete( (req, res) => {
+		console.log("aqui toy")
+		let tokenDecoded = req.data;
+		query = `
+            DELETE FROM representantes WHERE id_r = ${req.query.id};
+        `;
+		mysql.query(query)
+        .then( s => {
+			res.status(200).send(s);
         }).catch(error => {
         	res.status(404).send(error);
         });

@@ -1,17 +1,33 @@
 let app = angular.module("MyApp", []);
 
+app.config(['$httpProvider', function($httpProvider) {
+  	$httpProvider.interceptors.push(['$q', function($q) {
+    	return {
+      		request: function(httpConfig) {
+	        	var token = sessionStorage.token;
+	        	if( token ) {
+	          		httpConfig.headers.Authorization = token;
+	        	}
+	        	return httpConfig;
+      		},
+      		responseError: function(response) {
+        		return $q.reject(response);
+      		}
+    	};
+  	}]);
+}]);
+
 app.controller("LoginController", ($scope, $http, $window) => {
 	$scope.autentificado = false;
 	$scope.nombre = "";
 
 	if( sessionStorage.token !== "null") {
-		$http.get(`/auth/login/${sessionStorage.token}`).success( data => {
-				$http.defaults.headers.post.Authorization = `Session ${data.token}`;
+		$http.get(`/auth/login/${sessionStorage.token}`)
+			.success( data => {
 				$scope.nombre = `${data.nombres.split(" ")[0]} ${data.apellidos[0]}`;
 				$scope.autentificado = true;
 				console.log(`Success ${data}`);
 			}).error( e => {
-				$http.defaults.headers.post.Authorization = null;
 				sessionStorage.token = null;
 				$scope.autentificado = false;
 				$scope.nombre = "";
@@ -199,33 +215,25 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 
 app.controller('DocenteController', ($scope, $http, $window) => {
 
-	$scope.verData = self => {
-		if( !self ) {
-			$http.post(`/perfil/docente/data`)
-				.success( data => {
-					switch( data.genero ) {
-						case "m":
-							data.genero = "Hombre";
-							break;
-						case "f":
-							data.genero = "Mujer";
-					}
-
-					$scope.misDatos = data;
-					console.log(data);
-				}).error( e => {
-					console.log(`Error`);
-					console.log(e);
-					$scope.logout();
-				});
+	$http({
+		"method": "GET",
+		"url": "/perfil/docente/data"
+	}).success( data => {
+		switch( data.genero ) {
+			case "m":
+				data.genero = "Hombre";
+				break;
+			case "f":
+				data.genero = "Mujer";
 		}
-	}
 
-	setTimeout($scope.verData, 2000);
-
-	$scope.verHorario = () => {
-		
-	}
+		$scope.misDatos = data;
+		console.log(data);
+	}).error( e => {
+		console.log(`Error`);
+		console.log(e);
+		$scope.logout();
+	});
 
 	$scope.verSalones = self => {
 		if( !self ) {

@@ -15,7 +15,8 @@ module.exports.authenticated = (req, res, next) => {
 		);
 	}
 
-	let token = req.params.token ? req.params.token : req.headers.authorization.split(" ")[1];
+	let token = req.params.token ? req.params.token : req.headers.authorization;
+	// let token = req.params.token ? req.params.token : req.headers.authorization.split(" ")[1];
 	let payload = jwt.decode( token, TOKEN_SECRET );
 
 	if( payload.exp <= moment.unix() )

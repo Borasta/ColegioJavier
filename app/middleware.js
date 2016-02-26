@@ -24,7 +24,8 @@ module.exports.authenticated = function (req, res, next) {
 		});
 	}
 
-	var token = req.params.token ? req.params.token : req.headers.authorization.split(" ")[1];
+	var token = req.params.token ? req.params.token : req.headers.authorization;
+	// let token = req.params.token ? req.params.token : req.headers.authorization.split(" ")[1];
 	var payload = _jwtSimple2.default.decode(token, TOKEN_SECRET);
 
 	if (payload.exp <= _moment2.default.unix()) return res.status(401).send({

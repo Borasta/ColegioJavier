@@ -92,45 +92,6 @@
             </div>
 
             <div id="representantes" class="col s12" ng-controller="Representantes">
-                <div id="resultL" class="modal">
-                    <div class="modal-content blue darken-3">
-                        <div class="center-align" ng-hide="resultL">
-                            <div class="preloader-wrapper small active">
-                                <div class="spinner-layer spinner-green-only">
-                                    <div class="circle-clipper left">
-                                        <div class="circle"></div>
-                                    </div>
-                                    <div class="gap-patch">
-                                        <div class="circle"></div>
-                                    </div>
-                                    <div class="circle-clipper right">
-                                        <div class="circle"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <table ng-show="resultL" class="white stripped z-depth-2">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
-                                    <th>Cedula</th>
-                                    <th>Genero</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="re in resultL">
-                                    <td>{{re.id}}</td>
-                                    <td>{{re.nombres}}</td>
-                                    <td>{{re.apellidos}}</td>
-                                    <td>{{re.cedula}}</td>
-                                    <td>{{re.genero == 'm' ? 'Hombre' : 'Mujer'}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col s3">
                         <input class="with-gap" name="representantes" ng-model="radio.representantes" value="c" type="radio" id="representantesCrear"/>
@@ -203,10 +164,64 @@
                             </div>
                             <br>
                             <div class="col s3">
-                                <a class="waves-effect waves-light btn-large modal-trigger" href="#resultL" ng-click="leer()">Buscar</a>
+                                <a class="waves-effect waves-light btn-large" href="#resultL" ng-click="leer()">Buscar</a>
                             </div>
                         </div>
                     </form>
+                    <div class="center-align" ng-hide="resultL || !wait">
+                        <div class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table ng-show="resultL" class="white responsive-table highlight z-depth-2">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Cedula</th>
+                                <th>Genero</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="re in resultL">
+                                <td>{{re.id}}</td>
+                                <td><input type="text" value="{{re.nombres}}"></td>
+                                <td><input type="text" value="{{re.apellidos}}"></td>
+                                <td><input type="text" value="{{re.cedula}}"></td>
+                                <td>
+                                    <div>
+                                        <input class="with-gap" type="radio" name="genero{{re.id}}" value="m" ng-checked="re.genero == 'm' ? true : false" id="reM{{re.id}}">
+                                        <label for="reM{{re.id}}">Hombre</label>
+                                    </div>
+                                    <div>
+                                        <input class="with-gap" type="radio" name="genero{{re.id}}" value="f" ng-checked="re.genero === 'f' ? true : false" id="reF{{re.id}}">
+                                        <label for="reF{{re.id}}">Mujer</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn-floating btn waves-effect waves-light green" ng-click="modificar(re)">
+                                        <i class="small material-icons">build</i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn-floating btn waves-effect waves-light red" ng-click="borrar(re.id)">
+                                        <i class="small material-icons">delete</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="row" ng-show="radio.representantes == 'm'">
                     <form class="col s12">

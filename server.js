@@ -8,6 +8,10 @@ var _bodyParser = require("body-parser");
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
+var _methodOverride = require("method-override");
+
+var _methodOverride2 = _interopRequireDefault(_methodOverride);
+
 var _bluebird = require("bluebird");
 
 var _bluebird2 = _interopRequireDefault(_bluebird);
@@ -46,8 +50,9 @@ app.set("mysql", {
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ "extended": false }));
 
-app.use(_express2.default.static(__dirname + "/bower_components")); //se usa express en la carpeta (Bower Components)
-app.use(_express2.default.static(__dirname + "/public")); //se usa express en la carpeta (public)
+app.use(_express2.default.static(__dirname + "/bower_components")); // se usa express en la carpeta (Bower Components)
+app.use(_express2.default.static(__dirname + "/public")); // se usa express en la carpeta (public)
+app.use((0, _methodOverride2.default)()); // Se usa para poder utilizar los metodos put y delete
 
 app.listen(app.get("port"), function () {
 	//Conexion con la base de datos

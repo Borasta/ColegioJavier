@@ -138,7 +138,7 @@ module.exports = function (router, mysql) {
 		});
 	});
 
-	router.post("/perfil/docente/data", _middleware2.default.authenticated, function (req, res) {
+	router.get("/perfil/docente/data", _middleware2.default.authenticated, function (req, res) {
 		var tokenDecoded = req.data;
 		query = "\n            SELECT docentes.nombres_d as nombres,\n\t            docentes.apellidos_d as apellidos,\n\t            docentes.cedula_d as cedula,\n\t            docentes.genero_d as genero,\n\t            docentes.user_d as usuario\n            FROM docentes\n            WHERE docentes.id_d = " + tokenDecoded.id + ";\n        ";
 		mysql.query(query).then(function (docente) {
@@ -186,24 +186,37 @@ module.exports = function (router, mysql) {
 		});
 	});
 
-	router.post("/representantes/crear", _middleware2.default.authenticated, function (req, res) {
+	router.route("/representantes").get(_middleware2.default.authenticated, function (req, res) {
+		var tokenDecoded = req.data;
+		query = "\n            SELECT \n            \tid_r as id, \n            \tnombres_r as nombres, \n            \tapellidos_r as apellidos, \n            \tcedula_r as cedula, \n            \tgenero_r as genero \n            FROM representantes WHERE upper(" + req.query.type + "_r) LIKE upper('%" + req.query.data + "%') \n            ORDER BY nombres_r;\n        ";
+		mysql.query(query).then(function (representantes) {
+			console.log(representantes);
+			res.status(200).send(representantes);
+		}).catch(function (error) {
+			res.status(404).send(error);
+		});
+	}).post(_middleware2.default.authenticated, function (req, res) {
 		var tokenDecoded = req.data;
 		query = "\n            INSERT INTO representantes VALUES ( \n\t            null, \n\t            '" + req.body.nombres + "', \n\t            '" + req.body.apellidos + "', \n\t            " + req.body.cedula + ", \n\t            '" + req.body.genero + "' \n            );\n        ";
-		console.log(query);
 		mysql.query(query).then(function (s) {
 			res.status(200).send(s);
 		}).catch(function (error) {
 			res.status(404).send(error);
 		});
-	});
-
-	router.post("/representantes/leer", _middleware2.default.authenticated, function (req, res) {
+	}).put(function (req, res) {
 		var tokenDecoded = req.data;
-		query = "\n            SELECT \n            \tid_r as id, \n            \tnombres_r as nombres, \n            \tapellidos_r as apellidos, \n            \tcedula_r as cedula, \n            \tgenero_r as genero \n            FROM representantes WHERE upper(" + req.body.type + "_r) LIKE upper('%" + req.body.data + "%') \n            ORDER BY nombres_r;\n        ";
-		console.log(query);
-		mysql.query(query).then(function (representantes) {
-			console.log(representantes);
-			res.status(200).send(representantes);
+		query = "\n            UPDATE representantes SET\n\t            nombres_r = '" + req.query.nombres + "', \n\t            apellidos_r = '" + req.query.apellidos + "', \n\t            cedula_r = " + req.query.cedula + ", \n\t            genero_r = '" + req.query.genero + "' \n            WHERE id_r = " + req.query.id + "\n            ;\n        ";
+		mysql.query(query).then(function (s) {
+			res.status(200).send(s);
+		}).catch(function (error) {
+			res.status(404).send(error);
+		});
+	}).delete(function (req, res) {
+		console.log("aqui toy");
+		var tokenDecoded = req.data;
+		query = "\n            DELETE FROM representantes WHERE id_r = " + req.query.id + ";\n        ";
+		mysql.query(query).then(function (s) {
+			res.status(200).send(s);
 		}).catch(function (error) {
 			res.status(404).send(error);
 		});
