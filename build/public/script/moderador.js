@@ -1,21 +1,13 @@
-app.controller('Docentes', ($scope, $http, $window) => {
-	
-});
-
-app.controller('Alumnos', ($scope, $http, $window) => {
-	
-});
-
 app.controller('Representantes', ($scope, $http, $window) => {
 
 	$scope.crear = () => {
-		console.log($scope.createR);
+		console.log($scope.create);
 		$http({
 			"method": "POST",
 			"url": `/representantes`, 
-			"data": $scope.createR
+			"data": $scope.create
 		}).success( data => {
-			$scope.createR = null;
+			$scope.create = null;
 			alert("Creado correctamente");
 		}).error( e => {
 			
@@ -23,15 +15,15 @@ app.controller('Representantes', ($scope, $http, $window) => {
 	}
 
 	$scope.leer = () => {
-		$scope.resultL = null;
+		$scope.result = null;
 		$scope.wait = true;
 		$http({
 			"method": "GET",
 			"url": `/representantes`, 
-			"params": $scope.readR
+			"params": $scope.read
 		}).success( data => {
-			$scope.readR.data = "";
-			$scope.resultL = data ? data : [];
+			$scope.read.data = "";
+			$scope.result = data ? data : [];
 			$scope.wait = false;
 		}).error( e => {
 			
@@ -60,11 +52,11 @@ app.controller('Representantes', ($scope, $http, $window) => {
 		}).success( data => {
 			alert("Borrado correctamente");
 			var pos = 0;
-			$scope.resultL.forEach( (value, index) => {
+			$scope.result.forEach( (value, index) => {
 				if( value.id == id )
 					pos = index;
 			});
-			pos > -1 && $scope.resultL.splice( pos, 1 );
+			pos > -1 && $scope.result.splice( pos, 1 );
 		}).error( e => {
 			
 		});
@@ -72,12 +64,65 @@ app.controller('Representantes', ($scope, $http, $window) => {
 
 });
 
+app.controller('Alumnos', ($scope, $http, $window) => {
+	
+});
+
+app.controller('Familias', ($scope, $http, $window) => {
+
+});
+
+app.controller('Grados', ($scope, $http, $window) => {
+
+});
+
+app.controller('Secciones', ($scope, $http, $window) => {
+
+});
+
+app.controller('Cursos', ($scope, $http, $window) => {
+	
+});
+
+app.controller('Notas', ($scope, $http, $window) => {
+	
+});
+
+app.controller('Anio', ($scope, $http, $window) => {
+	
+});
+
 app.controller('Materias', ($scope, $http, $window) => {
 	
 });
+
+
+app.controller('DocenteMateria', ($scope, $http, $window) => {
+	
+});
+
+app.controller('Docentes', ($scope, $http, $window) => {
+	$scope.leer = () => {
+		$scope.result = null;
+		$scope.wait = true;
+		$http({
+			"method": "GET",
+			"url": `/docentes`, 
+			"params": $scope.read
+		}).success( data => {
+			$scope.read.data = "";
+			$scope.result = data ? data : [];
+			$scope.wait = false;
+		}).error( e => {
+			console.log(e)
+		});
+	}
+});
+
 app.controller('Horarios', ($scope, $http, $window) => {
 	
 });
-app.controller('Cursos', ($scope, $http, $window) => {
+
+app.controller('Dias', ($scope, $http, $window) => {
 	
 });

@@ -21,20 +21,15 @@ app.controller("LoginController", ($scope, $http, $window) => {
 	$scope.autentificado = false;
 	$scope.nombre = "";
 
-	if( sessionStorage.token !== "null") {
-		$http.get(`/auth/login/${sessionStorage.token}`)
-			.success( data => {
-				$scope.nombre = `${data.nombres.split(" ")[0]} ${data.apellidos[0]}`;
-				$scope.autentificado = true;
-				console.log(`Success ${data}`);
-			}).error( e => {
-				sessionStorage.token = null;
-				$scope.autentificado = false;
-				$scope.nombre = "";
-				console.log(`Error`);
-				console.log(e);
-			}
-		);
+	if( sessionStorage.token && sessionStorage.nombres && sessionStorage.apellidos ) {
+		$scope.nombre = `${sessionStorage.nombres.split(" ")[0]} ${sessionStorage.apellidos[0]}`;
+		$scope.autentificado = true;
+		console.log(`Success ${sessionStorage.datos}`);
+	}
+	else {
+		sessionStorage.clear();
+		$scope.autentificado = false;
+		$scope.nombre = "";
 	}
 
 	$scope.login = () => {
@@ -51,9 +46,10 @@ app.controller("LoginController", ($scope, $http, $window) => {
 					"type": $scope.data.type
 				}
 			).success( data => {
-				$http.defaults.headers.post.Authorization = `Session ${data.token}`;
 				$scope.nombre = `${data.nombres.split(" ")[0]} ${data.apellidos[0]}`;
 				sessionStorage.token = data.token;
+				sessionStorage.nombres = data.nombres;
+				sessionStorage.apellidos = data.apellidos;
 				$scope.autentificado = true;
 				console.log(data);
 			}).error( e => {
@@ -67,7 +63,7 @@ app.controller("LoginController", ($scope, $http, $window) => {
 		$scope.autentificado = false;
 		$http.defaults.headers.post.Authorization = null;
 		$scope.nombre = "";
-		sessionStorage.token = null;
+		sessionStorage.clear();
 		$window.location = "/";
 	}
 
@@ -84,9 +80,8 @@ app.controller("LoginController", ($scope, $http, $window) => {
 app.controller('EstudianteController', ($scope, $http, $window) => {
 
 	$scope.verData = self => {
-		console.log("VER DATA")
 		if( !self ) {
-			$http.post(`/perfil/estudiante/data`)
+			$http.get(`/perfil/estudiante/data`)
 				.success( data => {
 					console.log(data.estudiante.edad);
 					data.estudiante.edad = data.estudiante.edad.split(" ")[0];
@@ -120,7 +115,7 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 
 	$scope.verNotas = self => {
 		if( !self ) {
-			$http.post(`/perfil/estudiante/notas`)
+			$http.get(`/perfil/estudiante/notas`)
 				.success( data => {
 					$scope.notas = [];
 					for( let i = 0; i < data.length; i++ ) {
@@ -148,7 +143,7 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 
 	$scope.verHorario = self => {
 		if( !self ) {
-			$http.post(`/perfil/estudiante/horario`)
+			$http.get(`/perfil/estudiante/horario`)
 				.success( data => {
 
 					let semanas = [
@@ -199,7 +194,7 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 
 	$scope.verGrupos = self => {
 		if( !self ) {
-			$http.post(`/perfil/estudiante/grupos`)
+			$http.get(`/perfil/estudiante/grupos`)
 				.success( data => {
 					$scope.grupos = data;
 					console.log(data);
