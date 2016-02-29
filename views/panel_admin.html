@@ -1,5 +1,4 @@
 <div class="container">
-
     <div class="hide-on-large-only">
         <p class="center-align">Para ver todas las opciones por favor ingrese desde un dispositivo con pantalla mas grande</p>
     </div>
@@ -27,42 +26,76 @@
                 <div class="row">
                     <div class="col s6">
                         <input class="with-gap" name="docente" ng-model="radio" value="c" type="radio" id="docenteCrear"/>
-                        <label for="docenteCrear"><i class="small material-icons">playlist_add</i></label>
+                        <label for="docenteCrear"><i class="small material-icons">playlist_add</i>Crear</label>
                     </div>
                     <div class="col s6">
                         <input class="with-gap" name="docente" ng-model="radio" value="l" type="radio" id="docenteLeer"/>
-                        <label for="docenteLeer"><i class="small material-icons">find_in_page</i></label>
+                        <label for="docenteLeer"><i class="small material-icons">find_in_page</i>Buscar</label>
                     </div>
                 </div>
                 
-                <div ng-show="radio == 'c'">
+                <div class="row" ng-show="radio == 'c'">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input id="nombres_r" ng-model="createR.nombres" type="text" class="validate">
-                                <label for="nombres_r">Nombres</label>
+                                <input id="nombres_d" ng-model="create.nombres" type="text" class="validate">
+                                <label for="nombres_d">Nombres</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="apellidos_r" type="tel" ng-model="createR.apellidos" class="validate">
-                                <label for="apellidos_r">Apellidos</label>
+                                <input id="apellidos_d" type="tel" ng-model="create.apellidos" class="validate">
+                                <label for="apellidos_d">Apellidos</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">assignment_ind</i>
-                                <input id="cedula_r" type="text" ng-model="createR.cedula" class="validate">
-                                <label for="cedula_r">Cedula</label>
+                                <input id="cedula_d" type="text" ng-model="create.cedula" class="validate">
+                                <label for="cedula_d">Cedula</label>
                             </div>
-                            <br>
-                            <div class="col s3">
-                                <input class="with-gap" name="genero_r" ng-model="createR.genero" value="m" type="radio" id="generoM"/>
-                                <label for="generoM">Hombre</label>
-                            </div>
+                            <br ng-show="flag === 'b'">
+                            <div class="col s6">
+                                <div class="row">
+                                    <div class="col s6">
+                                        <input class="with-gap" name="genero_d" ng-model="create.genero" value="m" type="radio" id="generoM"/>
+                                        <label for="generoM">Hombre</label>
+                                    </div>
 
-                            <div class="col s3">
-                                <input class="with-gap" name="genero_r" ng-model="createR.genero" value="f" type="radio" id="generoF"/>
-                                <label for="generoF">Mujer</label>
+                                    <div class="col s6">
+                                        <input class="with-gap" name="genero_d" ng-model="create.genero" value="f" type="radio" id="generoF"/>
+                                        <label for="generoF">Mujer</label>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="flag === 'a'">
+                                    <div class="col s4">
+                                        <input class="with-gap" name="createFlag" ng-model="create.flag" value="c" type="radio" id="docenteFlag"/>
+                                        <label for="docenteFlag">Docente</label>
+                                    </div>
+                                    <div class="col s4">
+                                        <input class="with-gap" name="createFlag" ng-model="create.flag" value="b" type="radio" id="moderadorFlag"/>
+                                        <label for="moderadorFlag">Mod</label>
+                                    </div>
+                                    <div class="col s4">
+                                        <input class="with-gap" name="createFlag" ng-model="create.flag" value="a" type="radio" id="adminFlag"/>
+                                        <label for="adminFlag">Admin</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="nombres_d" ng-model="create.user" type="text" class="validate">
+                                <label for="nombres_d">
+                                    Usuario
+                                    <i class="material-icons left">person</i>
+                                </label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="apellidos_d" type="tel" ng-model="create.pass" class="validate">
+                                <label for="apellidos_d">
+                                    Contraseña
+                                    <i class="material-icons left">lock_outline</i>
+                                </label>
                             </div>
                         </div>
                         <div class="row">
@@ -70,7 +103,7 @@
                         </div>
                     </form>
                 </div>
-                <div ng-show="radio == 'l'">
+                <div class="row" ng-show="radio == 'l'">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s4">
@@ -83,7 +116,7 @@
                                 <label>Tipo</label>
                             </div>
                             <div class="input-field col s5">
-                                <input type="text" ng-model="read.data" id="findDL"/>
+                                <input type="text" ng-model="read.data" id="findDL" value="" />
                                 <label for="findDL">Buscador</label>
                             </div>
                             <br>
@@ -117,33 +150,50 @@
                                 <th>Usuario</th>
                                 <th>Genero</th>
                                 <th>Nueva Contraseña</th>
+                                <th ng-show="flag === 'a'">Nivel</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="re in result">
-                                <td>{{re.id}}</td>
-                                <td><input type="text" value="{{re.nombres}}"></td>
-                                <td><input type="text" value="{{re.apellidos}}"></td>
-                                <td><input type="text" value="{{re.cedula}}"></td>
-                                <td><input type="text" value="{{re.usuario}}"></td>
+                            <tr ng-repeat="row in result">
+                                <td>{{row.id}}</td>
+                                <td><input type="text" ng-model="row.nombres"></td>
+                                <td><input type="text" ng-model="row.apellidos"></td>
+                                <td><input type="text" ng-model="row.cedula"></td>
+                                <td><input type="text" ng-model="row.usuario"></td>
                                 <td>
                                     <div>
-                                        <input class="with-gap" type="radio" name="genero{{re.id}}" value="m" ng-checked="re.genero == 'm' ? true : false" id="doM{{re.id}}">
-                                        <label for="doM{{re.id}}">Hombre</label>
+                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="m" ng-checked="row.genero == 'm' ? true : false" id="doM{{row.id}}">
+                                        <label for="doM{{row.id}}">Hombre</label>
                                     </div>
                                     <div>
-                                        <input class="with-gap" type="radio" name="genero{{re.id}}" value="f" ng-checked="re.genero === 'f' ? true : false" id="doF{{re.id}}">
-                                        <label for="doF{{re.id}}">Mujer</label>
+                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="f" ng-checked="row.genero === 'f' ? true : false" id="doF{{row.id}}">
+                                        <label for="doF{{row.id}}">Mujer</label>
                                     </div>
                                 </td>
-                                <td><input type="text" value="{{re.contrasenia}}"></td>
+                                <td><input type="text" ng-model="row.pass"></td>
+                                <td ng-show="flag === 'a'">
+                                    <div>
+                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="c" type="radio" id="docenteRadio{{row.id}}"/>
+                                        <label for="docenteRadio{{row.id}}">Docente</label>
+                                    </div>
+                                    <div>
+                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="b" type="radio" id="moderadorRadio{{row.id}}"/>
+                                        <label for="moderadorRadio{{row.id}}">Mod</label>
+                                    </div>
+                                    <div>
+                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="a" type="radio" id="adminRadio{{row.id}}"/>
+                                        <label for="adminRadio{{row.id}}">Admin</label>
+                                    </div>
+                                </td>
                                 <td>
-                                    <a class="btn-floating btn waves-effect waves-light green" ng-click="modificar(re)">
+                                    <a class="btn-floating btn waves-effect waves-light green z-depth-3" ng-click="modificar(row)">
                                         <i class="small material-icons">build</i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="btn-floating btn waves-effect waves-light red" ng-click="borrar(re.id)">
+                                    <a class="btn-floating btn waves-effect waves-light red z-depth-3" ng-click="borrar(row.id)">
                                         <i class="small material-icons">delete</i>
                                     </a>
                                 </td>
@@ -155,34 +205,26 @@
 
             <div id="alumnos" class="col s12" ng-controller="Alumnos">
                 <div class="row">
-                    <div class="col s3">
+                    <div class="col s6">
                         <input class="with-gap" name="alumnos" ng-model="radio" value="c" type="radio" id="alumnosCrear"/>
-                        <label for="alumnosCrear"><i class="small material-icons">playlist_add</i></label>
+                        <label for="alumnosCrear"><i class="small material-icons">playlist_add</i>Crear</label>
                     </div>
-                    <div class="col s3">
+                    <div class="col s6">
                         <input class="with-gap" name="alumnos" ng-model="radio" value="l" type="radio" id="alumnosLeer"/>
-                        <label for="alumnosLeer"><i class="small material-icons">find_in_page</i></label>
-                    </div>
-                    <div class="col s3">
-                        <input class="with-gap" name="alumnos" ng-model="radio" value="m" type="radio" id="alumnosModificar"/>
-                        <label for="alumnosModificar"><i class="small material-icons">build</i></label>
-                    </div>
-                    <div class="col s3">
-                        <input class="with-gap" name="alumnos" ng-model="radio" value="b" type="radio" id="alumnosBorrar"/>
-                        <label for="alumnosBorrar"><i class="small material-icons">delete</i></label>
+                        <label for="alumnosLeer"><i class="small material-icons">find_in_page</i>Buscar</label>
                     </div>
                 </div>
                 
-                <div ng-show="radio == 'c'">
+                <div class="row" ng-show="radio == 'c'">
                     Hola yo creo
                 </div>
-                <div ng-show="radio == 'l'">
+                <div class="row" ng-show="radio == 'l'">
                     Hola yo leo
                 </div>
-                <div ng-show="radio == 'm'">
+                <div class="row" ng-show="radio == 'm'">
                     Hola yo actualizo
                 </div>
-                <div ng-show="radio == 'b'">
+                <div class="row" ng-show="radio == 'b'">
                     Hola yo elimino
                 </div>
             </div>
@@ -199,33 +241,33 @@
                     </div>
                 </div>
                 
-                <div class="row" ng-show="radio == 'c'">
+                <div class="row" class="row" ng-show="radio == 'c'">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input id="nombres_r" ng-model="createR.nombres" type="text" class="validate">
+                                <input id="nombres_r" ng-model="create.nombres" type="text" class="validate">
                                 <label for="nombres_r">Nombres</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="apellidos_r" type="tel" ng-model="createR.apellidos" class="validate">
+                                <input id="apellidos_r" type="tel" ng-model="create.apellidos" class="validate">
                                 <label for="apellidos_r">Apellidos</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">assignment_ind</i>
-                                <input id="cedula_r" type="text" ng-model="createR.cedula" class="validate">
+                                <input id="cedula_r" type="text" ng-model="create.cedula" class="validate">
                                 <label for="cedula_r">Cedula</label>
                             </div>
                             <br>
                             <div class="col s3">
-                                <input class="with-gap" name="genero_r" ng-model="createR.genero" value="m" type="radio" id="generoM"/>
+                                <input class="with-gap" name="genero_r" ng-model="create.genero" value="m" type="radio" id="generoM"/>
                                 <label for="generoM">Hombre</label>
                             </div>
 
                             <div class="col s3">
-                                <input class="with-gap" name="genero_r" ng-model="createR.genero" value="f" type="radio" id="generoF"/>
+                                <input class="with-gap" name="genero_r" ng-model="create.genero" value="f" type="radio" id="generoF"/>
                                 <label for="generoF">Mujer</label>
                             </div>
                         </div>
@@ -234,7 +276,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="row" ng-show="radio == 'l'">
+                <div class="row" class="row" ng-show="radio == 'l'">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s4">
@@ -247,7 +289,7 @@
                                 <label>Tipo</label>
                             </div>
                             <div class="input-field col s5">
-                                <input type="text" ng-model="read.data" id="findRL"/>
+                                <input type="text" ng-model="read.data" id="findRL" value="" />
                                 <label for="findRL">Buscador</label>
                             </div>
                             <br>
@@ -279,31 +321,33 @@
                                 <th>Apellidos</th>
                                 <th>Cedula</th>
                                 <th>Genero</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="re in result">
-                                <td>{{re.id}}</td>
-                                <td><input type="text" value="{{re.nombres}}"></td>
-                                <td><input type="text" value="{{re.apellidos}}"></td>
-                                <td><input type="text" value="{{re.cedula}}"></td>
+                            <tr ng-repeat="row in result">
+                                <td>{{row.id}}</td>
+                                <td><input type="text" ng-model="row.nombres"></td>
+                                <td><input type="text" ng-model="row.apellidos"></td>
+                                <td><input type="text" ng-model="row.cedula"></td>
                                 <td>
                                     <div>
-                                        <input class="with-gap" type="radio" name="genero{{re.id}}" value="m" ng-checked="re.genero == 'm' ? true : false" id="reM{{re.id}}">
-                                        <label for="reM{{re.id}}">Hombre</label>
+                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="m" ng-checked="row.genero == 'm' ? true : false" id="reM{{row.id}}">
+                                        <label for="reM{{row.id}}">Hombre</label>
                                     </div>
                                     <div>
-                                        <input class="with-gap" type="radio" name="genero{{re.id}}" value="f" ng-checked="re.genero === 'f' ? true : false" id="reF{{re.id}}">
-                                        <label for="reF{{re.id}}">Mujer</label>
+                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="f" ng-checked="row.genero === 'f' ? true : false" id="reF{{row.id}}">
+                                        <label for="reF{{row.id}}">Mujer</label>
                                     </div>
                                 </td>
                                 <td>
-                                    <a class="btn-floating btn waves-effect waves-light green" ng-click="modificar(re)">
+                                    <a class="btn-floating btn waves-effect waves-light green z-depth-3" ng-click="modificar(row)">
                                         <i class="small material-icons">build</i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="btn-floating btn waves-effect waves-light red" ng-click="borrar(re.id)">
+                                    <a class="btn-floating btn waves-effect waves-light red z-depth-3" ng-click="borrar(row.id)">
                                         <i class="small material-icons">delete</i>
                                     </a>
                                 </td>
@@ -315,60 +359,60 @@
 
             <div id="materias" class="col s12" ng-controller="Materias">
                 <div class="row">
-                    <div class="col s3">
+                    <div class="col s6">
                         <input class="with-gap" name="materias" ng-model="radio" value="c" type="radio" id="materiasCrear"/>
-                        <label for="materiasCrear"><i class="small material-icons">playlist_add</i></label>
+                        <label for="materiasCrear"><i class="small material-icons">playlist_add</i>Crear</label>
                     </div>
-                    <div class="col s3">
+                    <div class="col s6">
                         <input class="with-gap" name="materias" ng-model="radio" value="l" type="radio" id="materiasLeer"/>
-                        <label for="materiasLeer"><i class="small material-icons">find_in_page</i></label>
+                        <label for="materiasLeer"><i class="small material-icons">find_in_page</i>Buscar</label>
                     </div>
                 </div>
                 
-                <div class="row" ng-show="radio == 'c'">
+                <div class="row" class="row" ng-show="radio == 'c'">
                     Hola yo creo
                 </div>
-                <div class="row" ng-show="radio == 'l'">
+                <div class="row" class="row" ng-show="radio == 'l'">
                     Hola yo leo
                 </div>             
             </div>
 
             <div id="horarios" class="col s12" ng-controller="Horarios">
                 <div class="row">
-                    <div class="col s3">
+                    <div class="col s6">
                         <input class="with-gap" name="horarios" ng-model="radio" value="c" type="radio" id="horariosCrear"/>
-                        <label for="horariosCrear"><i class="small material-icons">playlist_add</i></label>
+                        <label for="horariosCrear"><i class="small material-icons">playlist_add</i>Crear</label>
                     </div>
-                    <div class="col s3">
+                    <div class="col s6">
                         <input class="with-gap" name="horarios" ng-model="radio" value="l" type="radio" id="horariosLeer"/>
-                        <label for="horariosLeer"><i class="small material-icons">find_in_page</i></label>
+                        <label for="horariosLeer"><i class="small material-icons">find_in_page</i>Buscar</label>
                     </div>
                 </div>
                 
-                <div class="row" ng-show="radio == 'c'">
+                <div class="row" class="row" ng-show="radio == 'c'">
                     Hola yo creo
                 </div>
-                <div class="row" ng-show="radio == 'l'">
+                <div class="row" class="row" ng-show="radio == 'l'">
                     Hola yo leo
                 </div>   
             </div>
 
             <div id="cursos" class="col s12" ng-controller="Cursos">
                 <div class="row">
-                    <div class="col s3">
+                    <div class="col s6">
                         <input class="with-gap" name="cursos" ng-model="radio" value="c" type="radio" id="cursosCrear"/>
-                        <label for="cursosCrear"><i class="small material-icons">playlist_add</i></label>
+                        <label for="cursosCrear"><i class="small material-icons">playlist_add</i>Crear</label>
                     </div>
-                    <div class="col s3">
+                    <div class="col s6">
                         <input class="with-gap" name="cursos" ng-model="radio" value="l" type="radio" id="cursosLeer"/>
-                        <label for="cursosLeer"><i class="small material-icons">find_in_page</i></label>
+                        <label for="cursosLeer"><i class="small material-icons">find_in_page</i>Buscar</label>
                     </div>
                 </div>
                 
-                <div class="row" ng-show="radio == 'c'">
+                <div class="row" class="row" ng-show="radio == 'c'">
                     Hola yo creo
                 </div>
-                <div class="row" ng-show="radio == 'l'">
+                <div class="row" class="row" ng-show="radio == 'l'">
                     Hola yo leo
                 </div>         
             </div>

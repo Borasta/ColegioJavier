@@ -2,6 +2,8 @@
 
 app.controller('Representantes', function ($scope, $http, $window) {
 
+	$scope.radio = "c";
+
 	$scope.crear = function () {
 		console.log($scope.create);
 		$http({
@@ -56,25 +58,67 @@ app.controller('Representantes', function ($scope, $http, $window) {
 	};
 });
 
-app.controller('Alumnos', function ($scope, $http, $window) {});
+app.controller('Alumnos', function ($scope, $http, $window) {
 
-app.controller('Familias', function ($scope, $http, $window) {});
+	$scope.radio = "c";
+});
 
-app.controller('Grados', function ($scope, $http, $window) {});
+app.controller('Familias', function ($scope, $http, $window) {
 
-app.controller('Secciones', function ($scope, $http, $window) {});
+	$scope.radio = "c";
+});
 
-app.controller('Cursos', function ($scope, $http, $window) {});
+app.controller('Grados', function ($scope, $http, $window) {
 
-app.controller('Notas', function ($scope, $http, $window) {});
+	$scope.radio = "c";
+});
 
-app.controller('Anio', function ($scope, $http, $window) {});
+app.controller('Secciones', function ($scope, $http, $window) {
 
-app.controller('Materias', function ($scope, $http, $window) {});
+	$scope.radio = "c";
+});
 
-app.controller('DocenteMateria', function ($scope, $http, $window) {});
+app.controller('Cursos', function ($scope, $http, $window) {
+
+	$scope.radio = "c";
+});
+
+app.controller('Notas', function ($scope, $http, $window) {
+
+	$scope.radio = "c";
+});
+
+app.controller('Anio', function ($scope, $http, $window) {
+
+	$scope.radio = "c";
+});
+
+app.controller('Materias', function ($scope, $http, $window) {
+
+	$scope.radio = "c";
+});
+
+app.controller('DocenteMateria', function ($scope, $http, $window) {
+
+	$scope.radio = "c";
+});
 
 app.controller('Docentes', function ($scope, $http, $window) {
+
+	$scope.radio = "c";
+
+	$scope.crear = function () {
+		console.log($scope.create);
+		$http({
+			"method": "POST",
+			"url": "/docentes",
+			"data": $scope.create
+		}).success(function (data) {
+			$scope.create = null;
+			alert("Creado correctamente");
+		}).error(function (e) {});
+	};
+
 	$scope.leer = function () {
 		$scope.result = null;
 		$scope.wait = true;
@@ -90,8 +134,41 @@ app.controller('Docentes', function ($scope, $http, $window) {
 			console.log(e);
 		});
 	};
+
+	$scope.modificar = function (docente) {
+		$http({
+			"method": "PUT",
+			"url": "/docentes",
+			"params": docente
+		}).success(function (data) {
+			alert("Modificado correctamente");
+		}).error(function (e) {});
+	};
+
+	$scope.borrar = function (id) {
+		$http({
+			"method": "DELETE",
+			"url": "/docentes",
+			"params": {
+				"id": id
+			}
+		}).success(function (data) {
+			alert("Borrado correctamente");
+			var pos = 0;
+			$scope.result.forEach(function (value, index) {
+				if (value.id == id) pos = index;
+			});
+			pos > -1 && $scope.result.splice(pos, 1);
+		}).error(function (e) {});
+	};
 });
 
-app.controller('Horarios', function ($scope, $http, $window) {});
+app.controller('Horarios', function ($scope, $http, $window) {
 
-app.controller('Dias', function ($scope, $http, $window) {});
+	$scope.radio = "c";
+});
+
+app.controller('Dias', function ($scope, $http, $window) {
+
+	$scope.radio = "c";
+});

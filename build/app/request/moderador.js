@@ -14,7 +14,8 @@ module.exports = mysql => {
 					          	apellidos_d AS apellidos, 
 					          	cedula_d AS cedula, 
 					          	genero_d AS genero,
-					          	user_d AS usuario
+					          	user_d AS usuario,
+					          	flag_d AS flag
 					        FROM 
 					        	docentes 
 					        WHERE 
@@ -36,7 +37,9 @@ module.exports = mysql => {
 							FROM
 								docentes
 							WHERE
-								UPPER(${req.query.type}_d) LIKE UPPER('%${req.query.data}%') AND NOT flag_d = 'b' AND NOT flag_d = 'a'
+								UPPER(${req.query.type}_d) LIKE UPPER('%${req.query.data}%') 
+								AND NOT flag_d = 'b' 
+								AND NOT flag_d = 'a'
 							ORDER BY
 								nombres_d;
 				        `;
@@ -60,7 +63,7 @@ module.exports = mysql => {
 				switch( tokenDecoded.flag ) {
 					case "a":
 						query = `
-				            INSERT INTO representantes VALUES ( 
+				            INSERT INTO docentes VALUES ( 
 					            null, 
 					            '${req.body.nombres}', 
 					            '${req.body.apellidos}', 
@@ -68,14 +71,14 @@ module.exports = mysql => {
 					            '${req.body.genero}',
 					            '${req.body.user}',
 					            '${req.body.pass}',
-					            'c'
+					            '${req.body.flag}',
 				            );
 				        `;
 						break;
 
 					case "b":
 						query = `
-				            INSERT INTO representantes VALUES ( 
+				            INSERT INTO docentes VALUES ( 
 					            null, 
 					            '${req.body.nombres}', 
 					            '${req.body.apellidos}', 
@@ -101,16 +104,43 @@ module.exports = mysql => {
 			},
 			"put": (req, res) => {
 				let tokenDecoded = req.data;
-				query = `
-		            UPDATE representantes SET
-			            nombres_r = '${req.query.nombres}', 
-			            apellidos_r = '${req.query.apellidos}', 
-			            cedula_r = ${req.query.cedula}, 
-			            genero_r = '${req.query.genero}',
-			            user_r = '${req.query.genero}'
-		            WHERE id_r = ${req.query.id} AND flag_d NOT 'b' AND flag_d NOT 'a'
-		            ;
-		        `;
+				var newPass = req.query.pass ? `, pass_d = '${req.query.pass}'` : ``;
+				switch( tokenDecoded.flag ) {
+					case "a":
+						query = `
+				            UPDATE docentes SET
+					            nombres_d = '${req.query.nombres}', 
+					            apellidos_d = '${req.query.apellidos}', 
+					            cedula_d = ${req.query.cedula}, 
+					            genero_d = '${req.query.genero}',
+					            user_d = '${req.query.genero}'
+					            ${newPass},
+					            flag_d = '${req.query.flag}'
+				            WHERE id_d = ${req.query.id}
+				            ;
+				        `;
+						break;
+
+					case "b":
+						query = `
+				            UPDATE docentes SET
+					            nombres_d = '${req.query.nombres}', 
+					            apellidos_d = '${req.query.apellidos}', 
+					            cedula_d = ${req.query.cedula}, 
+					            genero_d = '${req.query.genero}',
+					            user_d = '${req.query.genero}'
+					            ${newPass}
+				            WHERE id_d = ${req.query.id} 
+				            AND NOT flag_d = 'b' 
+				            AND NOT flag_d = 'a'
+				            ;
+				        `;
+						break;
+
+					default:
+						res.status(403).send("No tienes permiso");
+						break;
+				}
 				mysql.query(query)
 		        .then( s => {
 					res.status(200).send(s);
@@ -119,11 +149,30 @@ module.exports = mysql => {
 		        });
 			},
 			"delete": (req, res) => {
-				console.log("aqui toy")
 				let tokenDecoded = req.data;
-				query = `
-		            DELETE FROM representantes WHERE id_r = ${req.query.id};
-		        `;
+				switch( tokenDecoded.flag ) {
+					case "a":
+						query = `
+				            DELETE FROM docentes WHERE id_d = ${req.query.id} 
+				            AND NOT id_d = ${tokenDecoded.id};
+				        `;
+						break;
+
+					case "b":
+						query = `
+							DELETE FROM docentes
+				            WHERE id_d = ${req.query.id} 
+				            AND NOT id_d = ${tokenDecoded.id} 
+				            AND NOT flag_d = 'b' 
+				            AND NOT flag_d = 'a'
+				            ;
+				        `;
+						break;
+
+					default:
+						res.status(403).send("No tienes permiso");
+						break;
+				}
 				mysql.query(query)
 		        .then( s => {
 					res.status(200).send(s);
@@ -204,7 +253,6 @@ module.exports = mysql => {
 		        });
 			},
 			"delete": (req, res) => {
-				console.log("aqui toy")
 				let tokenDecoded = req.data;
 				query = `
 		            DELETE FROM representantes WHERE id_r = ${req.query.id};

@@ -26,6 +26,8 @@ app.controller("LoginController", function ($scope, $http, $window) {
 	if (sessionStorage.token && sessionStorage.nombres && sessionStorage.apellidos) {
 		$scope.nombre = sessionStorage.nombres.split(" ")[0] + ' ' + sessionStorage.apellidos[0];
 		$scope.autentificado = true;
+		$scope.type = sessionStorage.type;
+		$scope.flag = sessionStorage.flag;
 		console.log('Success ' + sessionStorage.datos);
 	} else {
 		sessionStorage.clear();
@@ -49,6 +51,8 @@ app.controller("LoginController", function ($scope, $http, $window) {
 			sessionStorage.token = data.token;
 			sessionStorage.nombres = data.nombres;
 			sessionStorage.apellidos = data.apellidos;
+			sessionStorage.type = data.type;
+			sessionStorage.flag = data.flag;
 			$scope.autentificado = true;
 			console.log(data);
 		}).error(function (e) {

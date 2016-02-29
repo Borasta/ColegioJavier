@@ -10,7 +10,8 @@ module.exports = mysql => {
 				query = `
 		            SELECT id_e as id,
 		            	nombres_e as nombres,
-			            apellidos_e as apellidos
+			            apellidos_e as apellidos,
+			            flag_e as flag
 		            FROM estudiantes
 		            WHERE id_e = ${tokenDecoded.id};
 		        `;
@@ -19,7 +20,8 @@ module.exports = mysql => {
 				query = `
 		            SELECT id_d as id,
 		            	nombres_d as nombres,
-			            apellidos_d as apellidos
+			            apellidos_d as apellidos,
+			            flag_e as flag
 		            FROM docentes
 		            WHERE id_d = ${tokenDecoded.id};
 		        `;
@@ -30,7 +32,9 @@ module.exports = mysql => {
 		    		let data =  {
 		    			"token": req.params.token,
 		    			"nombres": row[0].nombres,
-		    			"apellidos": row[0].apellidos
+		    			"apellidos": row[0].apellidos,
+		    			"type": tokenDecoded.type,
+		    			"flag": row[0].flag
 		    		};
 		    		res.status(200).send(data);
 		    	}
@@ -83,7 +87,9 @@ module.exports = mysql => {
 		    		let data =  {
 		    			"token": token,
 		    			"nombres": row[0].nombres,
-		    			"apellidos": row[0].apellidos
+		    			"apellidos": row[0].apellidos,
+		    			"type": userData.type,
+		    			"flag": row[0].flag
 		    		};
 		    		res.status(200).send(data);
 		    	}

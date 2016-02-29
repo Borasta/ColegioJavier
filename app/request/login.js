@@ -13,16 +13,18 @@ module.exports = function (mysql) {
 		"get": function get(req, res) {
 			var tokenDecoded = req.data;
 			if (tokenDecoded.type === "e") {
-				query = "\n\t\t            SELECT id_e as id,\n\t\t            \tnombres_e as nombres,\n\t\t\t            apellidos_e as apellidos\n\t\t            FROM estudiantes\n\t\t            WHERE id_e = " + tokenDecoded.id + ";\n\t\t        ";
+				query = "\n\t\t            SELECT id_e as id,\n\t\t            \tnombres_e as nombres,\n\t\t\t            apellidos_e as apellidos,\n\t\t\t            flag_e as flag\n\t\t            FROM estudiantes\n\t\t            WHERE id_e = " + tokenDecoded.id + ";\n\t\t        ";
 			} else if (tokenDecoded.type === "d") {
-				query = "\n\t\t            SELECT id_d as id,\n\t\t            \tnombres_d as nombres,\n\t\t\t            apellidos_d as apellidos\n\t\t            FROM docentes\n\t\t            WHERE id_d = " + tokenDecoded.id + ";\n\t\t        ";
+				query = "\n\t\t            SELECT id_d as id,\n\t\t            \tnombres_d as nombres,\n\t\t\t            apellidos_d as apellidos,\n\t\t\t            flag_e as flag\n\t\t            FROM docentes\n\t\t            WHERE id_d = " + tokenDecoded.id + ";\n\t\t        ";
 			}
 			mysql.query(query).then(function (row) {
 				if (row.length >= 1) {
 					var data = {
 						"token": req.params.token,
 						"nombres": row[0].nombres,
-						"apellidos": row[0].apellidos
+						"apellidos": row[0].apellidos,
+						"type": tokenDecoded.type,
+						"flag": row[0].flag
 					};
 					res.status(200).send(data);
 				}
@@ -57,7 +59,9 @@ module.exports = function (mysql) {
 					var data = {
 						"token": token,
 						"nombres": row[0].nombres,
-						"apellidos": row[0].apellidos
+						"apellidos": row[0].apellidos,
+						"type": userData.type,
+						"flag": row[0].flag
 					};
 					res.status(200).send(data);
 				}
