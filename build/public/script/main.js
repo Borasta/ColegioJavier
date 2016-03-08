@@ -313,8 +313,6 @@ app.controller('DocenteController', ($scope, $http, $window) => {
 		}
 	}
 
-	$scope.addNotas = () => {
-		
-	}
+	$scope.addNotas = () => { }
 
 });

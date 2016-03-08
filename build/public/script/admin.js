@@ -1,1 +1,1 @@
-let app = angular.module("MyApp", []);
+let app = angular.module("MyApp", [ ]);

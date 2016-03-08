@@ -63,7 +63,6 @@ app.controller('Alumnos', function ($scope, $http, $window) {
 	$scope.radio = "c";
 
 	$scope.getGraSec = function () {
-		// SELECT DISTINCT grado FROM grados
 		$http({
 			"method": "GET",
 			"url": "/gradossecciones"
