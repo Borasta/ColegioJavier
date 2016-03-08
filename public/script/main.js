@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module("MyApp", []);
+var app = angular.module("MyApp", ['ui.materialize']);
 
 app.config(['$httpProvider', function ($httpProvider) {
 	$httpProvider.interceptors.push(['$q', function ($q) {

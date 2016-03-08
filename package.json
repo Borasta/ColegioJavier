@@ -4,8 +4,9 @@
   "description": "Pagina web del Colegio Javier",
   "main": "server.js",
   "scripts": {
-    "test": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "nodemon server.js",
+    "babel": "babel ./build -d ./ -w"
   },
   "repository": {
     "type": "git",

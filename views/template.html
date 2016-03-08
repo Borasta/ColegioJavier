@@ -10,15 +10,16 @@
     <!-- JQuery -->
     <script src="/jquery/dist/jquery.min.js"></script>
 
-
-    <!-- Materialize -->
-    <link rel="stylesheet" href="/Materialize/dist/css/materialize.min.css">
-    <script src="/Materialize/dist/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     
     <!-- Angular -->
     <script src="/angular/angular.min.js"></script>
+    <script src="/angular-materialize/src/angular-materialize.js"></script>
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="/Materialize/dist/css/materialize.min.css">
+    <script src="/Materialize/dist/js/materialize.min.js"></script>
 
     <link rel="stylesheet" href="/style/main.css">
     <script src="/script/init.js"></script>
@@ -33,23 +34,13 @@
                 <a href="/" class="brand-logo center" href="#">Colegio Javier</a>
 
                 <ul class="left hide-on-med-and-down">
-                    <li class="active"><a href="#">Inicio</a></li>
-                    <li class=""><a href="#">¿Quienes Somos?</a></li>
-                    <li class=""><a href="#">Contactanos</a></li>
+                    <li class=""><a href="/">Inicio</a></li>
+                    <li class=""><a href="/quienes-somos">¿Quienes Somos?</a></li>
+                    <li class=""><a href="/contactanos">Contactanos</a></li>
                 </ul>
 
                 <ul class="right">
-                    <li class="hide-on-med-and-down"><a href="#">Noticias</a></li>
-                    <li class="hide-on-med-and-down">
-                        <a class="dropdown-button" href="#!" data-activates="estdrop1">Estudiantes
-                            <i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                        <ul id="estdrop1" class="dropdown-content">
-                            <li class="blue lighten-5"><a href="#">Educacion Inicial</a></li>
-                            <li class="blue lighten-5"><a href="#">Primaria</a></li>
-                            <li class="blue lighten-5"><a href="#">Diversificado</a></li>
-                        </ul>
-                    </li>
+                    <li class="hide-on-med-and-down"><a href="/noticias">Noticias</a></li>
                     <li class="">
                         <!-- DESAUTENTIFICADO -->
                         <a class="modal-trigger" ng-hide="autentificado" href="#modal1">

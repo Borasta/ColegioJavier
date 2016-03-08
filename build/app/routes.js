@@ -86,28 +86,25 @@ module.exports = router => {
 				values: {}
 			});
 		else if( req.data.type === "d" )
-			if( req.data.flag === "a" )
-				render({
-					res: res,
-					tmp: `${views}/template.html`,
-					ctn: `${views}/panel_admin.html`,
-					values: {}
-				});
-			else if( req.data.flag === "b" ) {
-				render({
-					res: res,
-					tmp: `${views}/template.html`,
-					ctn: `${views}/panel_moderador.html`,
-					values: {}
-				});
-			}
-			else if( req.data.flag === "c" ) {
-				render({
-					res: res,
-					tmp: `${views}/template.html`,
-					ctn: `${views}/panel_docente.html`,
-					values: {}
-				});
+			switch( req.data.flag ) {
+				case "a":
+				case "b":
+					render({
+						res: res,
+						tmp: `${views}/template.html`,
+						ctn: `${views}/panel_admin.html`,
+						values: {}
+					});
+					break;
+
+				case "c":
+					render({
+						res: res,
+						tmp: `${views}/template.html`,
+						ctn: `${views}/panel_docente.html`,
+						values: {}
+					});
+					break;
 			}
 		else {
 			res.status(401).send({"message": "Error, ingrese nuevamente"})

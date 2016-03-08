@@ -5,7 +5,6 @@ import configure from "./config";
 const TOKEN_SECRET = configure.TOKEN_SECRET;
 
 module.exports.authenticated = (req, res, next) => {
-	console.log(req.headers.authorization);
 	if( !req.headers.authorization && !req.params.token) {
 		return res
 			.status(403)
@@ -31,7 +30,6 @@ module.exports.authenticated = (req, res, next) => {
 }
 
 module.exports.authDocente = (req, res, next) => {
-	console.log(req.headers.authorization);
 	if( !req.headers.authorization && !req.params.token) {
 		return res
 			.status(403)
@@ -65,7 +63,6 @@ module.exports.authDocente = (req, res, next) => {
 }
 
 module.exports.authEstudiante = (req, res, next) => {
-	console.log(req.headers.authorization);
 	if( !req.headers.authorization && !req.params.token) {
 		return res
 			.status(403)

@@ -84,15 +84,15 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="nombres_d" ng-model="create.user" type="text" class="validate">
-                                <label for="nombres_d">
+                                <input id="user_d" ng-model="create.user" type="text" class="validate">
+                                <label for="user_d">
                                     Usuario
                                     <i class="material-icons left">person</i>
                                 </label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="apellidos_d" type="tel" ng-model="create.pass" class="validate">
-                                <label for="apellidos_d">
+                                <input id="pass_d" type="tel" ng-model="create.pass" class="validate">
+                                <label for="pass_d">
                                     Contraseña
                                     <i class="material-icons left">lock_outline</i>
                                 </label>
@@ -216,16 +216,194 @@
                 </div>
                 
                 <div class="row" ng-show="radio == 'c'">
-                    Hola yo creo
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="nombres_e" ng-model="create.nombres" type="text" class="validate">
+                                <label for="nombres_e">Nombres</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="apellidos_e" type="tel" ng-model="create.apellidos" class="validate">
+                                <label for="apellidos_e">Apellidos</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">assignment_ind</i>
+                                <input id="cedula_e" type="text" ng-model="create.cedula" class="validate">
+                                <label for="cedula_e">Cedula</label>
+                            </div>
+                            <br>
+                            <div class="col s3">
+                                <input class="with-gap" name="genero_e" ng-model="create.genero" value="m" type="radio" id="generoM"/>
+                                <label for="generoM">Varon</label>
+                            </div>
+
+                            <div class="col s3">
+                                <input class="with-gap" name="genero_e" ng-model="create.genero" value="f" type="radio" id="generoF"/>
+                                <label for="generoF">Hembra</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                <label for="To" >To : </label> 
+                                <input type="date" id="To" class="datepicker1">
+                            </div>
+                            <br>
+                            <div class="col s3">
+                                <div class="input-field">
+                                    <select ng-model="create.grado" material-select watch>
+                                        <option value="" disabled selected>Grados</option>
+                                        <option ng-repeat="grado in grados" ng-value="grado.grado">{{grado.grado}}</option>
+                                    </select>
+                                    <label>Grado</label>
+                                </div>
+                            </div>
+
+                            <div class="col s3">
+                                <div class="input-field">
+                                    <select ng-model="create.seccion" material-select watch>
+                                        <option value="" disabled selected>Secciones</option>
+                                        <option ng-repeat="seccion in secciones" ng-value="seccion.seccion">{{seccion.seccion}}</option>
+                                    </select>
+                                    <label>Seccion</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="nacimiento" type="text" ng-model="create.direccion" class="validate">
+                                <label for="nacimiento">Direccion</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="user_e" ng-model="create.user" type="text" class="validate">
+                                <label for="user_e">
+                                    Usuario
+                                    <i class="material-icons left">person</i>
+                                </label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="pass_e" type="text" ng-model="create.pass" class="validate">
+                                <label for="pass_e">
+                                    Contraseña
+                                    <i class="material-icons left">lock_outline</i>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a ng-click="crear()" class="waves-effect waves-light btn-large col s12">CREAR</a>
+                        </div>
+                    </form>
                 </div>
                 <div class="row" ng-show="radio == 'l'">
-                    Hola yo leo
-                </div>
-                <div class="row" ng-show="radio == 'm'">
-                    Hola yo actualizo
-                </div>
-                <div class="row" ng-show="radio == 'b'">
-                    Hola yo elimino
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s4">
+                                <select ng-model="read.type">
+                                    <option value="" disabled selected>Buscar por : ?</option>
+                                    <option value="nombres">Nombre</option>
+                                    <option value="apellidos">Apellido</option>
+                                    <option value="grado">Grado</option>
+                                </select>
+                                <label>Tipo</label>
+                            </div>
+                            <div ng-hide="read.type == 'grado'" class="input-field col s5">
+                                <input type="text" ng-model="read.data" id="findDL" value="" />
+                                <label for="findDL">Buscador</label>
+                            </div>
+                            <div ng-show="read.type == 'grado'" class="col s5">
+                                <div class="input-field">
+                                    <select ng-model="read.data" material-select watch>
+                                        <option value="" disabled selected>Grados</option>
+                                        <option ng-repeat="grado in grados" ng-value="grado.grado">{{grado.grado}}</option>
+                                    </select>
+                                    <label>Grado</label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col s3">
+                                <a class="waves-effect waves-light btn-large" ng-click="leer()">Buscar</a>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="center-align" ng-hide="result || !wait">
+                        <div class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table ng-show="result" class="white responsive-table highlight z-depth-2">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Cedula</th>
+                                <th>Usuario</th>
+                                <th>Genero</th>
+                                <th>Nueva Contraseña</th>
+                                <th ng-show="flag === 'a'">Nivel</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in result">
+                                <td>{{row.id}}</td>
+                                <td><input type="text" ng-model="row.nombres"></td>
+                                <td><input type="text" ng-model="row.apellidos"></td>
+                                <td><input type="text" ng-model="row.cedula"></td>
+                                <td><input type="text" ng-model="row.usuario"></td>
+                                <td>
+                                    <div>
+                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="m" ng-checked="row.genero == 'm' ? true : false" id="doM{{row.id}}">
+                                        <label for="doM{{row.id}}">Hombre</label>
+                                    </div>
+                                    <div>
+                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="f" ng-checked="row.genero === 'f' ? true : false" id="doF{{row.id}}">
+                                        <label for="doF{{row.id}}">Mujer</label>
+                                    </div>
+                                </td>
+                                <td><input type="text" ng-model="row.pass"></td>
+                                <td ng-show="flag === 'a'">
+                                    <div>
+                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="c" type="radio" id="docenteRadio{{row.id}}"/>
+                                        <label for="docenteRadio{{row.id}}">Docente</label>
+                                    </div>
+                                    <div>
+                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="b" type="radio" id="moderadorRadio{{row.id}}"/>
+                                        <label for="moderadorRadio{{row.id}}">Mod</label>
+                                    </div>
+                                    <div>
+                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="a" type="radio" id="adminRadio{{row.id}}"/>
+                                        <label for="adminRadio{{row.id}}">Admin</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn-floating btn waves-effect waves-light green z-depth-3" ng-click="modificar(row)">
+                                        <i class="small material-icons">build</i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn-floating btn waves-effect waves-light red z-depth-3" ng-click="borrar(row.id)">
+                                        <i class="small material-icons">delete</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 

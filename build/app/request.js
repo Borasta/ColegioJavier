@@ -27,39 +27,42 @@ module.exports = (router, mysql) => {
 
 	router.route("/docentes")
 	.get( middleware.authDocente, Moderador.docentes.get )
-	.post( middleware.authenticated, Moderador.docentes.post )
-	.put( middleware.authenticated, Moderador.docentes.put )
-	.delete( middleware.authenticated, Moderador.docentes.delete);
+	.post( middleware.authDocente, Moderador.docentes.post )
+	.put( middleware.authDocente, Moderador.docentes.put )
+	.delete( middleware.authDocente, Moderador.docentes.delete);
 
 	router.route("/alumnos")
-	.get( middleware.authenticated, Moderador.alumnos.get )
-	.post( middleware.authenticated, Moderador.alumnos.post )
-	.put( middleware.authenticated, Moderador.alumnos.put )
-	.delete( middleware.authenticated, Moderador.alumnos.delete );
+	.get( middleware.authDocente, Moderador.alumnos.get )
+	.post( middleware.authDocente, Moderador.alumnos.post )
+	.put( middleware.authDocente, Moderador.alumnos.put )
+	.delete( middleware.authDocente, Moderador.alumnos.delete );
 
 	router.route("/representantes")
-	.get( middleware.authenticated, Moderador.representantes.get )
-	.post( middleware.authenticated, Moderador.representantes.post )
-	.put( middleware.authenticated, Moderador.representantes.put )
-	.delete( middleware.authenticated, Moderador.representantes.delete );
+	.get( middleware.authDocente, Moderador.representantes.get )
+	.post( middleware.authDocente, Moderador.representantes.post )
+	.put( middleware.authDocente, Moderador.representantes.put )
+	.delete( middleware.authDocente, Moderador.representantes.delete );
 
 	router.route("/materias")
-	.get( middleware.authenticated, Moderador.materias.get )
-	.post( middleware.authenticated, Moderador.materias.post )
-	.put( middleware.authenticated, Moderador.materias.put )
-	.delete( middleware.authenticated, Moderador.materias.delete );	
+	.get( middleware.authDocente, Moderador.materias.get )
+	.post( middleware.authDocente, Moderador.materias.post )
+	.put( middleware.authDocente, Moderador.materias.put )
+	.delete( middleware.authDocente, Moderador.materias.delete );	
 
 	router.route("/horarios")
-	.get( middleware.authenticated, Moderador.horarios.get )
-	.post( middleware.authenticated, Moderador.horarios.post )
-	.put( middleware.authenticated, Moderador.horarios.put )
-	.delete( middleware.authenticated, Moderador.horarios.delete );
+	.get( middleware.authDocente, Moderador.horarios.get )
+	.post( middleware.authDocente, Moderador.horarios.post )
+	.put( middleware.authDocente, Moderador.horarios.put )
+	.delete( middleware.authDocente, Moderador.horarios.delete );
 
 	router.route("/cursos")
-	.get( middleware.authenticated, Moderador.cursos.get )
-	.post( middleware.authenticated, Moderador.cursos.post )
-	.put( middleware.authenticated, Moderador.cursos.put )
+	.get( middleware.authDocente, Moderador.cursos.get )
+	.post( middleware.authDocente, Moderador.cursos.post )
+	.put( middleware.authDocente, Moderador.cursos.put )
 	.delete( middleware.authenticated, Moderador.cursos.delete );
+
+	router.route("/gradossecciones")
+	.get( middleware.authDocente, Moderador.otros.getGradosSecciones )
 
 	return router;
 }

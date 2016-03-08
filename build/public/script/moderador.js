@@ -70,6 +70,25 @@ app.controller('Alumnos', ($scope, $http, $window) => {
 	
 	$scope.radio = "c";
 
+	$scope.getGraSec = () => {
+		// SELECT DISTINCT grado FROM grados
+		$http({
+			"method": "GET",
+			"url": `/gradossecciones`
+		}).success( data => {
+			$scope.grados = data.grados;
+			$scope.secciones = data.secciones;
+		}).error( e => {
+			console.log(e)
+		});
+	}
+
+	$scope.getGraSec();
+
+	$scope.updateSelect = () => {
+		$('.selectUpdate').material_select("update");
+	}
+
 });
 
 app.controller('Familias', ($scope, $http, $window) => {

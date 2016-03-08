@@ -29,17 +29,19 @@ module.exports = function (router, mysql) {
 	router.post("/perfil/docente/alumnos", _middleware2.default.authDocente, Docente.getAlumnos);
 	router.post("/perfil/docente/horario", _middleware2.default.authDocente, Docente.getHorario);
 
-	router.route("/docentes").get(_middleware2.default.authDocente, Moderador.docentes.get).post(_middleware2.default.authenticated, Moderador.docentes.post).put(_middleware2.default.authenticated, Moderador.docentes.put).delete(_middleware2.default.authenticated, Moderador.docentes.delete);
+	router.route("/docentes").get(_middleware2.default.authDocente, Moderador.docentes.get).post(_middleware2.default.authDocente, Moderador.docentes.post).put(_middleware2.default.authDocente, Moderador.docentes.put).delete(_middleware2.default.authDocente, Moderador.docentes.delete);
 
-	router.route("/alumnos").get(_middleware2.default.authenticated, Moderador.alumnos.get).post(_middleware2.default.authenticated, Moderador.alumnos.post).put(_middleware2.default.authenticated, Moderador.alumnos.put).delete(_middleware2.default.authenticated, Moderador.alumnos.delete);
+	router.route("/alumnos").get(_middleware2.default.authDocente, Moderador.alumnos.get).post(_middleware2.default.authDocente, Moderador.alumnos.post).put(_middleware2.default.authDocente, Moderador.alumnos.put).delete(_middleware2.default.authDocente, Moderador.alumnos.delete);
 
-	router.route("/representantes").get(_middleware2.default.authenticated, Moderador.representantes.get).post(_middleware2.default.authenticated, Moderador.representantes.post).put(_middleware2.default.authenticated, Moderador.representantes.put).delete(_middleware2.default.authenticated, Moderador.representantes.delete);
+	router.route("/representantes").get(_middleware2.default.authDocente, Moderador.representantes.get).post(_middleware2.default.authDocente, Moderador.representantes.post).put(_middleware2.default.authDocente, Moderador.representantes.put).delete(_middleware2.default.authDocente, Moderador.representantes.delete);
 
-	router.route("/materias").get(_middleware2.default.authenticated, Moderador.materias.get).post(_middleware2.default.authenticated, Moderador.materias.post).put(_middleware2.default.authenticated, Moderador.materias.put).delete(_middleware2.default.authenticated, Moderador.materias.delete);
+	router.route("/materias").get(_middleware2.default.authDocente, Moderador.materias.get).post(_middleware2.default.authDocente, Moderador.materias.post).put(_middleware2.default.authDocente, Moderador.materias.put).delete(_middleware2.default.authDocente, Moderador.materias.delete);
 
-	router.route("/horarios").get(_middleware2.default.authenticated, Moderador.horarios.get).post(_middleware2.default.authenticated, Moderador.horarios.post).put(_middleware2.default.authenticated, Moderador.horarios.put).delete(_middleware2.default.authenticated, Moderador.horarios.delete);
+	router.route("/horarios").get(_middleware2.default.authDocente, Moderador.horarios.get).post(_middleware2.default.authDocente, Moderador.horarios.post).put(_middleware2.default.authDocente, Moderador.horarios.put).delete(_middleware2.default.authDocente, Moderador.horarios.delete);
 
-	router.route("/cursos").get(_middleware2.default.authenticated, Moderador.cursos.get).post(_middleware2.default.authenticated, Moderador.cursos.post).put(_middleware2.default.authenticated, Moderador.cursos.put).delete(_middleware2.default.authenticated, Moderador.cursos.delete);
+	router.route("/cursos").get(_middleware2.default.authDocente, Moderador.cursos.get).post(_middleware2.default.authDocente, Moderador.cursos.post).put(_middleware2.default.authDocente, Moderador.cursos.put).delete(_middleware2.default.authenticated, Moderador.cursos.delete);
+
+	router.route("/gradossecciones").get(_middleware2.default.authDocente, Moderador.otros.getGradosSecciones);
 
 	return router;
 };

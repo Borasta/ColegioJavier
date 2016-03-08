@@ -1,4 +1,4 @@
-let app = angular.module("MyApp", []);
+let app = angular.module("MyApp", ['ui.materialize']);
 
 app.config(['$httpProvider', function($httpProvider) {
   	$httpProvider.interceptors.push(['$q', function($q) {

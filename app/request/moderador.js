@@ -155,6 +155,27 @@ module.exports = function (mysql) {
 			"post": function post(req, res) {},
 			"put": function put(req, res) {},
 			"delete": function _delete(req, res) {}
+		},
+		"otros": {
+			"getGradosSecciones": function getGradosSecciones(req, res) {
+				var tokenDecoded = req.data;
+				query = "\n\t\t            SELECT DISTINCT grado FROM grados\n\t\t        ";
+				mysql.query(query).then(function (grados) {
+					var data = {
+						"grados": grados
+					};
+					query = "\n\t\t\t            SELECT seccion FROM secciones\n\t\t\t        ";
+					mysql.query(query).then(function (secciones) {
+						data.secciones = secciones;
+						console.log(data);
+						res.status(200).send(data);
+					}).catch(function (error) {
+						res.status(404).send(error);
+					});
+				}).catch(function (error) {
+					res.status(404).send(error);
+				});
+			}
 		}
 	};
 };

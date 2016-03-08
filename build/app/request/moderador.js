@@ -306,6 +306,33 @@ module.exports = mysql => {
 			"delete": (req, res) => {
 			
 			}
+		},
+		"otros": {
+			"getGradosSecciones": (req, res) => {
+				let tokenDecoded = req.data;
+				query = `
+		            SELECT DISTINCT grado FROM grados
+		        `;
+				mysql.query(query)
+		        .then( grados => {
+		        	var data = {
+		        		"grados": grados
+		        	}
+					query = `
+			            SELECT seccion FROM secciones
+			        `;
+					mysql.query(query)
+			        .then( secciones => {
+			        	data.secciones = secciones;
+		        		console.log(data);
+						res.status(200).send(data);
+			        }).catch(error => {
+			        	res.status(404).send(error);
+			        });
+		        }).catch(error => {
+		        	res.status(404).send(error);
+		        });
+			}
 		}
 	}
 }

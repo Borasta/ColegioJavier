@@ -95,25 +95,25 @@ module.exports = function (router) {
 			tmp: views + "/template.html",
 			ctn: views + "/panel_estudiante.html",
 			values: {}
-		});else if (req.data.type === "d") if (req.data.flag === "a") (0, _render2.default)({
-			res: res,
-			tmp: views + "/template.html",
-			ctn: views + "/panel_admin.html",
-			values: {}
-		});else if (req.data.flag === "b") {
-			(0, _render2.default)({
-				res: res,
-				tmp: views + "/template.html",
-				ctn: views + "/panel_moderador.html",
-				values: {}
-			});
-		} else if (req.data.flag === "c") {
-			(0, _render2.default)({
-				res: res,
-				tmp: views + "/template.html",
-				ctn: views + "/panel_docente.html",
-				values: {}
-			});
+		});else if (req.data.type === "d") switch (req.data.flag) {
+			case "a":
+			case "b":
+				(0, _render2.default)({
+					res: res,
+					tmp: views + "/template.html",
+					ctn: views + "/panel_admin.html",
+					values: {}
+				});
+				break;
+
+			case "c":
+				(0, _render2.default)({
+					res: res,
+					tmp: views + "/template.html",
+					ctn: views + "/panel_docente.html",
+					values: {}
+				});
+				break;
 		} else {
 			res.status(401).send({ "message": "Error, ingrese nuevamente" });
 		}

@@ -17,7 +17,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var TOKEN_SECRET = _config2.default.TOKEN_SECRET;
 
 module.exports.authenticated = function (req, res, next) {
-	console.log(req.headers.authorization);
 	if (!req.headers.authorization && !req.params.token) {
 		return res.status(403).send({
 			"message": "Tu peticion no tiene cabezera de autentificacion"
@@ -36,7 +35,6 @@ module.exports.authenticated = function (req, res, next) {
 };
 
 module.exports.authDocente = function (req, res, next) {
-	console.log(req.headers.authorization);
 	if (!req.headers.authorization && !req.params.token) {
 		return res.status(403).send({
 			"message": "Tu peticion no tiene cabezera de autentificacion"
@@ -59,7 +57,6 @@ module.exports.authDocente = function (req, res, next) {
 };
 
 module.exports.authEstudiante = function (req, res, next) {
-	console.log(req.headers.authorization);
 	if (!req.headers.authorization && !req.params.token) {
 		return res.status(403).send({
 			"message": "Tu peticion no tiene cabezera de autentificacion"
