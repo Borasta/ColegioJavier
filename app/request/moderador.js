@@ -20,7 +20,6 @@ module.exports = function (mysql) {
 						res.status(403).send("No tienes permiso");
 						break;
 				}
-				console.log(query);
 				mysql.query(query).then(function (docentes) {
 					console.log(docentes);
 					res.status(200).send(docentes);
@@ -32,7 +31,7 @@ module.exports = function (mysql) {
 				var tokenDecoded = req.data;
 				switch (tokenDecoded.flag) {
 					case "a":
-						query = "\n\t\t\t\t            INSERT INTO docentes VALUES ( \n\t\t\t\t\t            null, \n\t\t\t\t\t            '" + req.body.nombres + "', \n\t\t\t\t\t            '" + req.body.apellidos + "', \n\t\t\t\t\t            " + req.body.cedula + ", \n\t\t\t\t\t            '" + req.body.genero + "',\n\t\t\t\t\t            '" + req.body.user + "',\n\t\t\t\t\t            '" + req.body.pass + "',\n\t\t\t\t\t            '" + req.body.flag + "',\n\t\t\t\t            );\n\t\t\t\t        ";
+						query = "\n\t\t\t\t            INSERT INTO docentes VALUES ( \n\t\t\t\t\t            null, \n\t\t\t\t\t            '" + req.body.nombres + "', \n\t\t\t\t\t            '" + req.body.apellidos + "', \n\t\t\t\t\t            " + req.body.cedula + ", \n\t\t\t\t\t            '" + req.body.genero + "',\n\t\t\t\t\t            '" + req.body.user + "',\n\t\t\t\t\t            '" + req.body.pass + "',\n\t\t\t\t\t            '" + req.body.flag + "'\n\t\t\t\t            );\n\t\t\t\t        ";
 						break;
 
 					case "b":
@@ -54,11 +53,11 @@ module.exports = function (mysql) {
 				var newPass = req.query.pass ? ", pass_d = '" + req.query.pass + "'" : "";
 				switch (tokenDecoded.flag) {
 					case "a":
-						query = "\n\t\t\t\t            UPDATE docentes SET\n\t\t\t\t\t            nombres_d = '" + req.query.nombres + "', \n\t\t\t\t\t            apellidos_d = '" + req.query.apellidos + "', \n\t\t\t\t\t            cedula_d = " + req.query.cedula + ", \n\t\t\t\t\t            genero_d = '" + req.query.genero + "',\n\t\t\t\t\t            user_d = '" + req.query.genero + "'\n\t\t\t\t\t            " + newPass + ",\n\t\t\t\t\t            flag_d = '" + req.query.flag + "'\n\t\t\t\t            WHERE id_d = " + req.query.id + "\n\t\t\t\t            ;\n\t\t\t\t        ";
+						query = "\n\t\t\t\t            UPDATE docentes SET\n\t\t\t\t\t            nombres_d = '" + req.query.nombres + "', \n\t\t\t\t\t            apellidos_d = '" + req.query.apellidos + "', \n\t\t\t\t\t            cedula_d = " + req.query.cedula + ", \n\t\t\t\t\t            genero_d = '" + req.query.genero + "',\n\t\t\t\t\t            user_d = '" + req.query.usuario + "'\n\t\t\t\t\t            " + newPass + ",\n\t\t\t\t\t            flag_d = '" + req.query.flag + "'\n\t\t\t\t            WHERE id_d = " + req.query.id + "\n\t\t\t\t            ;\n\t\t\t\t        ";
 						break;
 
 					case "b":
-						query = "\n\t\t\t\t            UPDATE docentes SET\n\t\t\t\t\t            nombres_d = '" + req.query.nombres + "', \n\t\t\t\t\t            apellidos_d = '" + req.query.apellidos + "', \n\t\t\t\t\t            cedula_d = " + req.query.cedula + ", \n\t\t\t\t\t            genero_d = '" + req.query.genero + "',\n\t\t\t\t\t            user_d = '" + req.query.genero + "'\n\t\t\t\t\t            " + newPass + "\n\t\t\t\t            WHERE id_d = " + req.query.id + " \n\t\t\t\t            AND NOT flag_d = 'b' \n\t\t\t\t            AND NOT flag_d = 'a'\n\t\t\t\t            ;\n\t\t\t\t        ";
+						query = "\n\t\t\t\t            UPDATE docentes SET\n\t\t\t\t\t            nombres_d = '" + req.query.nombres + "', \n\t\t\t\t\t            apellidos_d = '" + req.query.apellidos + "', \n\t\t\t\t\t            cedula_d = " + req.query.cedula + ", \n\t\t\t\t\t            genero_d = '" + req.query.genero + "',\n\t\t\t\t\t            user_d = '" + req.query.usuario + "'\n\t\t\t\t\t            " + newPass + "\n\t\t\t\t            WHERE id_d = " + req.query.id + " \n\t\t\t\t            AND NOT flag_d = 'b' \n\t\t\t\t            AND NOT flag_d = 'a'\n\t\t\t\t            ;\n\t\t\t\t        ";
 						break;
 
 					default:

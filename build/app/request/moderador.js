@@ -49,7 +49,6 @@ module.exports = mysql => {
 						res.status(403).send("No tienes permiso");
 						break;
 				}
-				console.log(query);
 				mysql.query(query)
 		        .then( docentes => {
 		        	console.log(docentes)
@@ -71,7 +70,7 @@ module.exports = mysql => {
 					            '${req.body.genero}',
 					            '${req.body.user}',
 					            '${req.body.pass}',
-					            '${req.body.flag}',
+					            '${req.body.flag}'
 				            );
 				        `;
 						break;
@@ -113,7 +112,7 @@ module.exports = mysql => {
 					            apellidos_d = '${req.query.apellidos}', 
 					            cedula_d = ${req.query.cedula}, 
 					            genero_d = '${req.query.genero}',
-					            user_d = '${req.query.genero}'
+					            user_d = '${req.query.usuario}'
 					            ${newPass},
 					            flag_d = '${req.query.flag}'
 				            WHERE id_d = ${req.query.id}
@@ -128,7 +127,7 @@ module.exports = mysql => {
 					            apellidos_d = '${req.query.apellidos}', 
 					            cedula_d = ${req.query.cedula}, 
 					            genero_d = '${req.query.genero}',
-					            user_d = '${req.query.genero}'
+					            user_d = '${req.query.usuario}'
 					            ${newPass}
 				            WHERE id_d = ${req.query.id} 
 				            AND NOT flag_d = 'b' 
