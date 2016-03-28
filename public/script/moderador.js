@@ -62,19 +62,30 @@ app.controller('Alumnos', function ($scope, $http, $window) {
 
 	$scope.radio = "c";
 
-	$scope.getGraSec = function () {
+	$scope.getGrados = function () {
 		$http({
 			"method": "GET",
-			"url": "/gradossecciones"
+			"url": "/grados"
 		}).success(function (data) {
 			$scope.grados = data.grados;
+		}).error(function (e) {
+			console.log(e);
+		});
+	};
+
+	$scope.getSecciones = function () {
+		$http({
+			"method": "GET",
+			"url": "/grados"
+		}).success(function (data) {
 			$scope.secciones = data.secciones;
 		}).error(function (e) {
 			console.log(e);
 		});
 	};
 
-	$scope.getGraSec();
+	$scope.getGrados();
+	$scope.getSecciones();
 
 	$scope.updateSelect = function () {
 		$('.selectUpdate').material_select("update");

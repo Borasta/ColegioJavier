@@ -44,6 +44,7 @@ module.exports = mysql => {
 		},
 		"post": (req, res) => {
 			let userData = req.body;
+			userData.type = req.params.token;
 			switch( userData.type ) {
 				case "e":
 					query = `
@@ -76,7 +77,7 @@ module.exports = mysql => {
 		    			{
 		    				"id": row[0].id,
 		    				"type": userData.type,
-		    				"flag": row[0].flag,
+		    				"flag": row[0].flag
 		    			}, 
 		    			{
 		        			"time": 1,
@@ -98,4 +99,4 @@ module.exports = mysql => {
 		    });
 		}
 	}
-}
+};

@@ -27,7 +27,44 @@ module.exports.authenticated = (req, res, next) => {
 
 	req.data = payload.data;
 	next();
-}
+};
+
+module.exports.authMod = (req, res, next) => {
+	if( !req.headers.authorization && !req.params.token) {
+		return res
+			.status(403)
+			.send({
+					"message": "Tu peticion no tiene cabezera de autentificacion"
+				}
+			);
+	}
+
+	let token = req.params.token ? req.params.token : req.headers.authorization;
+	// let token = req.params.token ? req.params.token : req.headers.authorization.split(" ")[1];
+	let payload = jwt.decode( token, TOKEN_SECRET );
+	if( payload.exp <= moment.unix() )
+		return res
+			.status(401)
+			.send({
+					"message": "El token ha expirado"
+				}
+			);
+
+
+	// Que sea de tipo docente, pero que no tenga el nivel c de docencia
+	if( payload.data.type === "d" && payload.data.type !== "c" ) {
+		req.data = payload.data;
+		next();
+	}
+	else {
+		return res
+			.status(401)
+			.send({
+					"message": "No tienes permiso suficientes"
+				}
+			);
+	}
+};
 
 module.exports.authDocente = (req, res, next) => {
 	if( !req.headers.authorization && !req.params.token) {
@@ -60,7 +97,7 @@ module.exports.authDocente = (req, res, next) => {
 
 	req.data = payload.data;
 	next();
-}
+};
 
 module.exports.authEstudiante = (req, res, next) => {
 	if( !req.headers.authorization && !req.params.token) {
@@ -94,4 +131,4 @@ module.exports.authEstudiante = (req, res, next) => {
 
 	req.data = payload.data;
 	next();
-}
+};

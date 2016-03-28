@@ -41,7 +41,7 @@ app.controller("LoginController", ($scope, $http, $window) => {
 		}
 
 		alert("Data enviada");
-		$http.post(`/auth/login`, 
+		$http.post(`/auth/login/${$scope.data.type}`,
 				{
 					"user": $scope.data.user, 
 					"pass": $scope.data.pass,
@@ -61,7 +61,7 @@ app.controller("LoginController", ($scope, $http, $window) => {
 				console.log(e);
 			}
 		);
-	}
+	};
 
 	$scope.logout = () => {
 		$scope.autentificado = false;
@@ -69,7 +69,7 @@ app.controller("LoginController", ($scope, $http, $window) => {
 		$scope.nombre = "";
 		sessionStorage.clear();
 		$window.location = "/";
-	}
+	};
 
 	$scope.private = path => {
 		if( sessionStorage.token !== "null") {
@@ -85,7 +85,7 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 
 	$scope.verData = self => {
 		if( !self ) {
-			$http.get(`/perfil/estudiante/data`)
+			$http.get(`/estudiantes`)
 				.success( data => {
 					console.log(data.estudiante.edad);
 					data.estudiante.edad = data.estudiante.edad.split(" ")[0];
@@ -115,11 +115,11 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 					$scope.logout();
 				});
 		}
-	}
+	};
 
 	$scope.verNotas = self => {
 		if( !self ) {
-			$http.get(`/perfil/estudiante/notas`)
+			$http.get(`/notas`)
 				.success( data => {
 					$scope.notas = [];
 					for( let i = 0; i < data.length; i++ ) {
@@ -142,12 +142,12 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 					$scope.logout();
 				});
 		}
-	}
+	};
 
 
 	$scope.verHorario = self => {
 		if( !self ) {
-			$http.get(`/perfil/estudiante/horario`)
+			$http.get(`/horarios`)
 				.success( data => {
 
 					let semanas = [
@@ -183,7 +183,7 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 						let len = semanas[i].length;
 						if( len > length )
 							length = len;
-					};
+					}
 
 					$scope.length = new Array(length);
 
@@ -194,11 +194,11 @@ app.controller('EstudianteController', ($scope, $http, $window) => {
 					$scope.logout();
 				});
 		}
-	}
+	};
 
 	$scope.verGrupos = self => {
 		if( !self ) {
-			$http.get(`/perfil/estudiante/grupos`)
+			$http.get(`/grupos`)
 				.success( data => {
 					$scope.grupos = data;
 					console.log(data);
@@ -216,7 +216,7 @@ app.controller('DocenteController', ($scope, $http, $window) => {
 
 	$http({
 		"method": "GET",
-		"url": "/perfil/docente/data"
+		"url": "/docentes"
 	}).success( data => {
 		switch( data.genero ) {
 			case "m":
@@ -231,40 +231,90 @@ app.controller('DocenteController', ($scope, $http, $window) => {
 	}).error( e => {
 		console.log(`Error`);
 		console.log(e);
-		$scope.logout();
+		// $scope.logout();
 	});
 
-	$scope.verSalones = self => {
+	$scope.verGrados = self => {
 		if( !self ) {
-			$http.post(`/perfil/docente/salones`)
-				.success( salones => {
-					$scope.salones = salones;
-					console.log(salones);
-				}).error( e => {
+			$http({
+				"url": `/grados`,
+				"method": "GET"
+			})
+				.then(grados => {
+					$scope.grados = grados.data;
+					console.log($scope.grados);
+				}, e => {
 					console.log(`Error`);
 					console.log(e);
-					$scope.logout();
+					// $scope.logout();
 				});
 		}
-	}
+	};
 
-	$scope.verAlumnos = self => {
-		if( !self ) {
-			$http.post(`/perfil/docente/alumnos`)
-				.success( salones => {
-					$scope.salones = salones;
-					console.log(salones);
-				}).error( e => {
+	$scope.verSecciones = grado => {
+		if( !$scope.secciones ) {
+			$http({
+				"method": "GET",
+				"url": `/secciones`,
+				"params": {
+					"grado": grado
+				}
+			})
+				.then(secciones => {
+					$scope.secciones = secciones.data;
+					console.log($scope.secciones);
+				}, e => {
 					console.log(`Error`);
 					console.log(e);
-					$scope.logout();
+					// $scope.logout();
 				});
 		}
-	}
+	};
+
+	$scope.verMaterias = id_gra => {
+		if( !$scope.materias ) {
+			$http({
+				"url": `/materias`,
+				"method": "GET",
+				"params": {
+					"id_gra": id_gra
+				}
+			})
+				.then(materias => {
+					$scope.materias = materias.data;
+					console.log($scope.materias);
+				}, e => {
+					console.log(`Error`);
+					console.log(e);
+					// $scope.logout();
+				});
+		}
+	};
+
+	$scope.verEstudiantes = id_m => {
+		if( !$scope.estudiantes ) {
+			$http({
+				"url": `/estudiantes`,
+				"method": "GET",
+				"params": {
+					id_gra: $scope.id_gra,
+					id_m: id_m
+				}
+			})
+				.then(estudiantes => {
+					$scope.estudiantes = estudiantes.data;
+					console.log($scope.estudiantes);
+				}, e => {
+					console.log(`Error`);
+					console.log(e);
+					// $scope.logout();
+				});
+		}
+	};
 
 	$scope.verHorario = self => {
 		if( !self ) {
-			$http.post(`/perfil/docente/horario`)
+			$http.get(`/horarios`)
 			.success( data => {
 
 				let semanas = [
@@ -300,7 +350,7 @@ app.controller('DocenteController', ($scope, $http, $window) => {
 					let len = semanas[i].length;
 					if( len > length )
 						length = len;
-				};
+				}
 
 				$scope.length = new Array(length);
 
@@ -308,11 +358,63 @@ app.controller('DocenteController', ($scope, $http, $window) => {
 			}).error( e => {
 				console.log(`Error`);
 				console.log(e);
+				// $scope.logout();
+			});
+		}
+	};
+
+	$scope.subirNota = ( estudiante ) => {
+		if( estudiante ) {
+			$http({
+				"url": `/notas`,
+				"method": "POST",
+				"data": {
+					id_c: estudiante.id_c,
+					id_anio: estudiante.id_anio,
+					lapso1: estudiante.lapso1,
+					lapso2: estudiante.lapso2,
+					lapso3: estudiante.lapso3
+				}
+			})
+				.then(resp => {
+					console.log(resp);
+				}, e => {
+					console.log(`Error`);
+					console.log(e);
+					// $scope.logout();
+				});
+		}
+	};
+
+	$scope.verGrupos = self => {
+		if( !self ) {
+			$http.get(`/grupos`)
+				 .success( data => {
+					 $scope.grupos = data;
+					 console.log(data);
+				 }).error( e => {
+				console.log(`Error`);
+				console.log(e);
 				$scope.logout();
 			});
 		}
-	}
+	};
 
-	$scope.addNotas = () => { }
+	$scope.watch("gra", function (variable, b, grado){
+		$scope.secciones = null;
+		$scope.verSecciones(grado);
+	});
+
+	$scope.watch("sec", function (variable, b, seccion){
+		$scope.materias = null;
+		$scope.verMaterias(seccion);
+		$scope.id_gra = seccion;
+		console.log($scope.id_gra)
+	});
+
+	$scope.watch("mat", function (variable, b, materia){
+		$scope.estudiantes = null;
+		$scope.verEstudiantes(materia);
+	})
 
 });

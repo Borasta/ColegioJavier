@@ -34,6 +34,31 @@ module.exports.authenticated = function (req, res, next) {
 	next();
 };
 
+module.exports.authMod = function (req, res, next) {
+	if (!req.headers.authorization && !req.params.token) {
+		return res.status(403).send({
+			"message": "Tu peticion no tiene cabezera de autentificacion"
+		});
+	}
+
+	var token = req.params.token ? req.params.token : req.headers.authorization;
+	// let token = req.params.token ? req.params.token : req.headers.authorization.split(" ")[1];
+	var payload = _jwtSimple2.default.decode(token, TOKEN_SECRET);
+	if (payload.exp <= _moment2.default.unix()) return res.status(401).send({
+		"message": "El token ha expirado"
+	});
+
+	// Que sea de tipo docente, pero que no tenga el nivel c de docencia
+	if (payload.data.type === "d" && payload.data.type !== "c") {
+		req.data = payload.data;
+		next();
+	} else {
+		return res.status(401).send({
+			"message": "No tienes permiso suficientes"
+		});
+	}
+};
+
 module.exports.authDocente = function (req, res, next) {
 	if (!req.headers.authorization && !req.params.token) {
 		return res.status(403).send({

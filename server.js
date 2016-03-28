@@ -44,7 +44,16 @@ app.set("mysql", {
 	"host": 'db4free.net',
 	"user": 'jhoseww',
 	"password": 'javier',
-	"database": 'javier' // Datos de mi usuario
+	"database": 'javier', // Datos de mi usuario
+	"port": '3306'
+});
+
+app.set("local", {
+	"host": 'localhost',
+	"user": 'root',
+	"password": '',
+	"database": 'javier', // Datos de mi usuario
+	"port": '3306'
 });
 
 app.use(_bodyParser2.default.json());
@@ -57,12 +66,23 @@ app.use((0, _methodOverride2.default)()); // Se usa para poder utilizar los meto
 app.listen(app.get("port"), function () {
 	//Conexion con la base de datos
 	console.log("Servidor iniciado en http://localhost:" + app.get("port"));
+
+	// Tratamos de conectarnos a db4free
 	_promiseMysql2.default.createConnection(app.get("mysql")).then(function (conection) {
 		mysql = conection;
-		console.log("Conexion con la base de datos correcta");
+		console.log("Conexion con la base de datos correcta db4free");
 		app.use((0, _request2.default)(router, mysql));
 	}).catch(function (error) {
 		console.log("" + error);
+
+		// Si no se puede entonces tratamos de conectarnos a local
+		_promiseMysql2.default.createConnection(app.get("local")).then(function (conection) {
+			mysql = conection;
+			console.log("Conexion con la base de datos correcta local");
+			app.use((0, _request2.default)(router, mysql));
+		}).catch(function (error) {
+			console.log("" + error);
+		});
 	});
 });
 

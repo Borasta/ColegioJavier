@@ -34,6 +34,7 @@ module.exports = function (mysql) {
 		},
 		"post": function post(req, res) {
 			var userData = req.body;
+			userData.type = req.params.token;
 			switch (userData.type) {
 				case "e":
 					query = "\n\t\t\t            SELECT id_e as id,\n\t\t\t            \tnombres_e as nombres,\n\t\t\t\t            apellidos_e as apellidos,\n\t\t\t\t            flag_e as flag\n\t\t\t            FROM estudiantes\n\t\t\t            WHERE user_e = '" + userData.user + "' AND pass_e = '" + userData.pass + "';\n\t\t\t        ";

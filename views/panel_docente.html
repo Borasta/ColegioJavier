@@ -6,7 +6,7 @@
             <div class="col s12">
                 <ul class="tabs no-scroll">
                     <li class="tab"><a href="#misDatos">Mis datos</a></li>
-                    <li class="tab"><a href="#notas" ng-click="verSalones(salones)">Notas</a></li>
+                    <li class="tab"><a href="#notas" ng-click="verGrados(grados)">Notas</a></li>
                     <li class="tab"><a href="#horario" ng-click="verHorario(semanas)">Horario</a></li>
                     <li class="tab"><a href="#grupos" ng-click="verGrupos(grupos)">Grupos</a></li>
                 </ul>
@@ -38,7 +38,7 @@
             </div>
 
             <div id="notas" class="col s12">
-                <div class="center-align" ng-hide="salones">
+                <div class="center-align" ng-hide="grados">
                     <div class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-green-only">
                             <div class="circle-clipper left">
@@ -54,44 +54,58 @@
                     </div>
                 </div>
 
-                <div ng-show="salones">
-                    <ul class="collapsible popout" data-collapsible="accordion">
-                        <li ng-repeat="salon in salones">
-                        <!-- verAlumnos(salon)  -->
-                            <div class="collapsible-header" ng-click="">
-                                <i class="material-icons">filter_drama</i>
-                                {{salon.grado}} {{salon.seccion.toUpperCase()}}
-                            </div>
-                            <div class="collapsible-body">
-                                <!-- <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Check</th>
-                                            <th>Cedula</th>
-                                            <th>Nombres</th>
-                                            <th>Apellidos</th>
-                                            <th>Lapso 1</th>
-                                            <th>Lapso 2</th>
-                                            <th>Lapso 3</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="alumno in salon.alumnos">
-                                            <td>
-                                                <input id="_{{alumno.cedula}}" type="checkbox" />
-                                                <label for="_{{alumno.cedula}}"></label>
-                                            </td>
-                                            <td>{{alumno.nombres}}</td>
-                                            <td>{{alumno.apellidos}}</td>
-                                            <td><input type="text" placeholder="Lapso 1" value="{{alumno.lapso1}}"></td>
-                                            <td><input type="text" placeholder="Lapso 2" value="{{alumno.lapso2}}"></td>
-                                            <td><input type="text" placeholder="Lapso 3" value="{{alumno.lapso3}}"></td>
-                                        </tr>
-                                    </tbody>
-                                </table> -->
-                            </div>
-                        </li>
-                    </ul>
+                <div ng-show="grados">
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <select ng-model="gra" material-select watch>
+                                <option value="" disabled selected>Grados</option>
+                                <option ng-repeat="grado in grados" ng-value="grado.grado">{{grado.grado}}</option>
+                            </select>
+                            <label>Grado</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <select ng-model="sec" ng-disabled="!secciones" material-select watch>
+                                <option value="" disabled selected>Secciones</option>
+                                <option ng-repeat="seccion in secciones" ng-value="seccion.id_gra">{{seccion.seccion}}</option>
+                            </select>
+                            <label>Secciones</label>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <select ng-model="mat" ng-disabled="!materias" material-select watch>
+                                <option value="" disabled selected>Materias</option>
+                                <option ng-repeat="materia in materias" ng-value="materia.id_m">{{materia.materia}}</option>
+                            </select>
+                            <label>Materias</label>
+                        </div>
+                    </div>
+
+                    <table ng-show="estudiantes">
+                        <thead>
+                        <tr>
+                            <th>Cedula</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Lapso 1</th>
+                            <th>Lapso 2</th>
+                            <th>Lapso 3</th>
+                            <th>Subir nota</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="estudiante in estudiantes">
+                                <td>{{estudiante.cedula}}</td>
+                                <td>{{estudiante.nombres}}</td>
+                                <td>{{estudiante.apellidos}}</td>
+                                <td><input type="number" ng-model="estudiante.lapso1"></td>
+                                <td><input type="number" ng-model="estudiante.lapso2"></td>
+                                <td><input type="number" ng-model="estudiante.lapso3"></td>
+                                <td><button
+                                        ng-click="subirNota(estudiante)">Subir</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
             </div>

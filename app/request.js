@@ -7,41 +7,40 @@ var _middleware2 = _interopRequireDefault(_middleware);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = function (router, mysql) {
-	var Login = require("./request/login")(mysql);
-	var Estudiante = require("./request/estudiante")(mysql);
-	var Docente = require("./request/docente")(mysql);
-	var Moderador = require("./request/moderador")(mysql);
-	var Admin = require("./request/admin")(mysql);
+      var Cursos = require("./request/cursos")(mysql);
+      var Docentes = require("./request/docentes")(mysql);
+      var Estudiantes = require("./request/estudiantes")(mysql);
+      var Grados = require("./request/grados")(mysql);
+      var Grupos = require("./request/grupos")(mysql);
+      var Horarios = require("./request/horarios")(mysql);
+      var Login = require("./request/login")(mysql);
+      var Materias = require("./request/materias")(mysql);
+      var Notas = require("./request/notas")(mysql);
+      var Representantes = require("./request/representantes")(mysql);
+      var Secciones = require("./request/secciones")(mysql);
 
-	var query = "";
+      router.route("/cursos").get(_middleware2.default.authDocente, Cursos.get).post(_middleware2.default.authMod, Cursos.post).put(_middleware2.default.authMod, Cursos.put).delete(_middleware2.default.authMod, Cursos.delete);
 
-	router.route("/auth/login/:token").get(_middleware2.default.authenticated, Login.get);
+      router.route("/docentes").get(_middleware2.default.authDocente, Docentes.get).post(_middleware2.default.authMod, Docentes.post).put(_middleware2.default.authMod, Docentes.put).delete(_middleware2.default.authMod, Docentes.delete);
 
-	router.route("/auth/login").post(Login.post);
+      router.route("/estudiantes") // Listo
+      .get(_middleware2.default.authenticated, Estudiantes.get).post(_middleware2.default.authMod, Estudiantes.post).put(_middleware2.default.authMod, Estudiantes.put).delete(_middleware2.default.authMod, Estudiantes.delete);
 
-	router.get("/perfil/estudiante/data", _middleware2.default.authEstudiante, Estudiante.getData);
-	router.get("/perfil/estudiante/notas", _middleware2.default.authEstudiante, Estudiante.getNotas);
-	router.get("/perfil/estudiante/horario", _middleware2.default.authEstudiante, Estudiante.getHorario);
-	router.get("/perfil/estudiante/grupos", _middleware2.default.authEstudiante, Estudiante.getGrupos);
+      router.route("/grados").get(_middleware2.default.authDocente, Grados.get).post(_middleware2.default.authMod, Grados.post).put(_middleware2.default.authMod, Grados.put).delete(_middleware2.default.authMod, Grados.delete);
 
-	router.get("/perfil/docente/data", _middleware2.default.authDocente, Docente.getData);
-	router.post("/perfil/docente/salones", _middleware2.default.authDocente, Docente.getSalones);
-	router.post("/perfil/docente/alumnos", _middleware2.default.authDocente, Docente.getAlumnos);
-	router.post("/perfil/docente/horario", _middleware2.default.authDocente, Docente.getHorario);
+      router.route("/grupos").get(_middleware2.default.authenticated, Grupos.get).post(_middleware2.default.authMod, Grupos.post).put(_middleware2.default.authMod, Grupos.put).delete(_middleware2.default.authMod, Grupos.delete);
 
-	router.route("/docentes").get(_middleware2.default.authDocente, Moderador.docentes.get).post(_middleware2.default.authDocente, Moderador.docentes.post).put(_middleware2.default.authDocente, Moderador.docentes.put).delete(_middleware2.default.authDocente, Moderador.docentes.delete);
+      router.route("/horarios").get(_middleware2.default.authenticated, Horarios.get).post(_middleware2.default.authMod, Horarios.post).put(_middleware2.default.authMod, Horarios.put).delete(_middleware2.default.authMod, Horarios.delete);
 
-	router.route("/alumnos").get(_middleware2.default.authDocente, Moderador.alumnos.get).post(_middleware2.default.authDocente, Moderador.alumnos.post).put(_middleware2.default.authDocente, Moderador.alumnos.put).delete(_middleware2.default.authDocente, Moderador.alumnos.delete);
+      router.route("/auth/login/:token").get(_middleware2.default.authenticated, Login.get).post(Login.post);
 
-	router.route("/representantes").get(_middleware2.default.authDocente, Moderador.representantes.get).post(_middleware2.default.authDocente, Moderador.representantes.post).put(_middleware2.default.authDocente, Moderador.representantes.put).delete(_middleware2.default.authDocente, Moderador.representantes.delete);
+      router.route("/materias").get(_middleware2.default.authDocente, Materias.get).post(_middleware2.default.authMod, Materias.post).put(_middleware2.default.authMod, Materias.put).delete(_middleware2.default.authMod, Materias.delete);
 
-	router.route("/materias").get(_middleware2.default.authDocente, Moderador.materias.get).post(_middleware2.default.authDocente, Moderador.materias.post).put(_middleware2.default.authDocente, Moderador.materias.put).delete(_middleware2.default.authDocente, Moderador.materias.delete);
+      router.route("/notas").get(_middleware2.default.authenticated, Notas.get).post(_middleware2.default.authMod, Notas.post).put(_middleware2.default.authMod, Notas.put).delete(_middleware2.default.authMod, Notas.delete);
 
-	router.route("/horarios").get(_middleware2.default.authDocente, Moderador.horarios.get).post(_middleware2.default.authDocente, Moderador.horarios.post).put(_middleware2.default.authDocente, Moderador.horarios.put).delete(_middleware2.default.authDocente, Moderador.horarios.delete);
+      router.route("/representantes").get(_middleware2.default.authMod, Representantes.get).post(_middleware2.default.authMod, Representantes.post).put(_middleware2.default.authMod, Representantes.put).delete(_middleware2.default.authMod, Representantes.delete);
 
-	router.route("/cursos").get(_middleware2.default.authDocente, Moderador.cursos.get).post(_middleware2.default.authDocente, Moderador.cursos.post).put(_middleware2.default.authDocente, Moderador.cursos.put).delete(_middleware2.default.authenticated, Moderador.cursos.delete);
+      router.route("/secciones").get(_middleware2.default.authDocente, Secciones.get).post(_middleware2.default.authMod, Secciones.post).put(_middleware2.default.authMod, Secciones.put).delete(_middleware2.default.authMod, Secciones.delete);
 
-	router.route("/gradossecciones").get(_middleware2.default.authDocente, Moderador.otros.getGradosSecciones);
-
-	return router;
+      return router;
 };

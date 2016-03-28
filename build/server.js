@@ -20,9 +20,18 @@ app.set("port", process.env.PORT || 5000); //agregar el puerto
 
 app.set("mysql", {
 	"host": 'db4free.net',
-    "user": 'jhoseww',
-    "password": 'javier',
-    "database": 'javier'  // Datos de mi usuario
+	"user": 'jhoseww',
+	"password": 'javier',
+	"database": 'javier',  // Datos de mi usuario
+	"port": '3306'
+});
+
+app.set("local", {
+	"host": 'localhost',
+	"user": 'root',
+	"password": '',
+	"database": 'javier',  // Datos de mi usuario
+	"port": '3306'
 });
 
 app.use(bodyParser.json());
@@ -33,15 +42,29 @@ app.use( express.static(`${__dirname}/public`) ); // se usa express en la carpet
 app.use( methodOverride() ); // Se usa para poder utilizar los metodos put y delete
 
 app.listen(app.get("port"), () => { //Conexion con la base de datos
-	console.log(`Servidor iniciado en http://localhost:${app.get("port")}`); 
-	Mysql.createConnection(app.get("mysql")) 
+	console.log(`Servidor iniciado en http://localhost:${app.get("port")}`);
+
+	// Tratamos de conectarnos a db4free
+	Mysql.createConnection(app.get("mysql"))
 		.then(conection => {
 			mysql = conection;
-			console.log(`Conexion con la base de datos correcta`);
+			console.log(`Conexion con la base de datos correcta db4free`);
 			app.use( request( router, mysql ) );
-		}).catch(error => {
-			console.log(`${error}`)
-	});
+		})
+        .catch(error => {
+			console.log(`${error}`);
+
+			// Si no se puede entonces tratamos de conectarnos a local
+			Mysql.createConnection(app.get("local"))
+				.then(conection => {
+					mysql = conection;
+					console.log(`Conexion con la base de datos correcta local`);
+					app.use( request( router, mysql ) );
+				})
+				.catch(error => {
+					console.log(`${error}`);
+				});
+		});
 });
 
 app.use( routes(router) ); //Acceder a las rutas

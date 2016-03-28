@@ -1,68 +1,81 @@
 import middleware from "./middleware";
 
-module.exports = (router, mysql) => {
-	let Login = require("./request/login")(mysql);
-	let Estudiante = require("./request/estudiante")(mysql);
-	let Docente = require("./request/docente")(mysql);
-	let Moderador = require("./request/moderador")(mysql);
-	let Admin = require("./request/admin")(mysql);
-	
-	let query = ``;
+module.exports = (router, mysql) =>{
+    let Cursos = require("./request/cursos")(mysql);
+    let Docentes = require("./request/docentes")(mysql);
+    let Estudiantes = require("./request/estudiantes")(mysql);
+    let Grados = require("./request/grados")(mysql);
+    let Grupos = require("./request/grupos")(mysql);
+    let Horarios = require("./request/horarios")(mysql);
+    let Login = require("./request/login")(mysql);
+    let Materias = require("./request/materias")(mysql);
+    let Notas = require("./request/notas")(mysql);
+    let Representantes = require("./request/representantes")(mysql);
+    let Secciones = require("./request/secciones")(mysql);
 
-	router.route("/auth/login/:token")
-	.get( middleware.authenticated, Login.get );
+    router.route("/cursos")
+          .get(middleware.authDocente, Cursos.get)
+          .post(middleware.authMod, Cursos.post)
+          .put(middleware.authMod, Cursos.put)
+          .delete(middleware.authMod, Cursos.delete);
 
-	router.route("/auth/login")
-	.post( Login.post );
+    router.route("/docentes")
+          .get(middleware.authDocente, Docentes.get)
+          .post(middleware.authMod, Docentes.post)
+          .put(middleware.authMod, Docentes.put)
+          .delete(middleware.authMod, Docentes.delete);
 
-	router.get("/perfil/estudiante/data", middleware.authEstudiante, Estudiante.getData);
-	router.get("/perfil/estudiante/notas", middleware.authEstudiante, Estudiante.getNotas);
-	router.get("/perfil/estudiante/horario", middleware.authEstudiante, Estudiante.getHorario);
-	router.get("/perfil/estudiante/grupos", middleware.authEstudiante, Estudiante.getGrupos);
+    router.route("/estudiantes") // Listo
+          .get(middleware.authenticated, Estudiantes.get)
+          .post(middleware.authMod, Estudiantes.post)
+          .put(middleware.authMod, Estudiantes.put)
+          .delete(middleware.authMod, Estudiantes.delete);
 
-	router.get("/perfil/docente/data", middleware.authDocente, Docente.getData);
-	router.post("/perfil/docente/salones", middleware.authDocente, Docente.getSalones);
-	router.post("/perfil/docente/alumnos", middleware.authDocente, Docente.getAlumnos);
-	router.post("/perfil/docente/horario", middleware.authDocente, Docente.getHorario);
+    router.route("/grados")
+          .get(middleware.authDocente, Grados.get)
+          .post(middleware.authMod, Grados.post)
+          .put(middleware.authMod, Grados.put)
+          .delete(middleware.authMod, Grados.delete);
 
-	router.route("/docentes")
-	.get( middleware.authDocente, Moderador.docentes.get )
-	.post( middleware.authDocente, Moderador.docentes.post )
-	.put( middleware.authDocente, Moderador.docentes.put )
-	.delete( middleware.authDocente, Moderador.docentes.delete);
+    router.route("/grupos")
+          .get(middleware.authenticated, Grupos.get)
+          .post(middleware.authMod, Grupos.post)
+          .put(middleware.authMod, Grupos.put)
+          .delete(middleware.authMod, Grupos.delete);
 
-	router.route("/alumnos")
-	.get( middleware.authDocente, Moderador.alumnos.get )
-	.post( middleware.authDocente, Moderador.alumnos.post )
-	.put( middleware.authDocente, Moderador.alumnos.put )
-	.delete( middleware.authDocente, Moderador.alumnos.delete );
+    router.route("/horarios")
+          .get(middleware.authenticated, Horarios.get)
+          .post(middleware.authMod, Horarios.post)
+          .put(middleware.authMod, Horarios.put)
+          .delete(middleware.authMod, Horarios.delete);
 
-	router.route("/representantes")
-	.get( middleware.authDocente, Moderador.representantes.get )
-	.post( middleware.authDocente, Moderador.representantes.post )
-	.put( middleware.authDocente, Moderador.representantes.put )
-	.delete( middleware.authDocente, Moderador.representantes.delete );
+    router.route("/auth/login/:token")
+          .get(middleware.authenticated, Login.get)
+          .post(Login.post);
 
-	router.route("/materias")
-	.get( middleware.authDocente, Moderador.materias.get )
-	.post( middleware.authDocente, Moderador.materias.post )
-	.put( middleware.authDocente, Moderador.materias.put )
-	.delete( middleware.authDocente, Moderador.materias.delete );	
+    router.route("/materias")
+          .get(middleware.authDocente, Materias.get)
+          .post(middleware.authMod, Materias.post)
+          .put(middleware.authMod, Materias.put)
+          .delete(middleware.authMod, Materias.delete);
 
-	router.route("/horarios")
-	.get( middleware.authDocente, Moderador.horarios.get )
-	.post( middleware.authDocente, Moderador.horarios.post )
-	.put( middleware.authDocente, Moderador.horarios.put )
-	.delete( middleware.authDocente, Moderador.horarios.delete );
+    router.route("/notas")
+          .get(middleware.authenticated, Notas.get)
+          .post(middleware.authMod, Notas.post)
+          .put(middleware.authMod, Notas.put)
+          .delete(middleware.authMod, Notas.delete);
 
-	router.route("/cursos")
-	.get( middleware.authDocente, Moderador.cursos.get )
-	.post( middleware.authDocente, Moderador.cursos.post )
-	.put( middleware.authDocente, Moderador.cursos.put )
-	.delete( middleware.authenticated, Moderador.cursos.delete );
+    router.route("/representantes")
+          .get(middleware.authMod, Representantes.get)
+          .post(middleware.authMod, Representantes.post)
+          .put(middleware.authMod, Representantes.put)
+          .delete(middleware.authMod, Representantes.delete);
 
-	router.route("/gradossecciones")
-	.get( middleware.authDocente, Moderador.otros.getGradosSecciones )
+    router.route("/secciones")
+          .get(middleware.authDocente, Secciones.get)
+          .post(middleware.authMod, Secciones.post)
+          .put(middleware.authMod, Secciones.put)
+          .delete(middleware.authMod, Secciones.delete);
 
-	return router;
-}
+    return router;
+};

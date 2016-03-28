@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Db4free Javier" uuid="b1cd08be-49c1-4cbc-8c1e-8febd598f271">
+      <secret-storage>master_key</secret-storage>
+      <user-name>jhoseww</user-name>
+      <schema-pattern>javier.*</schema-pattern>
+      <default-schemas>javier.*</default-schemas>
+    </data-source>
+    <data-source name="Local Javier" uuid="e996f938-7019-4c0e-b306-bb1b588de951">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>javier.*</schema-pattern>
+      <default-schemas>javier.*</default-schemas>
+    </data-source>
+  </component>
+</project>

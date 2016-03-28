@@ -14,7 +14,7 @@ app.controller('Representantes', ($scope, $http, $window) => {
 		}).error( e => {
 			
 		});
-	}
+	};
 
 	$scope.leer = () => {
 		$scope.result = null;
@@ -30,7 +30,7 @@ app.controller('Representantes', ($scope, $http, $window) => {
 		}).error( e => {
 			
 		});
-	}
+	};
 
 	$scope.modificar = ( representante ) => {
 		$http({
@@ -42,7 +42,7 @@ app.controller('Representantes', ($scope, $http, $window) => {
 		}).error( e => {
 			
 		});
-	}
+	};
 
 	$scope.borrar = ( id ) => {
 		$http({
@@ -70,19 +70,30 @@ app.controller('Alumnos', ($scope, $http, $window) => {
 	
 	$scope.radio = "c";
 
-	$scope.getGraSec = () => {
+	$scope.getGrados = () => {
 		$http({
 			"method": "GET",
-			"url": `/gradossecciones`
+			"url": `/grados`
 		}).success( data => {
 			$scope.grados = data.grados;
+		}).error( e => {
+			console.log(e)
+		});
+	};
+
+	$scope.getSecciones = () => {
+		$http({
+			"method": "GET",
+			"url": `/grados`
+		}).success( data => {
 			$scope.secciones = data.secciones;
 		}).error( e => {
 			console.log(e)
 		});
-	}
+	};
 
-	$scope.getGraSec();
+	$scope.getGrados();
+	$scope.getSecciones();
 
 	$scope.updateSelect = () => {
 		$('.selectUpdate').material_select("update");
@@ -154,7 +165,7 @@ app.controller('Docentes', ($scope, $http, $window) => {
 		}).error( e => {
 			
 		});
-	}
+	};
 
 	$scope.leer = () => {
 		$scope.result = null;
@@ -170,7 +181,7 @@ app.controller('Docentes', ($scope, $http, $window) => {
 		}).error( e => {
 			console.log(e)
 		});
-	}
+	};
 
 	$scope.modificar = ( docente ) => {
 		$http({
@@ -182,7 +193,7 @@ app.controller('Docentes', ($scope, $http, $window) => {
 		}).error( e => {
 			
 		});
-	}
+	};
 
 	$scope.borrar = ( id ) => {
 		$http({
