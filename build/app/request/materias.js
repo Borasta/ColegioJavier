@@ -70,16 +70,14 @@ module.exports = mysql => {
 				case "b":
 					query = `
 							INSERT INTO
-								grupos
+								materias
 							VALUES(
 								null,
-								?,
 								?
 							)
 				        `;
 					values = [
-						req.body.nombre,
-						req.body.descripcion
+						req.body.nombre
 					];
 					break;
 

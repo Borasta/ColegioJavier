@@ -116,8 +116,8 @@
                                 <label>Tipo</label>
                             </div>
                             <div class="input-field col s5">
-                                <input type="text" ng-model="read.data" id="findDL" value="" />
-                                <label for="findDL">Buscador</label>
+                                <input type="text" ng-model="read.data" id="findDL1" value="" />
+                                <label for="findDL1">Buscador</label>
                             </div>
                             <br>
                             <div class="col s3">
@@ -164,26 +164,26 @@
                                 <td><input type="text" ng-model="row.usuario"></td>
                                 <td>
                                     <div>
-                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="m" ng-checked="row.genero == 'm' ? true : false" id="doM{{row.id}}">
+                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="m" ng-checked="row.genero == 'm' ? true : false" ng-attr-id="{{ 'doM' + row.id}}">
                                         <label for="doM{{row.id}}">Hombre</label>
                                     </div>
                                     <div>
-                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="f" ng-checked="row.genero === 'f' ? true : false" id="doF{{row.id}}">
+                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="f" ng-checked="row.genero === 'f' ? true : false" ng-attr-id="{{ 'doF' + row.id}}">
                                         <label for="doF{{row.id}}">Mujer</label>
                                     </div>
                                 </td>
                                 <td><input type="text" ng-model="row.pass"></td>
                                 <td ng-show="flag === 'a'">
                                     <div>
-                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="c" type="radio" id="docenteRadio{{row.id}}"/>
+                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="c" type="radio" ng-attr-id="{{ 'docenteRadio' + row.id}}"/>
                                         <label for="docenteRadio{{row.id}}">Docente</label>
                                     </div>
                                     <div>
-                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="b" type="radio" id="moderadorRadio{{row.id}}"/>
+                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="b" type="radio" ng-attr-id="{{'moderadorRadio' + row.id}}"/>
                                         <label for="moderadorRadio{{row.id}}">Mod</label>
                                     </div>
                                     <div>
-                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="a" type="radio" id="adminRadio{{row.id}}"/>
+                                        <input class="with-gap" name="flag{{row.id}}" ng-model="row.flag" value="a" type="radio" ng-attr-id="{{'adminRadio' + row.id}}"/>
                                         <label for="adminRadio{{row.id}}">Admin</label>
                                     </div>
                                 </td>
@@ -224,7 +224,7 @@
                                 <label for="nombres_e">Nombres</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="apellidos_e" type="tel" ng-model="create.apellidos" class="validate">
+                                <input id="apellidos_e" type="text" ng-model="create.apellidos" class="validate">
                                 <label for="apellidos_e">Apellidos</label>
                             </div>
                         </div>
@@ -246,11 +246,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s6">
-                                <label for="To" >Fecha de nacimiento</label> 
-                                <input type="date" class="datepicker">
+                            <div class="input-field col s6">
+                                <input id="fecha_nacimiento" type="text" ng-model="create.fecha_nacimiento" class="validate">
+                                <label for="fecha_nacimiento">Fecha de nacimiento (YYYY-MM-DD)</label>
                             </div>
-                            <br>
                             <div class="col s3">
                                 <div class="input-field">
                                     <select ng-model="create.grado" material-select watch>
@@ -273,8 +272,8 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="nacimiento" type="text" ng-model="create.direccion" class="validate">
-                                <label for="nacimiento">Direccion</label>
+                                <input id="direccion" type="text" ng-model="create.direccion" class="validate">
+                                <label for="direccion">Direccion</label>
                             </div>
                         </div>
                         <div class="row">
@@ -419,7 +418,7 @@
                     </div>
                 </div>
                 
-                <div class="row" class="row" ng-show="radio == 'c'">
+                <div class="row" ng-show="radio == 'c'">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s6">
@@ -454,7 +453,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="row" class="row" ng-show="radio == 'l'">
+                <div class="row" ng-show="radio == 'l'">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s4">
@@ -511,11 +510,11 @@
                                 <td><input type="text" ng-model="row.cedula"></td>
                                 <td>
                                     <div>
-                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="m" ng-checked="row.genero == 'm' ? true : false" id="reM{{row.id}}">
+                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="m" ng-checked="row.genero == 'm' ? true : false" ng-attr-id="{{'reM'+row.id}}">
                                         <label for="reM{{row.id}}">Hombre</label>
                                     </div>
                                     <div>
-                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="f" ng-checked="row.genero === 'f' ? true : false" id="reF{{row.id}}">
+                                        <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="f" ng-checked="row.genero === 'f' ? true : false" ng-attr-id="{{'reF'+row.id}}">
                                         <label for="reF{{row.id}}">Mujer</label>
                                     </div>
                                 </td>
@@ -546,13 +545,154 @@
                         <label for="materiasLeer"><i class="small material-icons">find_in_page</i>Buscar</label>
                     </div>
                 </div>
-                
-                <div class="row" class="row" ng-show="radio == 'c'">
-                    Hola yo creo
+
+                <div class="row" ng-show="radio == 'c'">
+                    <form class="col s12">
+                        <div class="card-panel">
+                            <h4>Crear materia</h4>
+                            <div class="row">
+                                <div class="input-field col s9">
+                                    <input id="nombre_m3" ng-model="create.nombre" type="text" class="validate">
+                                    <label for="nombre_m3">Materia</label>
+                                </div>
+                                <div class="col s3">
+                                    <a ng-click="crear()" class="waves-effect waves-light btn-large col s12">CREAR</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-panel">
+                            <h4>Asignar materia a docente</h4>
+                            <div class="row">
+                                <div class="col s6">
+                                    <div class="input-field">
+                                        <input id="nombre_m4" ng-model="create.cedula" type="text" class="validate">
+                                        <label for="nombre_m4">Docente (cedula)</label>
+                                    </div>
+                                </div>
+                                <div class="col s6">
+                                    <div class="input-field">
+                                        <select ng-model="create.materia" material-select watch>
+                                            <option value="" disabled selected>Materias</option>
+                                            <option ng-repeat="materia in materias" ng-value="materia.id">{{materia.nombre}}</option>
+                                        </select>
+                                        <label>Materia</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s3">
+                                    <div class="input-field">
+                                        <input id="nombre_m2" ng-model="create.hora_inicio" type="text" class="validate">
+                                        <label for="nombre_m2">Hora de inicio(HH:MM)</label>
+                                    </div>
+                                </div>
+                                <div class="col s3">
+                                    <div class="input-field">
+                                        <input id="nombre_m1" ng-model="create.hora_final" type="text" class="validate">
+                                        <label for="nombre_m1">Hora final(HH:MM)</label>
+                                    </div>
+                                </div>
+                                <div class="col s6">
+                                    <div class="input-field">
+                                        <select ng-model="create.dia" material-select watch>
+                                            <option value="" disabled selected>Dias</option>
+                                            <option value="1">Lunes</option>
+                                            <option value="2">Martes</option>
+                                            <option value="3">Miercoles</option>
+                                            <option value="4">Jueves</option>
+                                            <option value="5">Viernes</option>
+                                        </select>
+                                        <label>Dia</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <a ng-click="crear()" class="waves-effect waves-light btn-large col s12">CREAR</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="row" class="row" ng-show="radio == 'l'">
-                    Hola yo leo
-                </div>             
+                <div class="row" ng-show="radio == 'l'">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s4">
+                                <select ng-model="read.type">
+                                    <option value="" disabled selected>Buscar por : ?</option>
+                                    <option value="nombres_d">Nombre de Docente</option>
+                                    <option value="nombre_m">Materia</option>
+                                </select>
+                                <label>Tipo</label>
+                            </div>
+                            <div class="input-field col s5">
+                                <input type="text" ng-model="read.data" id="findRL2" value="" />
+                                <label for="findRL2">Buscador</label>
+                            </div>
+                            <br>
+                            <div class="col s3">
+                                <a class="waves-effect waves-light btn-large" ng-click="leer()">Buscar</a>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="center-align" ng-hide="result || !wait">
+                        <div class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table ng-show="result" class="white responsive-table highlight z-depth-2">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Cedula</th>
+                            <th>Genero</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in result">
+                            <td>{{row.id}}</td>
+                            <td><input type="text" ng-model="row.nombres"></td>
+                            <td><input type="text" ng-model="row.apellidos"></td>
+                            <td><input type="text" ng-model="row.cedula"></td>
+                            <td>
+                                <div>
+                                    <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="m" ng-checked="row.genero == 'm' ? true : false" id="reM{{row.id}}">
+                                    <label for="reM{{row.id}}">Hombre</label>
+                                </div>
+                                <div>
+                                    <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="f" ng-checked="row.genero === 'f' ? true : false" id="reF{{row.id}}">
+                                    <label for="reF{{row.id}}">Mujer</label>
+                                </div>
+                            </td>
+                            <td>
+                                <a class="btn-floating btn waves-effect waves-light green z-depth-3" ng-click="modificar(row)">
+                                    <i class="small material-icons">build</i>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn-floating btn waves-effect waves-light red z-depth-3" ng-click="borrar(row.id)">
+                                    <i class="small material-icons">delete</i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div id="horarios" class="col s12" ng-controller="Horarios">
@@ -566,13 +706,98 @@
                         <label for="horariosLeer"><i class="small material-icons">find_in_page</i>Buscar</label>
                     </div>
                 </div>
-                
-                <div class="row" class="row" ng-show="radio == 'c'">
-                    Hola yo creo
+
+                <div class="row" ng-show="radio == 'c'">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s9">
+                                <input id="nombre_m" ng-model="create.nombre" type="text" class="validate">
+                                <label for="nombre_m">Materia</label>
+                            </div>
+                            <div class="col s3">
+                                <a ng-click="crear()" class="waves-effect waves-light btn-large col s12">CREAR</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="row" class="row" ng-show="radio == 'l'">
-                    Hola yo leo
-                </div>   
+                <div class="row" ng-show="radio == 'l'">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s4">
+                                <select ng-model="read.type">
+                                    <option value="" disabled selected>Buscar por : ?</option>
+                                    <option value="nombres_d">Nombre de Docente</option>
+                                    <option value="nombre_m">Materia</option>
+                                </select>
+                                <label>Tipo</label>
+                            </div>
+                            <div class="input-field col s5">
+                                <input type="text" ng-model="read.data" id="findRL3" value="" />
+                                <label for="findRL3">Buscador</label>
+                            </div>
+                            <br>
+                            <div class="col s3">
+                                <a class="waves-effect waves-light btn-large" ng-click="leer()">Buscar</a>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="center-align" ng-hide="result || !wait">
+                        <div class="preloader-wrapper small active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table ng-show="result" class="white responsive-table highlight z-depth-2">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Cedula</th>
+                            <th>Genero</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in result">
+                            <td>{{row.id}}</td>
+                            <td><input type="text" ng-model="row.nombres"></td>
+                            <td><input type="text" ng-model="row.apellidos"></td>
+                            <td><input type="text" ng-model="row.cedula"></td>
+                            <td>
+                                <div>
+                                    <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="m" ng-checked="row.genero == 'm' ? true : false" ng-attr-id="{{'reM' + row.id}}">
+                                    <label for="reM{{row.id}}">Hombre</label>
+                                </div>
+                                <div>
+                                    <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="f" ng-checked="row.genero === 'f' ? true : false" ng-attr-id="{{'reF' + row.id}}">
+                                    <label for="reF{{row.id}}">Mujer</label>
+                                </div>
+                            </td>
+                            <td>
+                                <a class="btn-floating btn waves-effect waves-light green z-depth-3" ng-click="modificar(row)">
+                                    <i class="small material-icons">build</i>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn-floating btn waves-effect waves-light red z-depth-3" ng-click="borrar(row.id)">
+                                    <i class="small material-icons">delete</i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div id="cursos" class="col s12" ng-controller="Cursos">
@@ -587,219 +812,15 @@
                     </div>
                 </div>
                 
-                <div class="row" class="row" ng-show="radio == 'c'">
+                <div class="row" ng-show="radio == 'c'">
                     Hola yo creo
                 </div>
-                <div class="row" class="row" ng-show="radio == 'l'">
+                <div class="row" ng-show="radio == 'l'">
                     Hola yo leo
                 </div>         
             </div>
-    </div>
-
-    <div ng-controller="DocenteController">
-        <h2 class="center-align">Docente</h2>
-        <div class="row">
-            <div class="col s12">
-                <ul class="tabs no-scroll">
-                    <li class="tab"><a href="#misDatos">Mis datos</a></li>
-                    <li class="tab"><a href="#notas" ng-click="verSalones(salones)">Notas</a></li>
-                    <li class="tab"><a href="#horario" ng-click="verHorario(semanas)">Horario</a></li>
-                    <li class="tab"><a href="#grupos" ng-click="verGrupos(grupos)">Grupos</a></li>
-                </ul>
-            </div>
-
-            <div id="misDatos" class="col s12">
-                <div class="center-align" ng-hide="misDatos">
-                    <div class="preloader-wrapper small active">
-                        <div class="spinner-layer spinner-green-only">
-                            <div class="circle-clipper left">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="gap-patch">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="circle-clipper right">
-                                <div class="circle"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="collection" ng-show="misDatos">
-                    <li class="collection-item">Nombres: {{misDatos.nombres}}</li>
-                    <li class="collection-item">Apellidos: {{misDatos.apellidos}}</li>
-                    <li class="collection-item">Cedula: {{misDatos.cedula}}</li>
-                    <li class="collection-item">Genero: {{misDatos.genero}}</li>
-                    <li class="collection-item">Usuario: {{misDatos.usuario}}</li>
-                </ul>
-            </div>
-
-            <div id="notas" class="col s12">
-                <div class="center-align" ng-hide="salones">
-                    <div class="preloader-wrapper small active">
-                        <div class="spinner-layer spinner-green-only">
-                            <div class="circle-clipper left">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="gap-patch">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="circle-clipper right">
-                                <div class="circle"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div ng-show="salones">
-                    <ul class="collapsible popout" data-collapsible="accordion">
-                        <li ng-repeat="salon in salones">
-                        <!-- verAlumnos(salon)  -->
-                            <div class="collapsible-header" ng-click="">
-                                <i class="material-icons">filter_drama</i>
-                                {{salon.grado}} {{salon.seccion.toUpperCase()}}
-                            </div>
-                            <div class="collapsible-body">
-                                <!-- <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Check</th>
-                                            <th>Cedula</th>
-                                            <th>Nombres</th>
-                                            <th>Apellidos</th>
-                                            <th>Lapso 1</th>
-                                            <th>Lapso 2</th>
-                                            <th>Lapso 3</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="alumno in salon.estudiantes">
-                                            <td>
-                                                <input id="_{{alumno.cedula}}" type="checkbox" />
-                                                <label for="_{{alumno.cedula}}"></label>
-                                            </td>
-                                            <td>{{alumno.nombres}}</td>
-                                            <td>{{alumno.apellidos}}</td>
-                                            <td><input type="text" placeholder="Lapso 1" value="{{alumno.lapso1}}"></td>
-                                            <td><input type="text" placeholder="Lapso 2" value="{{alumno.lapso2}}"></td>
-                                            <td><input type="text" placeholder="Lapso 3" value="{{alumno.lapso3}}"></td>
-                                        </tr>
-                                    </tbody>
-                                </table> -->
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div id="horario" class="col s12">
-                <div class="center-align" ng-hide="semanas">
-                    <div class="preloader-wrapper small active">
-                        <div class="spinner-layer spinner-green-only">
-                            <div class="circle-clipper left">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="gap-patch">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="circle-clipper right">
-                                <div class="circle"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <table class="bordered highlight centered container responsive-table" ng-show="semanas">
-                    <thead>
-                        <tr>
-                            <th data-field="lunes">Lunes</th>
-                            <th data-field="martes">Martes</th>
-                            <th data-field="miercoles">Miercoles</th>
-                            <th data-field="jueves">Jueves</th>
-                            <th data-field="viernes">Viernes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="indice in length track by $index">
-                            <td ng-show="semanas[0][$index]">
-                                <div class="row">{{semanas[0][$index].hora_inicio}} - {{semanas[0][$index].hora_final}}</div>
-                                <div class="row">{{semanas[0][$index].nombre_m}}</div>
-                            </td>
-                            <td ng-hide="semanas[0][$index]">
-                                <i class="material-icons">clear_all</i>
-                            </td>
-
-                            <td ng-show="semanas[1][$index]">
-                                <div class="row">{{semanas[1][$index].hora_inicio}} - {{semanas[1][$index].hora_final}}</div>
-                                <div class="row">{{semanas[1][$index].nombre_m}}</div>
-                            </td>
-                            <td ng-hide="semanas[1][$index]">
-                                <i class="material-icons">clear_all</i>
-                            </td>
-
-                            <td ng-show="semanas[2][$index]">
-                                <div class="row">{{semanas[2][$index].hora_inicio}} - {{semanas[2][$index].hora_final}}</div>
-                                <div class="row">{{semanas[2][$index].nombre_m}}</div>
-                            </td>
-                            <td ng-hide="semanas[2][$index]">
-                                <i class="material-icons">clear_all</i>
-                            </td>
-
-                            <td ng-show="semanas[3][$index]">
-                                <div class="row">{{semanas[3][$index].hora_inicio}} - {{semanas[3][$index].hora_final}}</div>
-                                <div class="row">{{semanas[3][$index].nombre_m}}</div>
-                            </td>
-                            <td ng-hide="semanas[3][$index]">
-                                <i class="material-icons">clear_all</i>
-                            </td>
-
-                            <td ng-show="semanas[4][$index]">
-                                <div class="row">{{semanas[4][$index].hora_inicio}} - {{semanas[4][$index].hora_final}}</div>
-                                <div class="row">{{semanas[4][$index].nombre_m}}</div>
-                            </td>
-                            <td ng-hide="semanas[4][$index]">
-                                <i class="material-icons">clear_all</i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="grupos" class="col s12">
-                <div class="center-align" ng-hide="grupos">
-                    <div class="preloader-wrapper small active">
-                        <div class="spinner-layer spinner-green-only">
-                            <div class="circle-clipper left">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="gap-patch">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="circle-clipper right">
-                                <div class="circle"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <table class="bordered highlight centered container responsive-table" ng-show="grupos">
-                    <thead>
-                        <tr>
-                            <th data-field="lunes">Grupo</th>
-                            <th data-field="martes">Descripcion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="grupo in grupos">
-                            <td>
-                                {{grupo.nombre}}
-                            </td>
-                            <td>
-                                {{grupo.descripcion}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </div>
     
+    </div>
+
 </div>

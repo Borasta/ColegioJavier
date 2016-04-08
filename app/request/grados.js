@@ -31,8 +31,7 @@ module.exports = function (mysql) {
 							case "a":
 							case "b":
 								{
-									query = "\n\t\t\t\t\t\t\t\t\tSELECT \n\t\t\t\t\t\t\t\t\t\tdocentes.nombres_d as lider,\n\t\t\t\t\t\t\t\t\t\tgrupos.nombre_gru as nombre, \n\t\t\t\t\t\t\t\t\t\tgrupos.descripcion_gru as descripcion\n\t\t\t\t\t\t\t\t\tFROM docentes INNER JOIN lideres\n\t\t\t\t\t\t\t\t\t\tON docentes.id_d = lideres.id_d INNER JOIN grupos\n\t\t\t\t\t\t\t\t\t\tON lideres.id_gru = grupos.id_gru\n\t\t\t\t\t\t\t\t\tWHERE upper(" + req.query.type + "_gru) LIKE upper(?) \n\t\t            \t\t\t\tORDER BY nombre_gru;\n\t\t\t\t\t\t\t\t";
-									values = ["%" + req.query.data + "%"];
+									query = "\n\t\t\t\t\t\t\t\tSELECT DISTINCT\n\t\t\t\t\t\t\t\t  grado\n\t\t\t\t\t\t\t\tFROM grados\n\t\t\t\t\t\t\t";
 									break;
 								}
 

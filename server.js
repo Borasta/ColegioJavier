@@ -32,7 +32,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // importacion de las librerias
 
-var mysql = undefined; //guarda la conexion
+var mysql = void 0; //guarda la conexion
 
 var app = (0, _express2.default)(); //guarda los objetos
 

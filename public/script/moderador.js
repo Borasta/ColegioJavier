@@ -62,30 +62,40 @@ app.controller('Alumnos', function ($scope, $http, $window) {
 
 	$scope.radio = "c";
 
-	$scope.getGrados = function () {
-		$http({
-			"method": "GET",
-			"url": "/grados"
-		}).success(function (data) {
-			$scope.grados = data.grados;
-		}).error(function (e) {
-			console.log(e);
-		});
+	$scope.verGrados = function (self) {
+		if (!self) {
+			$http({
+				"method": "GET",
+				"url": "/grados"
+			}).then(function (grados) {
+				$scope.grados = grados.data;
+				console.log($scope.grados);
+			}, function (e) {
+				console.log("Error");
+				console.log(e);
+				// $scope.logout();
+			});
+		}
 	};
 
-	$scope.getSecciones = function () {
-		$http({
-			"method": "GET",
-			"url": "/grados"
-		}).success(function (data) {
-			$scope.secciones = data.secciones;
-		}).error(function (e) {
-			console.log(e);
-		});
+	$scope.verSecciones = function (grado) {
+		if (!$scope.secciones) {
+			$http({
+				"method": "GET",
+				"url": "/secciones"
+			}).then(function (secciones) {
+				$scope.secciones = secciones.data;
+				console.log($scope.secciones);
+			}, function (e) {
+				console.log("Error");
+				console.log(e);
+				// $scope.logout();
+			});
+		}
 	};
 
-	$scope.getGrados();
-	$scope.getSecciones();
+	$scope.verGrados();
+	$scope.verSecciones();
 
 	$scope.updateSelect = function () {
 		$('.selectUpdate').material_select("update");
@@ -125,6 +135,24 @@ app.controller('Anio', function ($scope, $http, $window) {
 app.controller('Materias', function ($scope, $http, $window) {
 
 	$scope.radio = "c";
+
+	$scope.verMaterias = function (materias) {
+		if (!$scope.materias) {
+			$http({
+				"method": "GET",
+				"url": "/materias"
+			}).then(function (materias) {
+				$scope.materias = materias.data;
+				console.log($scope.materias);
+			}, function (e) {
+				console.log("Error");
+				console.log(e);
+				// $scope.logout();
+			});
+		}
+	};
+
+	$scope.verMaterias();
 });
 
 app.controller('DocenteMateria', function ($scope, $http, $window) {

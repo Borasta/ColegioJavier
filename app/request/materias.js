@@ -40,8 +40,8 @@ module.exports = function (mysql) {
 			switch (tokenDecoded.flag) {
 				case "a":
 				case "b":
-					query = "\n\t\t\t\t\t\t\tINSERT INTO\n\t\t\t\t\t\t\t\tgrupos\n\t\t\t\t\t\t\tVALUES(\n\t\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t\t?,\n\t\t\t\t\t\t\t\t?\n\t\t\t\t\t\t\t)\n\t\t\t\t        ";
-					values = [req.body.nombre, req.body.descripcion];
+					query = "\n\t\t\t\t\t\t\tINSERT INTO\n\t\t\t\t\t\t\t\tmaterias\n\t\t\t\t\t\t\tVALUES(\n\t\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t\t?\n\t\t\t\t\t\t\t)\n\t\t\t\t        ";
+					values = [req.body.nombre];
 					break;
 
 				default:

@@ -70,30 +70,42 @@ app.controller('Alumnos', ($scope, $http, $window) => {
 	
 	$scope.radio = "c";
 
-	$scope.getGrados = () => {
-		$http({
-			"method": "GET",
-			"url": `/grados`
-		}).success( data => {
-			$scope.grados = data.grados;
-		}).error( e => {
-			console.log(e)
-		});
+	$scope.verGrados = self => {
+		if( !self ) {
+			$http({
+				"method": "GET",
+				"url": `/grados`
+			})
+				.then(grados => {
+					$scope.grados = grados.data;
+					console.log($scope.grados);
+				}, e => {
+					console.log(`Error`);
+					console.log(e);
+					// $scope.logout();
+				});
+		}
 	};
 
-	$scope.getSecciones = () => {
-		$http({
-			"method": "GET",
-			"url": `/grados`
-		}).success( data => {
-			$scope.secciones = data.secciones;
-		}).error( e => {
-			console.log(e)
-		});
+	$scope.verSecciones = grado => {
+		if( !$scope.secciones ) {
+			$http({
+				"method": "GET",
+				"url": `/secciones`
+			})
+				.then(secciones => {
+					$scope.secciones = secciones.data;
+					console.log($scope.secciones);
+				}, e => {
+					console.log(`Error`);
+					console.log(e);
+					// $scope.logout();
+				});
+		}
 	};
 
-	$scope.getGrados();
-	$scope.getSecciones();
+	$scope.verGrados();
+	$scope.verSecciones();
 
 	$scope.updateSelect = () => {
 		$('.selectUpdate').material_select("update");
@@ -140,6 +152,25 @@ app.controller('Anio', ($scope, $http, $window) => {
 app.controller('Materias', ($scope, $http, $window) => {
 	
 	$scope.radio = "c";
+
+	$scope.verMaterias = materias => {
+		if( !$scope.materias ) {
+			$http({
+				"method": "GET",
+				"url": `/materias`
+			})
+				.then(materias => {
+					$scope.materias = materias.data;
+					console.log($scope.materias);
+				}, e => {
+					console.log(`Error`);
+					console.log(e);
+					// $scope.logout();
+				});
+		}
+	};
+
+	$scope.verMaterias();
 
 });
 

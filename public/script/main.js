@@ -171,8 +171,8 @@ app.controller('EstudianteController', function ($scope, $http, $window) {
 				}
 
 				var length = 0;
-				for (var i = 0; i < semanas.length; i++) {
-					var len = semanas[i].length;
+				for (var _i = 0; _i < semanas.length; _i++) {
+					var len = semanas[_i].length;
 					if (len > length) length = len;
 				}
 
@@ -329,8 +329,8 @@ app.controller('DocenteController', function ($scope, $http, $window) {
 				}
 
 				var length = 0;
-				for (var i = 0; i < semanas.length; i++) {
-					var len = semanas[i].length;
+				for (var _i2 = 0; _i2 < semanas.length; _i2++) {
+					var len = semanas[_i2].length;
 					if (len > length) length = len;
 				}
 
