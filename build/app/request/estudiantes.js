@@ -9,7 +9,6 @@ module.exports = mysql => {
 			let values = [
 				tokenDecoded.id
 			];
-			console.log(tokenDecoded.type)
 			switch( tokenDecoded.type ) {
 				// Si somos estudiantes nos retorna nuestros datos,
 				// y los de nuestros padres
@@ -76,17 +75,24 @@ module.exports = mysql => {
 										cedula_e as cedula,
 										genero_e as genero,
 										grado as grado,
+										user_e as usuario,
 										grados.seccion as seccion
 									FROM 
 										estudiantes 
 										INNER JOIN grados
 											ON estudiantes.id_gra = grados.id_gra
-									WHERE 
-										UPPER(${req.query.type}_e) LIKE UPPER(?)
+									WHERE
+										UPPER(grado) LIKE UPPER(?) OR 
+										UPPER(nombres_e) LIKE UPPER(?) OR 
+										UPPER(apellidos_e) LIKE UPPER(?) OR 
+										cedula_e LIKE ? 
 									ORDER BY 
 										nombres_e;
 								`;
 							values = [
+								`%${req.query.data}%`,
+								`%${req.query.data}%`,
+								`%${req.query.data}%`,
 								`%${req.query.data}%`
 							];
 							break;

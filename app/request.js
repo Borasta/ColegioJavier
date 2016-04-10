@@ -8,6 +8,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 module.exports = function (router, mysql) {
       var Cursos = require("./request/cursos")(mysql);
+      var DocenteMateria = require("./request/docente_materia")(mysql);
       var Docentes = require("./request/docentes")(mysql);
       var Estudiantes = require("./request/estudiantes")(mysql);
       var Grados = require("./request/grados")(mysql);
@@ -20,6 +21,8 @@ module.exports = function (router, mysql) {
       var Secciones = require("./request/secciones")(mysql);
 
       router.route("/cursos").get(_middleware2.default.authDocente, Cursos.get).post(_middleware2.default.authMod, Cursos.post).put(_middleware2.default.authMod, Cursos.put).delete(_middleware2.default.authMod, Cursos.delete);
+
+      router.route("/docente_materia").get(_middleware2.default.authMod, DocenteMateria.get).post(_middleware2.default.authMod, DocenteMateria.post).put(_middleware2.default.authMod, DocenteMateria.put).delete(_middleware2.default.authMod, DocenteMateria.delete);
 
       router.route("/docentes").get(_middleware2.default.authDocente, Docentes.get).post(_middleware2.default.authMod, Docentes.post).put(_middleware2.default.authMod, Docentes.put).delete(_middleware2.default.authMod, Docentes.delete);
 

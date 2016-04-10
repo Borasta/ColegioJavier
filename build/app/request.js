@@ -2,6 +2,7 @@ import middleware from "./middleware";
 
 module.exports = (router, mysql) =>{
     let Cursos = require("./request/cursos")(mysql);
+    let DocenteMateria = require("./request/docente_materia")(mysql);
     let Docentes = require("./request/docentes")(mysql);
     let Estudiantes = require("./request/estudiantes")(mysql);
     let Grados = require("./request/grados")(mysql);
@@ -18,6 +19,12 @@ module.exports = (router, mysql) =>{
           .post(middleware.authMod, Cursos.post)
           .put(middleware.authMod, Cursos.put)
           .delete(middleware.authMod, Cursos.delete);
+
+    router.route("/docente_materia")
+          .get(middleware.authMod, DocenteMateria.get)
+          .post(middleware.authMod, DocenteMateria.post)
+          .put(middleware.authMod, DocenteMateria.put)
+          .delete(middleware.authMod, DocenteMateria.delete);
 
     router.route("/docentes")
           .get(middleware.authDocente, Docentes.get)

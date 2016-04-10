@@ -13,17 +13,34 @@ module.exports = mysql => {
 				case "a":
 				case "b": {
 					query = `
-									SELECT 
-										docentes.nombres_d as lider,
-										grupos.nombre_gru as nombre, 
-										grupos.descripcion_gru as descripcion
-									FROM docentes INNER JOIN lideres
-										ON docentes.id_d = lideres.id_d INNER JOIN grupos
-										ON lideres.id_gru = grupos.id_gru
-									WHERE upper(${req.query.type}_gru) LIKE upper(?) 
-		            				ORDER BY nombre_gru;
-								`;
+						SELECT 
+							id_c as id,
+							CONCAT(nombres_d, ' ', apellidos_d) as docente,
+							apellidos_d,
+							nombre_m as materia,
+							CONCAT(nombres_e, ' ', apellidos_e) as estudiante
+						FROM cursos
+						  INNER JOIN estudiantes
+						    ON cursos.id_e = estudiantes.id_e
+						  INNER JOIN docente_materia
+						    ON cursos.id_dm = docente_materia.id_dm
+						  INNER JOIN docentes
+						  	ON docente_materia.id_d = docentes.id_d
+						  INNER JOIN materias
+						  	ON docente_materia.id_m = materias.id_m
+						WHERE 
+							(
+								UPPER(nombres_d) LIKE UPPER(?) OR 
+								UPPER(apellidos_d) LIKE UPPER(?) OR 
+								cedula_d LIKE ? 
+							)
+						ORDER BY
+							nombres_d;
+						;
+					`;
 					values = [
+						`%${req.query.data}%`,
+						`%${req.query.data}%`,
 						`%${req.query.data}%`
 					];
 					break;
@@ -70,6 +87,7 @@ module.exports = mysql => {
 			}
 			mysql.query(query, values)
 				 .then( curso => {
+					 console.log(curso)
 					 res.status(200).send(curso);
 				 }).catch(error => {
 				res.status(404).send(error);

@@ -1,18 +1,21 @@
 app.controller('Representantes', ($scope, $http, $window) => {
 
 	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
 
 	$scope.crear = () => {
 		console.log($scope.create);
 		$http({
 			"method": "POST",
-			"url": `/representantes`, 
+			"url": `/representantes`,
 			"data": $scope.create
 		}).success( data => {
 			$scope.create = null;
 			alert("Creado correctamente");
 		}).error( e => {
-			
+
 		});
 	};
 
@@ -21,33 +24,34 @@ app.controller('Representantes', ($scope, $http, $window) => {
 		$scope.wait = true;
 		$http({
 			"method": "GET",
-			"url": `/representantes`, 
+			"url": `/representantes`,
 			"params": $scope.read
 		}).success( data => {
+			console.log(data);
 			$scope.read.data = "";
 			$scope.result = data ? data : [];
 			$scope.wait = false;
 		}).error( e => {
-			
+
 		});
 	};
 
 	$scope.modificar = ( representante ) => {
 		$http({
 			"method": "PUT",
-			"url": `/representantes`, 
+			"url": `/representantes`,
 			"params": representante
 		}).success( data => {
 			alert("Modificado correctamente");
 		}).error( e => {
-			
+
 		});
 	};
 
 	$scope.borrar = ( id ) => {
 		$http({
 			"method": "DELETE",
-			"url": `/representantes`, 
+			"url": `/representantes`,
 			"params": {
 				"id": id
 			}
@@ -60,17 +64,20 @@ app.controller('Representantes', ($scope, $http, $window) => {
 			});
 			pos > -1 && $scope.result.splice( pos, 1 );
 		}).error( e => {
-			
+
 		});
 	}
 
 });
 
 app.controller('Alumnos', ($scope, $http, $window) => {
-	
-	$scope.radio = "c";
 
-	$scope.verGrados = self => {
+	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
+
+	($scope.verGrados = self => {
 		if( !self ) {
 			$http({
 				"method": "GET",
@@ -85,9 +92,8 @@ app.controller('Alumnos', ($scope, $http, $window) => {
 					// $scope.logout();
 				});
 		}
-	};
-
-	$scope.verSecciones = grado => {
+	})();
+	($scope.verSecciones = grado => {
 		if( !$scope.secciones ) {
 			$http({
 				"method": "GET",
@@ -102,58 +108,124 @@ app.controller('Alumnos', ($scope, $http, $window) => {
 					// $scope.logout();
 				});
 		}
+	})();
+
+	$scope.leer = () => {
+		$scope.result = null;
+		$scope.wait = true;
+		$http({
+			"method": "GET",
+			"url": `/estudiantes`,
+			"params": $scope.read
+		}).success( data => {
+			$scope.read.data = "";
+			$scope.result = data ? data : [];
+			$scope.wait = false;
+		}).error( e => {
+			console.log(e);
+			$scope.result = [];
+			$scope.wait = false;
+		});
 	};
-
-	$scope.verGrados();
-	$scope.verSecciones();
-
-	$scope.updateSelect = () => {
-		$('.selectUpdate').material_select("update");
-	}
 
 });
 
 app.controller('Familias', ($scope, $http, $window) => {
-	
+
 	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
 
 });
 
 app.controller('Grados', ($scope, $http, $window) => {
-	
+
 	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
 
 });
 
 app.controller('Secciones', ($scope, $http, $window) => {
-	
+
 	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
 
 });
 
 app.controller('Cursos', ($scope, $http, $window) => {
-	
+
 	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
+
+	$scope.crear = () => {
+		$http({
+			"method": "POST",
+			"url": `/cursos`,
+			"data": $scope.create
+		}).success( data => {
+			$scope.create = null;
+			alert("Creado correctamente");
+		}).error( e => {
+			console.log(e)
+		});
+	};
+
+	$scope.leer = () => {
+		$scope.result = null;
+		$scope.wait = true;
+		$http({
+			"method": "GET",
+			"url": `/cursos`,
+			"params": $scope.read
+		}).success( data => {
+			$scope.read.data = "";
+			$scope.result = data ? data : [];
+			$scope.wait = false;
+		}).error( e => {
+			console.log(e);
+			$scope.result = [];
+			$scope.wait = false;
+		});
+	};
 
 });
 
 app.controller('Notas', ($scope, $http, $window) => {
-	
+
 	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
 
 });
 
 app.controller('Anio', ($scope, $http, $window) => {
-	
+
 	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
 
 });
 
 app.controller('Materias', ($scope, $http, $window) => {
-	
-	$scope.radio = "c";
 
-	$scope.verMaterias = materias => {
+	$scope.radio = "c";
+	$scope.read1 = {
+		data: ""
+	};
+	$scope.read2 = {
+		data: ""
+	};
+
+	($scope.verMaterias = materias => {
 		if( !$scope.materias ) {
 			$http({
 				"method": "GET",
@@ -168,33 +240,116 @@ app.controller('Materias', ($scope, $http, $window) => {
 					// $scope.logout();
 				});
 		}
+	})();
+
+	$scope.crear = () => {
+		$http({
+			"method": "POST",
+			"url": `/materias`,
+			"data": $scope.create1
+		}).success( data => {
+			$scope.create = null;
+			alert("Creado correctamente");
+		}).error( e => {
+			console.log(e)
+		});
 	};
 
-	$scope.verMaterias();
+	$scope.crearDocenteMateria = () => {
+		$http({
+			"method": "POST",
+			"url": `/docente_materia`,
+			"data": $scope.create2
+		}).success( data => {
+			$scope.create = null;
+			alert("Creado correctamente");
+		}).error( e => {
+			console.log(e)
+		});
+	};
+
+	$scope.leer = () => {
+		$scope.dm = false;
+		$scope.m = false;
+		$scope.result = null;
+		$scope.wait = true;
+		$http({
+			"method": "GET",
+			"url": `/materias`,
+			"params": $scope.read1
+		}).success( data => {
+			$scope.m = true;
+			console.log(data);
+			$scope.read.data = "";
+			$scope.result = data ? data : [];
+			$scope.wait = true;
+		}).error( e => {
+
+		});
+	};
+
+	$scope.leerDM = () => {
+		$scope.dm = false;
+		$scope.m = false;
+		$scope.result = null;
+		$scope.wait = true;
+		$http({
+			"method": "GET",
+			"url": `/docente_materia`,
+			"params": $scope.read2
+		}).success( data => {
+			$scope.dm = true;
+			console.log(data);
+			$scope.read.data = "";
+			$scope.result = data ? data : [];
+			$scope.wait = false;
+		}).error( e => {
+
+		});
+	};
 
 });
 
 app.controller('DocenteMateria', ($scope, $http, $window) => {
-	
+
 	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
+
+	$scope.crear = () => {
+		$http({
+			"method": "POST",
+			"url": `/materias`,
+			"data": $scope.create1
+		}).success( data => {
+			$scope.create = null;
+			alert("Creado correctamente");
+		}).error( e => {
+			console.log(e)
+		});
+	};
 
 });
 
 app.controller('Docentes', ($scope, $http, $window) => {
 
 	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
 
 	$scope.crear = () => {
 		console.log($scope.create);
 		$http({
 			"method": "POST",
-			"url": `/docentes`, 
+			"url": `/docentes`,
 			"data": $scope.create
 		}).success( data => {
 			$scope.create = null;
 			alert("Creado correctamente");
 		}).error( e => {
-			
+
 		});
 	};
 
@@ -203,33 +358,35 @@ app.controller('Docentes', ($scope, $http, $window) => {
 		$scope.wait = true;
 		$http({
 			"method": "GET",
-			"url": `/docentes`, 
+			"url": `/docentes`,
 			"params": $scope.read
 		}).success( data => {
 			$scope.read.data = "";
 			$scope.result = data ? data : [];
 			$scope.wait = false;
 		}).error( e => {
-			console.log(e)
+			console.log(e);
+			$scope.result = [];
+			$scope.wait = false;
 		});
 	};
 
 	$scope.modificar = ( docente ) => {
 		$http({
 			"method": "PUT",
-			"url": `/docentes`, 
+			"url": `/docentes`,
 			"params": docente
 		}).success( data => {
 			alert("Modificado correctamente");
 		}).error( e => {
-			
+
 		});
 	};
 
 	$scope.borrar = ( id ) => {
 		$http({
 			"method": "DELETE",
-			"url": `/docentes`, 
+			"url": `/docentes`,
 			"params": {
 				"id": id
 			}
@@ -242,20 +399,112 @@ app.controller('Docentes', ($scope, $http, $window) => {
 			});
 			pos > -1 && $scope.result.splice( pos, 1 );
 		}).error( e => {
-			
+
 		});
 	}
 
 });
 
 app.controller('Horarios', ($scope, $http, $window) => {
-	
+
 	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
 
 });
 
 app.controller('Dias', ($scope, $http, $window) => {
-	
+
 	$scope.radio = "c";
-	
+	$scope.read = {
+		data: ""
+	};
+
+});
+
+app.controller('Grupos', ($scope, $http, $window) => {
+
+	$scope.radio = "c";
+	$scope.read = {
+		data: ""
+	};
+
+	($scope.verGrupos = grupos => {
+		if( !$scope.grupos ) {
+			$http({
+				"method": "GET",
+				"url": `/grupos`
+			})
+				.then(grupos => {
+					console.log("hla");
+					console.log(grupos);
+					$scope.grupos = grupos.data;
+				}, e => {
+					console.log(`Error`);
+					console.log(e);
+				});
+		}
+	})();
+
+	$scope.crear = () => {
+		console.log($scope.create1);
+		$http({
+			"method": "POST",
+			"url": `/grupos`,
+			"data": $scope.create
+		}).success( data => {
+			$scope.create = null;
+			alert("Creado correctamente");
+		}).error( e => {
+
+		});
+	};
+
+	$scope.crearMiembro = () => {
+		console.log($scope.create1);
+		$http({
+			"method": "POST",
+			"url": `/miembros`,
+			"data": $scope.create2
+		}).success( data => {
+			$scope.create = null;
+			alert("Creado correctamente");
+		}).error( e => {
+
+		});
+	};
+
+	$scope.crearLider = () => {
+		console.log($scope.create1);
+		$http({
+			"method": "POST",
+			"url": `/lideres`,
+			"data": $scope.create3
+		}).success( data => {
+			$scope.create = null;
+			alert("Creado correctamente");
+		}).error( e => {
+
+		});
+	};
+
+	$scope.leer = () => {
+		$scope.result = null;
+		$scope.wait = true;
+		$http({
+			"method": "GET",
+			"url": `/grupos`,
+			"params": $scope.read
+		}).success( data => {
+			$scope.read.data = "";
+			$scope.result = data ? data : [];
+			$scope.wait = false;
+		}).error( e => {
+			console.log(e);
+			$scope.result = [];
+			$scope.wait = false;
+		});
+	};
+
 });

@@ -30,18 +30,19 @@ module.exports = mysql => {
 						case "a":
 						case "b": {
 							query = `
-									SELECT 
-										docentes.nombres_d as lider,
+									SELECT
+										id_gru as id,
 										grupos.nombre_gru as nombre, 
 										grupos.descripcion_gru as descripcion
-									FROM docentes INNER JOIN lideres
-										ON docentes.id_d = lideres.id_d INNER JOIN grupos
-										ON lideres.id_gru = grupos.id_gru
-									WHERE upper(${req.query.type}_gru) LIKE upper(?) 
-		            				ORDER BY nombre_gru;
+									FROM 
+										grupos
+									WHERE 
+										upper(nombre_gru) LIKE upper(?) 
+		            				ORDER BY 
+		            					nombre_gru;
 								`;
 							values = [
-								`%${req.query.data}%`
+								`%${req.query.data || ''}%`
 							];
 							break;
 						}
@@ -80,11 +81,11 @@ module.exports = mysql => {
 			mysql.query(query, values)
 				 .then( grupos => {
 					 if( grupos.length >= 1 ) {
-						 console.log(grupos);
 						 res.status(200).send(grupos);
 					 }
 				 })
 				 .catch(error => {
+					 console.log(error);
 					 res.status(404).send(error);
 				 });
 

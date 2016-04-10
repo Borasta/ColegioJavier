@@ -24,8 +24,8 @@ module.exports = function (mysql) {
 							case "a":
 							case "b":
 								{
-									query = "\n\t\t\t\t\t\t\t\t\tSELECT \n\t\t\t\t\t\t\t\t\t\tdocentes.nombres_d as lider,\n\t\t\t\t\t\t\t\t\t\tgrupos.nombre_gru as nombre, \n\t\t\t\t\t\t\t\t\t\tgrupos.descripcion_gru as descripcion\n\t\t\t\t\t\t\t\t\tFROM docentes INNER JOIN lideres\n\t\t\t\t\t\t\t\t\t\tON docentes.id_d = lideres.id_d INNER JOIN grupos\n\t\t\t\t\t\t\t\t\t\tON lideres.id_gru = grupos.id_gru\n\t\t\t\t\t\t\t\t\tWHERE upper(" + req.query.type + "_gru) LIKE upper(?) \n\t\t            \t\t\t\tORDER BY nombre_gru;\n\t\t\t\t\t\t\t\t";
-									values = ["%" + req.query.data + "%"];
+									query = "\n\t\t\t\t\t\t\t\t\tSELECT\n\t\t\t\t\t\t\t\t\t\tid_gru as id,\n\t\t\t\t\t\t\t\t\t\tgrupos.nombre_gru as nombre, \n\t\t\t\t\t\t\t\t\t\tgrupos.descripcion_gru as descripcion\n\t\t\t\t\t\t\t\t\tFROM \n\t\t\t\t\t\t\t\t\t\tgrupos\n\t\t\t\t\t\t\t\t\tWHERE \n\t\t\t\t\t\t\t\t\t\tupper(nombre_gru) LIKE upper(?) \n\t\t            \t\t\t\tORDER BY \n\t\t            \t\t\t\t\tnombre_gru;\n\t\t\t\t\t\t\t\t";
+									values = ["%" + (req.query.data || '') + "%"];
 									break;
 								}
 
@@ -53,10 +53,10 @@ module.exports = function (mysql) {
 
 			mysql.query(query, values).then(function (grupos) {
 				if (grupos.length >= 1) {
-					console.log(grupos);
 					res.status(200).send(grupos);
 				}
 			}).catch(function (error) {
+				console.log(error);
 				res.status(404).send(error);
 			});
 		}, // Listo

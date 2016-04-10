@@ -13,8 +13,8 @@ module.exports = function (mysql) {
 				case "a":
 				case "b":
 					{
-						query = "\n\t\t\t\t\t\t\t\t\tSELECT \n\t\t\t\t\t\t\t\t\t\tdocentes.nombres_d as lider,\n\t\t\t\t\t\t\t\t\t\tgrupos.nombre_gru as nombre, \n\t\t\t\t\t\t\t\t\t\tgrupos.descripcion_gru as descripcion\n\t\t\t\t\t\t\t\t\tFROM docentes INNER JOIN lideres\n\t\t\t\t\t\t\t\t\t\tON docentes.id_d = lideres.id_d INNER JOIN grupos\n\t\t\t\t\t\t\t\t\t\tON lideres.id_gru = grupos.id_gru\n\t\t\t\t\t\t\t\t\tWHERE upper(" + req.query.type + "_gru) LIKE upper(?) \n\t\t            \t\t\t\tORDER BY nombre_gru;\n\t\t\t\t\t\t\t\t";
-						values = ["%" + req.query.data + "%"];
+						query = "\n\t\t\t\t\t\tSELECT \n\t\t\t\t\t\t\tid_c as id,\n\t\t\t\t\t\t\tCONCAT(nombres_d, ' ', apellidos_d) as docente,\n\t\t\t\t\t\t\tapellidos_d,\n\t\t\t\t\t\t\tnombre_m as materia,\n\t\t\t\t\t\t\tCONCAT(nombres_e, ' ', apellidos_e) as estudiante\n\t\t\t\t\t\tFROM cursos\n\t\t\t\t\t\t  INNER JOIN estudiantes\n\t\t\t\t\t\t    ON cursos.id_e = estudiantes.id_e\n\t\t\t\t\t\t  INNER JOIN docente_materia\n\t\t\t\t\t\t    ON cursos.id_dm = docente_materia.id_dm\n\t\t\t\t\t\t  INNER JOIN docentes\n\t\t\t\t\t\t  \tON docente_materia.id_d = docentes.id_d\n\t\t\t\t\t\t  INNER JOIN materias\n\t\t\t\t\t\t  \tON docente_materia.id_m = materias.id_m\n\t\t\t\t\t\tWHERE \n\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\tUPPER(nombres_d) LIKE UPPER(?) OR \n\t\t\t\t\t\t\t\tUPPER(apellidos_d) LIKE UPPER(?) OR \n\t\t\t\t\t\t\t\tcedula_d LIKE ? \n\t\t\t\t\t\t\t)\n\t\t\t\t\t\tORDER BY\n\t\t\t\t\t\t\tnombres_d;\n\t\t\t\t\t\t;\n\t\t\t\t\t";
+						values = ["%" + req.query.data + "%", "%" + req.query.data + "%", "%" + req.query.data + "%"];
 						break;
 					}
 
@@ -31,6 +31,7 @@ module.exports = function (mysql) {
 					break;
 			}
 			mysql.query(query, values).then(function (curso) {
+				console.log(curso);
 				res.status(200).send(curso);
 			}).catch(function (error) {
 				res.status(404).send(error);

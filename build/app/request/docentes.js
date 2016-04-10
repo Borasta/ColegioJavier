@@ -19,13 +19,18 @@ module.exports = mysql => {
 							FROM
 								docentes
 							WHERE
-								(UPPER(${req.query.type}_d) LIKE UPPER(?)
+								(
+									UPPER(nombres_d) LIKE UPPER(?) OR 
+									UPPER(apellidos_d) LIKE UPPER(?) OR 
+									cedula_d LIKE ? 
+								)
 							ORDER BY
 								nombres_d;
 				        `;
 					values = [
 						`%${req.query.data}%`,
-						req.query.type
+						`%${req.query.data}%`,
+						`%${req.query.data}%`
 					];
 					break;
 				}
@@ -43,19 +48,22 @@ module.exports = mysql => {
 							FROM
 								docentes
 							WHERE
-								(UPPER(${req.query.type}_d) LIKE UPPER(?) 
+								(
+									UPPER(nombres_d) LIKE UPPER(?) OR 
+									UPPER(apellidos_d) LIKE UPPER(?) OR 
+									cedula_d LIKE ? 
+								)
 								AND NOT flag_d = 'b' 
-								AND NOT flag_d = 'a')
-								OR ('id' = ? AND ? = ? AND id_d = ?)
+								AND NOT flag_d = 'a'
+								AND NOT id_d = ?
 							ORDER BY
 								nombres_d;
 				        `;
 					values = [
 						`%${req.query.data}%`,
-						req.query.type,
-						tokenDecoded.id,
-						req.query.data,
-						req.query.data
+						`%${req.query.data}%`,
+						`%${req.query.data}%`,
+						tokenDecoded.id
 					];
 					break;
 				}

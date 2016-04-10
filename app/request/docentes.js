@@ -11,16 +11,16 @@ module.exports = function (mysql) {
 				// Si somos admins retornamos cualquier docente admin o moderador
 				case "a":
 					{
-						query = "\n\t\t\t\t\t\t\tSELECT\n\t\t\t\t\t\t\t\tid_d AS id,\n\t\t\t\t\t\t\t\tnombres_d AS nombres,\n\t\t\t\t\t\t\t\tapellidos_d AS apellidos,\n\t\t\t\t\t\t\t\tcedula_d AS cedula,\n\t\t\t\t\t\t\t\tgenero_d AS genero,\n\t\t\t\t\t\t\t\tuser_d AS usuario\n\t\t\t\t\t\t\tFROM\n\t\t\t\t\t\t\t\tdocentes\n\t\t\t\t\t\t\tWHERE\n\t\t\t\t\t\t\t\t(UPPER(" + req.query.type + "_d) LIKE UPPER(?)\n\t\t\t\t\t\t\tORDER BY\n\t\t\t\t\t\t\t\tnombres_d;\n\t\t\t\t        ";
-						values = ["%" + req.query.data + "%", req.query.type];
+						query = "\n\t\t\t\t\t\t\tSELECT\n\t\t\t\t\t\t\t\tid_d AS id,\n\t\t\t\t\t\t\t\tnombres_d AS nombres,\n\t\t\t\t\t\t\t\tapellidos_d AS apellidos,\n\t\t\t\t\t\t\t\tcedula_d AS cedula,\n\t\t\t\t\t\t\t\tgenero_d AS genero,\n\t\t\t\t\t\t\t\tuser_d AS usuario\n\t\t\t\t\t\t\tFROM\n\t\t\t\t\t\t\t\tdocentes\n\t\t\t\t\t\t\tWHERE\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tUPPER(nombres_d) LIKE UPPER(?) OR \n\t\t\t\t\t\t\t\t\tUPPER(apellidos_d) LIKE UPPER(?) OR \n\t\t\t\t\t\t\t\t\tcedula_d LIKE ? \n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\tORDER BY\n\t\t\t\t\t\t\t\tnombres_d;\n\t\t\t\t        ";
+						values = ["%" + req.query.data + "%", "%" + req.query.data + "%", "%" + req.query.data + "%"];
 						break;
 					}
 
 				// Si somos moderador retornamos cualquier docente
 				case "b":
 					{
-						query = "\n\t\t\t\t\t\t\tSELECT\n\t\t\t\t\t\t\t\tid_d AS id,\n\t\t\t\t\t\t\t\tnombres_d AS nombres,\n\t\t\t\t\t\t\t\tapellidos_d AS apellidos,\n\t\t\t\t\t\t\t\tcedula_d AS cedula,\n\t\t\t\t\t\t\t\tgenero_d AS genero,\n\t\t\t\t\t\t\t\tuser_d AS usuario\n\t\t\t\t\t\t\tFROM\n\t\t\t\t\t\t\t\tdocentes\n\t\t\t\t\t\t\tWHERE\n\t\t\t\t\t\t\t\t(UPPER(" + req.query.type + "_d) LIKE UPPER(?) \n\t\t\t\t\t\t\t\tAND NOT flag_d = 'b' \n\t\t\t\t\t\t\t\tAND NOT flag_d = 'a')\n\t\t\t\t\t\t\t\tOR ('id' = ? AND ? = ? AND id_d = ?)\n\t\t\t\t\t\t\tORDER BY\n\t\t\t\t\t\t\t\tnombres_d;\n\t\t\t\t        ";
-						values = ["%" + req.query.data + "%", req.query.type, tokenDecoded.id, req.query.data, req.query.data];
+						query = "\n\t\t\t\t\t\t\tSELECT\n\t\t\t\t\t\t\t\tid_d AS id,\n\t\t\t\t\t\t\t\tnombres_d AS nombres,\n\t\t\t\t\t\t\t\tapellidos_d AS apellidos,\n\t\t\t\t\t\t\t\tcedula_d AS cedula,\n\t\t\t\t\t\t\t\tgenero_d AS genero,\n\t\t\t\t\t\t\t\tuser_d AS usuario\n\t\t\t\t\t\t\tFROM\n\t\t\t\t\t\t\t\tdocentes\n\t\t\t\t\t\t\tWHERE\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tUPPER(nombres_d) LIKE UPPER(?) OR \n\t\t\t\t\t\t\t\t\tUPPER(apellidos_d) LIKE UPPER(?) OR \n\t\t\t\t\t\t\t\t\tcedula_d LIKE ? \n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t\tAND NOT flag_d = 'b' \n\t\t\t\t\t\t\t\tAND NOT flag_d = 'a'\n\t\t\t\t\t\t\t\tAND NOT id_d = ?\n\t\t\t\t\t\t\tORDER BY\n\t\t\t\t\t\t\t\tnombres_d;\n\t\t\t\t        ";
+						values = ["%" + req.query.data + "%", "%" + req.query.data + "%", "%" + req.query.data + "%", tokenDecoded.id];
 						break;
 					}
 

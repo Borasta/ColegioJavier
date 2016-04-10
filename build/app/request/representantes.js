@@ -10,11 +10,21 @@ module.exports = mysql => {
 		            	apellidos_r as apellidos, 
 		            	cedula_r as cedula, 
 		            	genero_r as genero 
-		            FROM representantes WHERE upper(${req.query.type}_r) LIKE upper('%${req.query.data}%') 
+		            FROM representantes 
+		            WHERE 
+		            	upper(nombres_r) LIKE upper(?) OR
+		            	upper(nombres_r) LIKE upper(?) OR
+		            	cedula_r LIKE ? 
 		            ORDER BY nombres_r;
 		        `;
-			mysql.query(query)
+			var values = [
+				`%${req.query.data}%`,
+				`%${req.query.data}%`,
+				`%${req.query.data}%`
+			];
+			mysql.query(query, values)
 				 .then( representantes => {
+					 console.log(representantes);
 					 res.status(200).send(representantes);
 				 }).catch(error => {
 				res.status(404).send(error);

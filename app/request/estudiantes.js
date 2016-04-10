@@ -13,7 +13,6 @@ module.exports = function (mysql) {
 		"get": function get(req, res) {
 			var tokenDecoded = req.data;
 			var values = [tokenDecoded.id];
-			console.log(tokenDecoded.type);
 			switch (tokenDecoded.type) {
 				// Si somos estudiantes nos retorna nuestros datos,
 				// y los de nuestros padres
@@ -53,8 +52,8 @@ module.exports = function (mysql) {
 							case "a":
 							case "b":
 								{
-									query = "\n\t\t\t\t\t\t\t\t\tSELECT \n\t\t\t\t\t\t\t\t\t\tid_e as id,\n\t\t\t\t\t\t\t\t\t\tnombres_e as nombres,\n\t\t\t\t\t\t\t\t\t\tapellidos_e as apellidos,\n\t\t\t\t\t\t\t\t\t\tcedula_e as cedula,\n\t\t\t\t\t\t\t\t\t\tgenero_e as genero,\n\t\t\t\t\t\t\t\t\t\tgrado as grado,\n\t\t\t\t\t\t\t\t\t\tgrados.seccion as seccion\n\t\t\t\t\t\t\t\t\tFROM \n\t\t\t\t\t\t\t\t\t\testudiantes \n\t\t\t\t\t\t\t\t\t\tINNER JOIN grados\n\t\t\t\t\t\t\t\t\t\t\tON estudiantes.id_gra = grados.id_gra\n\t\t\t\t\t\t\t\t\tWHERE \n\t\t\t\t\t\t\t\t\t\tUPPER(" + req.query.type + "_e) LIKE UPPER(?)\n\t\t\t\t\t\t\t\t\tORDER BY \n\t\t\t\t\t\t\t\t\t\tnombres_e;\n\t\t\t\t\t\t\t\t";
-									values = ["%" + req.query.data + "%"];
+									query = "\n\t\t\t\t\t\t\t\t\tSELECT \n\t\t\t\t\t\t\t\t\t\tid_e as id,\n\t\t\t\t\t\t\t\t\t\tnombres_e as nombres,\n\t\t\t\t\t\t\t\t\t\tapellidos_e as apellidos,\n\t\t\t\t\t\t\t\t\t\tcedula_e as cedula,\n\t\t\t\t\t\t\t\t\t\tgenero_e as genero,\n\t\t\t\t\t\t\t\t\t\tgrado as grado,\n\t\t\t\t\t\t\t\t\t\tuser_e as usuario,\n\t\t\t\t\t\t\t\t\t\tgrados.seccion as seccion\n\t\t\t\t\t\t\t\t\tFROM \n\t\t\t\t\t\t\t\t\t\testudiantes \n\t\t\t\t\t\t\t\t\t\tINNER JOIN grados\n\t\t\t\t\t\t\t\t\t\t\tON estudiantes.id_gra = grados.id_gra\n\t\t\t\t\t\t\t\t\tWHERE\n\t\t\t\t\t\t\t\t\t\tUPPER(grado) LIKE UPPER(?) OR \n\t\t\t\t\t\t\t\t\t\tUPPER(nombres_e) LIKE UPPER(?) OR \n\t\t\t\t\t\t\t\t\t\tUPPER(apellidos_e) LIKE UPPER(?) OR \n\t\t\t\t\t\t\t\t\t\tcedula_e LIKE ? \n\t\t\t\t\t\t\t\t\tORDER BY \n\t\t\t\t\t\t\t\t\t\tnombres_e;\n\t\t\t\t\t\t\t\t";
+									values = ["%" + req.query.data + "%", "%" + req.query.data + "%", "%" + req.query.data + "%", "%" + req.query.data + "%"];
 									break;
 								}
 							// Si somos docentes normales buscamos nuestros estudiantes
