@@ -239,7 +239,7 @@ app.controller('Materias', ($scope, $http, $window) => {
 					console.log(e);
 					// $scope.logout();
 				});
-		}
+		}	
 	})();
 
 	$scope.crear = () => {
