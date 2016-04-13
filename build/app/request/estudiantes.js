@@ -9,6 +9,7 @@ module.exports = mysql => {
 			let values = [
 				tokenDecoded.id
 			];
+			console.log("hola");
 			switch( tokenDecoded.type ) {
 				// Si somos estudiantes nos retorna nuestros datos,
 				// y los de nuestros padres
@@ -90,10 +91,10 @@ module.exports = mysql => {
 										nombres_e;
 								`;
 							values = [
-								`%${req.query.data}%`,
-								`%${req.query.data}%`,
-								`%${req.query.data}%`,
-								`%${req.query.data}%`
+								`%${req.query.data1}%`,
+								`%${req.query.data1}%`,
+								`%${req.query.data1}%`,
+								`%${req.query.data1}%`
 							];
 							break;
 
@@ -126,8 +127,8 @@ module.exports = mysql => {
 									ON docente_materia.id_m = materias.id_m
 								WHERE 
 									docentes.id_d = ? 
-# 									AND materias.id_m = ?
-# 									AND grados.id_gra = ?
+ 									AND materias.id_m = ?
+ 									AND grados.id_gra = ?
 									AND (SELECT count(*) FROM anio) = notas.id_anio
 								ORDER BY grados.grado, grados.seccion, estudiantes.cedula_e;
 							`;
@@ -175,11 +176,10 @@ module.exports = mysql => {
 						?,
 						?,
 						?,
-						?
+						(SELECT id_gra FROM grados WHERE grado = ? AND seccion = ?)
 					);
 				`;
 			values = [
-				req.body.id_gra,
 				req.body.nombres,
 				req.body.apellidos,
 				req.body.cedula,
@@ -188,8 +188,12 @@ module.exports = mysql => {
 				req.body.direccion,
 				req.body.user,
 				req.body.pass,
-				'c'
+				'c',
+				req.body.grado,
+				req.body.seccion
 			];
+
+			console.log(values);
 
 			mysql.query(query, values)
 				 .then( estudiante => {

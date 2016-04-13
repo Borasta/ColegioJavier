@@ -63,8 +63,9 @@ module.exports = function (mysql) {
 		"post": function post(req, res) {
 			var values = [];
 			query = "\n\t\t            INSERT INTO grupos VALUES ( \n\t\t\t            null, \n\t\t\t            ?, \n\t\t\t            ? \n\t\t            );\n\t\t        ";
-			values = [req.body.nombre, req.body.descripcion];
-			mysql.query(query).then(function (grupo) {
+			values = [req.body.grupo, req.body.descripcion];
+			console.log(values);
+			mysql.query(query, values).then(function (grupo) {
 				res.status(200).send(grupo);
 			}).catch(function (error) {
 				res.status(404).send(error);

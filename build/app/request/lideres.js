@@ -98,10 +98,10 @@ module.exports = mysql => {
 		            );
 		        `;
 			values = [
-				req.body.id,
+				req.body.grupo,
 				req.body.cedula
 			];
-			mysql.query(query)
+			mysql.query(query, values)
 				 .then( grupo => {
 					 res.status(200).send(grupo);
 				 })

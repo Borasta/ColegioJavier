@@ -1,114 +1,38 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+<div class="container">
+    <h1> Noticias </h1>
 
-    <!-- Bootstrap -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="libraries/styles/bootstrap.css">
-    <!-- JQuery -->
-    <script src="libraries/scripts/jquery.js"></script>
-    <script src="libraries/scripts/bootstrap.js"></script>
 
-    <script src="panelControl/script/session.js"></script>
+    <div class="card-panel indigo accent-1 z-depth-3">
+        <h2>Abril</h2>
+        <ul class="collection">
+            <li class="collection-item">
+                06 y 07 Convivencia 2do grado A y B respectivamente.
+            </li>
+            <li class="collection-item">
+                13 Entrega de notas (Inicial y Primaria).
+            </li>
+            <li class="collection-item">
+                14 Entrega de notas (Media General).
+            </li>
+            <li class="collection-item">
+                15 Finaliza proceso de visitas a las familias.
+            </li>
 
-</head>
-<body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="">Colegio Javier</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">Inicio</a></li>
-                <li><a href="">¿Quienes Somos?</a></li>
-                <li><a href="contacto.html">Contactanos</a></li>
-                <li><a href="noticia.html">Noticias</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="">Estudiantes<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="">Educacion Inicial</a></li>
-                        <li><a href="">Primaria</a></li>
-                        <li><a href="">Diversificado</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="conectado active dropdown" style="display: none;">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
-                        <span class="nombresPersona"></span>
-                        <span class="apellidosPersona"></span>
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="">Administracion <span class="glyphicon glyphicon-book"></span></a></li>
-                        <li><a href="" id="config">Configuracion <span class="glyphicon glyphicon-cog"></span></a></li>
-                        <li class="divider"></li>
-                        <li><a href="" id="desconectar">Desconectar <span class="glyphicon glyphicon-off"></span></a></li>
-                    </ul>
-
-                </li>
-                <li class="desconectado" style="display: none;">
-                    <a class="dropdown-toggle" data-toggle="modal" data-target="#myModal" href="">
-                        <span class="glyphicon glyphicon-log-in dropdown"></span> Login
-                    </a>
-
-                    <!-- Modal -->
-                    <div id="myModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content modal-sm">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Login</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Some text in the modal.</p>
-                                    <div class="row">
-                                        <div class="input-prepend col-xs-11">
-                                            <span class="add-on"><i class="icon-user"></i> Usuario:</span>
-                                            <input id="usuario" type="text" class="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-prepend col-xs-11">
-                                            <span class="add-on"><i></i> Contraseña:</span>
-                                            <input id="contrasenia" type="password" class="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-prepend col-xs-11">
-                                            <select class="form-control" id="tipo">
-                                                <option value="estudiante">Estudiante</option>
-                                                <option value="docente">Docente</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <br/>
-                                    <div class="row">
-                                        <span class="col-xs-6">Olvido su contraseña?</span>
-                                        <button class="btn btn-info btn-sm col-xs-5" id="conectar">Conectar</button>
-                                    </div>
-                                    <br/>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+            <li class="collection-item">
+                21 y 22 Consejo de Secciones.
+            </li>
+            <li class="collection-item">
+                24 Jornada para padres aspirantes sala de 5 años (Comunidad).
+            </li>
+            <li class="collection-item">
+                26 y 28 Elaboración de boletines.
+            </li>
+            <li class="collection-item">
+                28 Publicación de los estudiantes admitidos sala de 5 años (Comunidad).
+            </li>
+            <li class="collection-item">
+                29 Entrega de boletines.
+            </li>
+        </ul>
     </div>
-</nav>
-</body>
-</html>
+</div>

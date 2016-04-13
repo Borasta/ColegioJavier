@@ -12,6 +12,8 @@ module.exports = (router, mysql) =>{
     let Materias = require("./request/materias")(mysql);
     let Notas = require("./request/notas")(mysql);
     let Representantes = require("./request/representantes")(mysql);
+    let Miembros = require("./request/miembros")(mysql);
+    let Lideres = require("./request/lideres")(mysql);
     let Secciones = require("./request/secciones")(mysql);
 
     router.route("/cursos")
@@ -77,6 +79,18 @@ module.exports = (router, mysql) =>{
           .post(middleware.authMod, Representantes.post)
           .put(middleware.authMod, Representantes.put)
           .delete(middleware.authMod, Representantes.delete);
+
+    router.route("/miembros")
+          .get(middleware.authMod, Miembros.get)
+          .post(middleware.authMod, Miembros.post)
+          .put(middleware.authMod, Miembros.put)
+          .delete(middleware.authMod, Miembros.delete);
+
+    router.route("/lideres")
+          .get(middleware.authMod, Lideres.get)
+          .post(middleware.authMod, Lideres.post)
+          .put(middleware.authMod, Lideres.put)
+          .delete(middleware.authMod, Lideres.delete);
 
     router.route("/secciones")
           .get(middleware.authDocente, Secciones.get)

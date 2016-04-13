@@ -5,7 +5,7 @@ module.exports = function (mysql) {
 
 	return {
 		"get": function get(req, res) {
-			query = "\n\t\t            SELECT \n\t\t            \tid_r as id, \n\t\t            \tnombres_r as nombres, \n\t\t            \tapellidos_r as apellidos, \n\t\t            \tcedula_r as cedula, \n\t\t            \tgenero_r as genero \n\t\t            FROM representantes \n\t\t            WHERE \n\t\t            \tupper(nombres_r) LIKE upper(?) OR\n\t\t            \tupper(nombres_r) LIKE upper(?) OR\n\t\t            \tcedula_r LIKE ? \n\t\t            ORDER BY nombres_r;\n\t\t        ";
+			query = "\n\t\t            SELECT \n\t\t            \tid_r as id, \n\t\t            \tnombres_r as nombres, \n\t\t            \tapellidos_r as apellidos, \n\t\t            \tcedula_r as cedula, \n\t\t            \tgenero_r as genero \n\t\t            FROM representantes \n\t\t            WHERE \n\t\t            \tupper(CONCAT(nombres_r, ' ', apellidos_r)) LIKE upper(?) OR\n\t\t            \tcedula_r LIKE ? \n\t\t            ORDER BY nombres_r;\n\t\t        ";
 			var values = ["%" + req.query.data + "%", "%" + req.query.data + "%", "%" + req.query.data + "%"];
 			mysql.query(query, values).then(function (representantes) {
 				console.log(representantes);

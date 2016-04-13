@@ -1,22 +1,13 @@
 <div class="container">
-    <div class="hide-on-large-only">
-        <p class="center-align">Para ver todas las opciones por favor ingrese desde un dispositivo con pantalla mas grande</p>
-    </div>
-
-    <div class="hide-on-med-and-down">
-        <h2 class="center-align">Admin</h2>
-    </div>
-
-    <div class="hide-on-med-and-down">
+    <div class="">
         <h2 class="center-align">Panel de control</h2>
         <div class="row">
-            <div class="col s12">
-                <ul class="tabs">
-                    <li class="tab"><a href="#docentes">Docentes</a></li>
+            <div class="col s12 blue-text">
+                <ul class="tabs blue-text">
+                    <li class="tab blue-text"><a href="#docentes">Docentes</a></li>
                     <li class="tab"><a href="#alumnos">Alumnos</a></li>
                     <li class="tab"><a href="#representantes">Representantes</a></li>
                     <li class="tab"><a href="#materias">Materias</a></li>
-                    <li class="tab"><a href="#horarios">Horarios</a></li>
                     <li class="tab"><a href="#cursos">Cursos</a></li>
                     <li class="tab"><a href="#grupos">Grupos</a></li>
                 </ul>
@@ -588,7 +579,7 @@
                         <div class="row">
                             <div class="input-field col s9">
                                 <input type="text" ng-model="read1.data" id="findRL2" value="" />
-                                <label for="findRL2">Buscador</label>
+                                <label for="findRL2">Buscador (Materia)</label>
                             </div>
                             <br>
                             <div class="col s3">
@@ -600,7 +591,7 @@
                         <div class="row">
                             <div class="input-field col s9">
                                 <input type="text" ng-model="read2.data" id="findRL2"/>
-                                <label for="findRL2">Buscador</label>
+                                <label for="findRL2">Buscador (Nombre, Apellido o Cedula de Docente)</label>
                             </div>
                             <br>
                             <div class="col s3">
@@ -696,111 +687,6 @@
                 </div>
             </div>
 
-            <div id="horarios" class="col s12" ng-controller="Horarios">
-                <div class="row">
-                    <div class="col s6">
-                        <input class="with-gap" name="horarios" ng-model="radio" value="c" type="radio" id="horariosCrear"/>
-                        <label for="horariosCrear"><i class="small material-icons">playlist_add</i>Crear</label>
-                    </div>
-                    <div class="col s6">
-                        <input class="with-gap" name="horarios" ng-model="radio" value="l" type="radio" id="horariosLeer"/>
-                        <label for="horariosLeer"><i class="small material-icons">find_in_page</i>Buscar</label>
-                    </div>
-                </div>
-
-                <div class="row" ng-show="radio == 'c'">
-                    <form class="col s12">
-                        <div class="row">
-                            <div class="input-field col s9">
-                                <input id="nombre_m" ng-model="create.nombre" type="text" class="validate">
-                                <label for="nombre_m">Materia</label>
-                            </div>
-                            <div class="col s3">
-                                <a ng-click="crear()" class="waves-effect waves-light btn-large col s12">CREAR</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row" ng-show="radio == 'l'">
-                    <form class="col s12">
-                        <div class="row">
-                            <div class="input-field col s4">
-                                <select ng-model="read.type">
-                                    <option value="" disabled selected>Buscar por : ?</option>
-                                    <option value="nombres_d">Nombre de Docente</option>
-                                    <option value="nombre_m">Materia</option>
-                                </select>
-                                <label>Tipo</label>
-                            </div>
-                            <div class="input-field col s5">
-                                <input type="text" ng-model="read.data" id="findRL3" value="" />
-                                <label for="findRL3">Buscador</label>
-                            </div>
-                            <br>
-                            <div class="col s3">
-                                <a class="waves-effect waves-light btn-large" ng-click="leer()">Buscar</a>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="center-align" ng-hide="result || !wait">
-                        <div class="preloader-wrapper small active">
-                            <div class="spinner-layer spinner-green-only">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <table ng-show="result" class="white responsive-table highlight z-depth-2">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>Cedula</th>
-                            <th>Genero</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="row in result">
-                            <td>{{row.id}}</td>
-                            <td><input type="text" ng-model="row.nombres"></td>
-                            <td><input type="text" ng-model="row.apellidos"></td>
-                            <td><input type="text" ng-model="row.cedula"></td>
-                            <td>
-                                <div>
-                                    <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="m" ng-checked="row.genero == 'm' ? true : false" ng-attr-id="{{'reM' + row.id}}">
-                                    <label for="reM{{row.id}}">Hombre</label>
-                                </div>
-                                <div>
-                                    <input class="with-gap" type="radio" name="genero{{row.id}}" ng-model="row.genero" value="f" ng-checked="row.genero === 'f' ? true : false" ng-attr-id="{{'reF' + row.id}}">
-                                    <label for="reF{{row.id}}">Mujer</label>
-                                </div>
-                            </td>
-                            <td>
-                                <a class="btn-floating btn waves-effect waves-light green z-depth-3" ng-click="modificar(row)">
-                                    <i class="small material-icons">build</i>
-                                </a>
-                            </td>
-                            <td>
-                                <a class="btn-floating btn waves-effect waves-light red z-depth-3" ng-click="borrar(row.id)">
-                                    <i class="small material-icons">delete</i>
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
             <div id="cursos" class="col s12" ng-controller="Cursos">
                 <div class="row">
                     <div class="col s6">
@@ -835,7 +721,7 @@
                         <div class="row">
                             <div class="input-field col s9">
                                 <input type="text" ng-model="read.data" id="findRL3" value="" />
-                                <label for="findRL3">Buscador</label>
+                                <label for="findRL3">Buscador (Nombre, Apellido, Cedula)</label>
                             </div>
                             <br>
                             <div class="col s3">
@@ -887,7 +773,7 @@
                     </div>
                     <div class="col s6">
                         <input class="with-gap" name="grupos" ng-model="radio" value="l" type="radio" id="gruposLeer"/>
-                        <label for="gruposLeer"><i class="small material-icons">find_in_page</i>Buscar</label>
+                        <label for="gruposLeer"><i class="small material-icons">find_in_page</i><Buscar></Buscar></label>
                     </div>
                 </div>
 
@@ -897,11 +783,17 @@
                             <h4>Crear grupo</h4>
                             <div class="row">
                                 <div class="input-field col s9">
-                                    <input id="nombre_m8" ng-model="create1.nombre" type="text" class="validate">
+                                    <input id="nombre_m8" ng-model="create1.grupo" type="text" class="validate">
                                     <label for="nombre_m8">Grupo</label>
                                 </div>
                                 <div class="col s3">
                                     <a ng-click="crear()" class="waves-effect waves-light btn-large col s12">CREAR</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 input-field">
+                                    <textarea ng-model="create1.descripcion" id="textarea" class="materialize-textarea"></textarea>
+                                    <label for="nombre_m8">Descripcion</label>
                                 </div>
                             </div>
                         </div>
@@ -964,7 +856,7 @@
                         <div class="row">
                             <div class="input-field col s9">
                                 <input type="text" ng-model="read.data" id="findRL2" value="" />
-                                <label for="findRL2">Buscador</label>
+                                <label for="findRL2">Buscador (Grupos)</label>
                             </div>
                             <br>
                             <div class="col s3">

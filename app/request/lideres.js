@@ -63,8 +63,8 @@ module.exports = function (mysql) {
 		"post": function post(req, res) {
 			var values = [];
 			query = "\n\t\t            INSERT INTO lideres VALUES ( \n\t\t\t            ?,\n\t\t\t            (SELECT id_d FROM docentes WHERE cedula_d = ?)\n\t\t            );\n\t\t        ";
-			values = [req.body.id, req.body.cedula];
-			mysql.query(query).then(function (grupo) {
+			values = [req.body.grupo, req.body.cedula];
+			mysql.query(query, values).then(function (grupo) {
 				res.status(200).send(grupo);
 			}).catch(function (error) {
 				res.status(404).send(error);

@@ -18,6 +18,8 @@ module.exports = function (router, mysql) {
       var Materias = require("./request/materias")(mysql);
       var Notas = require("./request/notas")(mysql);
       var Representantes = require("./request/representantes")(mysql);
+      var Miembros = require("./request/miembros")(mysql);
+      var Lideres = require("./request/lideres")(mysql);
       var Secciones = require("./request/secciones")(mysql);
 
       router.route("/cursos").get(_middleware2.default.authDocente, Cursos.get).post(_middleware2.default.authMod, Cursos.post).put(_middleware2.default.authMod, Cursos.put).delete(_middleware2.default.authMod, Cursos.delete);
@@ -42,6 +44,10 @@ module.exports = function (router, mysql) {
       router.route("/notas").get(_middleware2.default.authenticated, Notas.get).post(_middleware2.default.authMod, Notas.post).put(_middleware2.default.authMod, Notas.put).delete(_middleware2.default.authMod, Notas.delete);
 
       router.route("/representantes").get(_middleware2.default.authMod, Representantes.get).post(_middleware2.default.authMod, Representantes.post).put(_middleware2.default.authMod, Representantes.put).delete(_middleware2.default.authMod, Representantes.delete);
+
+      router.route("/miembros").get(_middleware2.default.authMod, Miembros.get).post(_middleware2.default.authMod, Miembros.post).put(_middleware2.default.authMod, Miembros.put).delete(_middleware2.default.authMod, Miembros.delete);
+
+      router.route("/lideres").get(_middleware2.default.authMod, Lideres.get).post(_middleware2.default.authMod, Lideres.post).put(_middleware2.default.authMod, Lideres.put).delete(_middleware2.default.authMod, Lideres.delete);
 
       router.route("/secciones").get(_middleware2.default.authDocente, Secciones.get).post(_middleware2.default.authMod, Secciones.post).put(_middleware2.default.authMod, Secciones.put).delete(_middleware2.default.authMod, Secciones.delete);
 

@@ -100,10 +100,11 @@ module.exports = mysql => {
 		            );
 		        `;
 			values = [
-				req.body.nombre,
+				req.body.grupo,
 				req.body.descripcion
 			];
-			mysql.query(query)
+			console.log(values);
+			mysql.query(query, values)
 				 .then( grupo => {
 					 res.status(200).send(grupo);
 				 })

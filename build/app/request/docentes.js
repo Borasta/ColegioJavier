@@ -15,20 +15,19 @@ module.exports = mysql => {
 								apellidos_d AS apellidos,
 								cedula_d AS cedula,
 								genero_d AS genero,
-								user_d AS usuario
+								user_d AS usuario,
+								flag_d as flag
 							FROM
 								docentes
 							WHERE
 								(
-									UPPER(nombres_d) LIKE UPPER(?) OR 
-									UPPER(apellidos_d) LIKE UPPER(?) OR 
+									UPPER(CONCAT(nombres_d, ' ', apellidos_d)) LIKE UPPER(?) OR 
 									cedula_d LIKE ? 
 								)
 							ORDER BY
 								nombres_d;
 				        `;
 					values = [
-						`%${req.query.data}%`,
 						`%${req.query.data}%`,
 						`%${req.query.data}%`
 					];

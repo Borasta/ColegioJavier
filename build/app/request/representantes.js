@@ -12,8 +12,7 @@ module.exports = mysql => {
 		            	genero_r as genero 
 		            FROM representantes 
 		            WHERE 
-		            	upper(nombres_r) LIKE upper(?) OR
-		            	upper(nombres_r) LIKE upper(?) OR
+		            	upper(CONCAT(nombres_r, ' ', apellidos_r)) LIKE upper(?) OR
 		            	cedula_r LIKE ? 
 		            ORDER BY nombres_r;
 		        `;

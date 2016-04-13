@@ -117,6 +117,22 @@ app.controller('Alumnos', function ($scope, $http, $window) {
 			$scope.wait = false;
 		});
 	};
+
+	$scope.crear = function () {
+		$http({
+			"method": "POST",
+			"url": "/estudiantes",
+			"data": $scope.create
+		}).success(function (data) {
+			$scope.wait = false;
+			$scope.create = null;
+			alert("agregado correctamente");
+		}).error(function (e) {
+			console.log(e);
+			$scope.result = [];
+			$scope.wait = false;
+		});
+	};
 });
 
 app.controller('Familias', function ($scope, $http, $window) {
@@ -262,7 +278,7 @@ app.controller('Materias', function ($scope, $http, $window) {
 		}).success(function (data) {
 			$scope.m = true;
 			console.log(data);
-			$scope.read.data = "";
+			$scope.read1.data = "";
 			$scope.result = data ? data : [];
 			$scope.wait = true;
 		}).error(function (e) {});
@@ -280,7 +296,7 @@ app.controller('Materias', function ($scope, $http, $window) {
 		}).success(function (data) {
 			$scope.dm = true;
 			console.log(data);
-			$scope.read.data = "";
+			$scope.read2.data = "";
 			$scope.result = data ? data : [];
 			$scope.wait = false;
 		}).error(function (e) {});
@@ -417,18 +433,18 @@ app.controller('Grupos', function ($scope, $http, $window) {
 		$http({
 			"method": "POST",
 			"url": "/grupos",
-			"data": $scope.create
+			"data": $scope.create1
 		}).success(function (data) {
-			$scope.create = null;
+			$scope.create1 = null;
 			alert("Creado correctamente");
 		}).error(function (e) {});
 	};
 
-	$scope.crearMiembro = function () {
-		console.log($scope.create1);
+	$scope.crearLider = function () {
+		console.log($scope.create2);
 		$http({
 			"method": "POST",
-			"url": "/miembros",
+			"url": "/lideres",
 			"data": $scope.create2
 		}).success(function (data) {
 			$scope.create = null;
@@ -436,11 +452,11 @@ app.controller('Grupos', function ($scope, $http, $window) {
 		}).error(function (e) {});
 	};
 
-	$scope.crearLider = function () {
-		console.log($scope.create1);
+	$scope.crearMiembro = function () {
+		console.log($scope.create3);
 		$http({
 			"method": "POST",
-			"url": "/lideres",
+			"url": "/miembros",
 			"data": $scope.create3
 		}).success(function (data) {
 			$scope.create = null;
